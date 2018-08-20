@@ -10,6 +10,7 @@ import  random
 import csv
 import re
 import os
+import sys
 import nltk
 from xlrd import open_workbook
 from statistics import mean
@@ -40,8 +41,12 @@ print(os.getcwd())
 
 
 def replace_all(text, dic):
-    for i, j in dic.items():
-        text = text.replace(i, j)
+    if(sys.version_info[0] < 3):
+        for i, j in dic.iteritems():
+            text = text.replace(i, j)
+    else:
+        for i, j in dic.items():
+            text = text.replace(i, j)
     return text
 
 stemmer =SnowballStemmer("english")
