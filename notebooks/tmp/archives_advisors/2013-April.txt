@@ -1,0 +1,26 @@
+From johnmark at redhat.com  Tue Apr  2 17:59:33 2013
+From: johnmark at redhat.com (John Mark Walker)
+Date: Tue, 2 Apr 2013 13:59:33 -0400 (EDT)
+Subject: [Advisors] Fwd: Revving up the Gluster Forge
+In-Reply-To: <1932835269.1101432.1364922374982.JavaMail.root@redhat.com>
+References: <1932835269.1101432.1364922374982.JavaMail.root@redhat.com>
+Message-ID: <2067340955.1145848.1364925573716.JavaMail.root@redhat.com>
+
+Greetings,
+
+I wanted to get your help with the Gluster Forge. The Gluster Forge is the place where storage, big data, virt and cloud meet. 
+
+If you like, create an account at https://redhat-staging.gitorious.com/
+
+If you have a project, start it here: https://redhat-staging.gitorious.com/projects/new
+
+This is the staging server and will be moved over to forge.gluster.org next week, with a target beta launch date of Wednesday, April 10.
+
+We're going with a converged infrastructure theme, so anything that integrates any cloud or big data project with GlusterFS should go on the forge. Anything that helps GlusterFS work better with other technologies goes on the forge. Any kind of scripting that helps admins manage GlusterFS goes in the forge. 
+
+By the end of the week or beginning of next week, we'll move everything over to https://forge.gluster.org/ - you won't need to do anything. It will just "go". 
+
+Thanks!
+JM
+
+

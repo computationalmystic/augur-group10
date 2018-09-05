@@ -1,0 +1,266 @@
+From johnmark at redhat.com  Mon Dec 10 20:17:38 2012
+From: johnmark at redhat.com (John Mark Walker)
+Date: Mon, 10 Dec 2012 15:17:38 -0500 (EST)
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <1288561098.46748257.1355160936632.JavaMail.root@redhat.com>
+Message-ID: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+
+Greetings, esteemed board members. 
+
+I want to apologize for the radio silence of late. There have been several things we've been working on, but we needed legal approval for many of them, thus the lack of information recently.
+
+First, some sad news. Ewan Mellor left Citrix and is no longer working on cloud infrastructure things, so he resigned from the board. I've always appreciated Ewan's presence and contributions to the Gluster community, and he will be missed. 
+
+Next, there are several items we need to decide on as we approach the coming year. 
+
+
+1. Governance model changes
+
+One of the things that has come up is that we need a stronger, more assertive board that takes on more responsibility. As our community expands to include more developer partners and other organizations, the board needs to take more ownership of community functions. See the attached document to get a sense of what I'd like to do. This document was created with the generous help of Jim Jagielski (CC'd). This has not been officially approved by our legal department, so there might be a couple of changes here and there. However, the last few drafts have been completed with input from the attorneys, so I feel confident that the spirit of what we will vote on is very much there. There might be an 'i' dotted or 't' crossed somewhere, but it won't change very much. At this point, the only way this document changes significantly is if you want to add something, or if you feel there is something in it that doesn't belong. 
+
+I am sending you this document in confidence because I want to get your input and feedback before we move forward. Please do not share with anyone outside of the board until we approve it, unanimously. 
+
+
+2. Changes to the board
+
+One thing you'll notice is the proposal concerning the new board. Whereas the current board consists of nice people in the community whom I tapped to give guidance, I propose that the new board have a more direct impact on community goings on. This means that there will be a set of minimum criteria for board membership. An individual will have a proven track record of contributing to the community in some way, whether that be through code contributions, documentation writing, assisting in community forums, hosting meetups, speaking at conferences, etc. 
+
+Individual community members, however, are not the only type of proposed board member. I also propose that we designate representatives of outside organizations that wish to invest in the Gluster community. This means that the particular individual who represents an organization need not be a community contributor, but their employer or sponsor must be. You can see the list of criteria of what constitutes a contributor in the governance document.
+
+There are also proposed processes for voting, board terms, and meeting frequency, among other things. Please review these changes. Once we decide on a date on which to go live, I will ask each of you to nominate individuals to run for a seat. Note that we're not proposing any cap on the number of board members, but we are proposing a 1-year limit on terms with no limit on the number of times you can run for a seat. 
+
+3. Project Incubation
+
+We are going to start accepting multiple projects for inclusion in the Gluster community. This means that GlusterFS will be the flagship project, but will by no means be the only project. Other pieces of what has constituted a GlusterFS release may move to their own project areas, although that is still TBD. These include, but are not limited to, gluster-swift, gluster-HDFS, GluPy, and xsync, as far as sub-projects started by our engineers go. There are also quite a few other projects I'd like to include - UFO Pilot, Bungee, gflocator, pmux, etc. 
+
+There are rules governing how and when a project can graduate from incubation status. 
+
+As part of this multi-project change, we're also looking at gitorious as the software to power the Gluster Forge (I don't want to use the word "forge" - feel free to send me another name)
+
+4. Community processes
+
+There are a few rules about how releases can be made, how communities vote on material changes to a project, etc. Read the doc. 
+
+In all, the document is based on similar documents from the ASF and oVirt communities, so much of what is there should be pretty familiar to some of you. 
+
+I encourage you to read it and send feedback, questions, comments, and angry bitching to the list. 
+
+Let's try to get together for a board meeting in January, probably via telephone, to make some decisions and decide elections, etc. 
+
+Thanks!
+JM
+
+
+
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: governance doc final draft.odt
+Type: application/vnd.oasis.opendocument.text
+Size: 42787 bytes
+Desc: not available
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20121210/0f06e908/attachment-0001.odt>
+
+From David.Nalley at citrix.com  Tue Dec 18 18:48:43 2012
+From: David.Nalley at citrix.com (David Nalley)
+Date: Tue, 18 Dec 2012 13:48:43 -0500
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+References: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+Message-ID: <00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+
+My apologies for slow feedback. Even this is incomplete, but I needed to get something out rather than let it dwindle as a draft. 
+
+So  a couple of side comments - Apache and Eclipse are very different open source orgs (as is oVirt). I understand some of the attraction to the Eclipse model, but the mixing and matching causes some concern. Each of those foundations has been successful in its own right, can you tell us why not copy one or the other? 
+
+Members: 
+So this is somewhat confusing to me. So plenty of assumptions here on my part - it appears that we are setting the stage for the Gluster Software Foundation  - there will be multiple projects within the 'GSF'. What isn't clear is how membership is handled across those groups, there is talk about different standards being set within the group once a project is large enough. So I guess a point of clarification - are you a member of the 'Gluster Project' - or are you a member of Gluster sub-projects? or?? 
+
+Unwritten things: 
+So there is plenty of talk about the responsibilities, and making the board more active. But there doesn't seem to be much about the authority of the board. Where does authority end and begin? 
+
+There are no officers defined - not necessarily a problem, but?..
+
+So not to call out the 800lb Gorilla in the room - but there is zero mention in the governance document or this email of the relationship to Red Hat. 
+Is the project completely free from RHT strings? Is it truly independent? Is there to be a legal entity holding various pieces of IP and providing some framework? 
+Assuming the answer to this is 'no'. What is the relationship to Red Hat, what are the limits on project (and board) authority? 
+
+--David
+
+On Dec 10, 2012, at 3:17 PM, John Mark Walker wrote:
+
+> <governance doc final draft.odt>
+
+
+From jimjag at redhat.com  Tue Dec 18 20:38:02 2012
+From: jimjag at redhat.com (Jim Jagielski)
+Date: Tue, 18 Dec 2012 15:38:02 -0500
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+References: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+	<00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+Message-ID: <0C8F02D5-26BB-4C10-9C37-1D577320FBDB@redhat.com>
+
+Hi David! ;)
+
+Just some inline comments... please note, these are my comments and
+not necessarily those Gluster or JMW.
+
+On Dec 18, 2012, at 1:48 PM, David Nalley <David.Nalley at citrix.com> wrote:
+
+> My apologies for slow feedback. Even this is incomplete, but I needed to get something out rather than let it dwindle as a draft. 
+> 
+> So  a couple of side comments - Apache and Eclipse are very different open source orgs (as is oVirt). I understand some of the attraction to the Eclipse model, but the mixing and matching causes some concern. Each of those foundations has been successful in its own right, can you tell us why not copy one or the other? 
+> 
+
+We are trying to copy oVirt as much as possible, but "fill in the
+holes" (as it were) by leveraging Apache mechanisms... This is
+because after we created oVirt, we realized that there were
+some actions and procedures that were either not well
+defined (or defined at all!) or not really suited to what we
+wanted to implement. That's the reason for the mix you see.
+
+> Members: 
+> So this is somewhat confusing to me. So plenty of assumptions here on my part - it appears that we are setting the stage for the Gluster Software Foundation  - there will be multiple projects within the 'GSF'. What isn't clear is how membership is handled across those groups, there is talk about different standards being set within the group once a project is large enough. So I guess a point of clarification - are you a member of the 'Gluster Project' - or are you a member of Gluster sub-projects? or?? 
+> 
+
+Some of this is murky on purpose: we want to empower the Gluster
+*community* to answer these kinds of questions. The feeling is
+that if we define everything, then there's little for the
+nascent community to do, which will drastically impact uptake.
+
+> Unwritten things: 
+> So there is plenty of talk about the responsibilities, and making the board more active. But there doesn't seem to be much about the authority of the board. Where does authority end and begin? 
+
+Ideally, the board exists to enforce a neutral, well-run project... It
+does not, and should not, make technical decisions, or anything else
+related to the development or "business" aspects of the project
+and codebase. It's there to ensure collaboration and consensus-
+based operations.
+
+Also, at the start, the board is there to be a wellspring of
+experience, knowledge and insight. Think of at least some members
+of the board as "midwives", helping the birth of the community.
+
+> 
+> There are no officers defined - not necessarily a problem, but?..
+> 
+> So not to call out the 800lb Gorilla in the room - but there is zero mention in the governance document or this email of the relationship to Red Hat. 
+> Is the project completely free from RHT strings? Is it truly independent? Is there to be a legal entity holding various pieces of IP and providing some framework? 
+> Assuming the answer to this is 'no'. What is the relationship to Red Hat, what are the limits on project (and board) authority? 
+
+This is key: we (we == JMW, and myself, and Red Hat and everyone else)
+want Gluster to be run as a *real* open source project. Not some
+front for Red Hat, not as some kinda pseudo-FOSS project where
+RH has ultimate control (ala Oracle and Java), but a real FOSS project.
+RH will provide support and resources to the effort, of course,
+but not use or abuse any sort of "control" over it, and the
+board will be empowered to make sure that's the case (and not
+only w/ RH of course).
+
+Hope this helps!
+
+
+--
+Jim Jagielski | jimjag at redhat.com | 443-324-8390 (cell)
+Open Source and Standards, Red Hat - http://community.redhat.com
+
+
+From David.Nalley at citrix.com  Tue Dec 18 22:46:31 2012
+From: David.Nalley at citrix.com (David Nalley)
+Date: Tue, 18 Dec 2012 17:46:31 -0500
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <0C8F02D5-26BB-4C10-9C37-1D577320FBDB@redhat.com>
+References: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+	<00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+	<0C8F02D5-26BB-4C10-9C37-1D577320FBDB@redhat.com>
+Message-ID: <DA79AD52-C693-4601-A08A-F6E475D9D1C3@citrix.com>
+
+
+On Dec 18, 2012, at 3:38 PM, Jim Jagielski wrote:
+
+> Hi David! ;)
+> 
+
+Hi Jim!
+
+> Just some inline comments... please note, these are my comments and
+> not necessarily those Gluster or JMW.
+> 
+> On Dec 18, 2012, at 1:48 PM, David Nalley <David.Nalley at citrix.com> wrote:
+> 
+>> My apologies for slow feedback. Even this is incomplete, but I needed to get something out rather than let it dwindle as a draft. 
+>> 
+>> So  a couple of side comments - Apache and Eclipse are very different open source orgs (as is oVirt). I understand some of the attraction to the Eclipse model, but the mixing and matching causes some concern. Each of those foundations has been successful in its own right, can you tell us why not copy one or the other? 
+>> 
+> 
+> We are trying to copy oVirt as much as possible, but "fill in the
+> holes" (as it were) by leveraging Apache mechanisms... This is
+> because after we created oVirt, we realized that there were
+> some actions and procedures that were either not well
+> defined (or defined at all!) or not really suited to what we
+> wanted to implement. That's the reason for the mix you see.
+> 
+
+Interesting. I'd love to hear about what you learned from the oVirt experience sometime. 
+
+
+>> Members: 
+>> So this is somewhat confusing to me. So plenty of assumptions here on my part - it appears that we are setting the stage for the Gluster Software Foundation  - there will be multiple projects within the 'GSF'. What isn't clear is how membership is handled across those groups, there is talk about different standards being set within the group once a project is large enough. So I guess a point of clarification - are you a member of the 'Gluster Project' - or are you a member of Gluster sub-projects? or?? 
+>> 
+> 
+> Some of this is murky on purpose: we want to empower the Gluster
+> *community* to answer these kinds of questions. The feeling is
+> that if we define everything, then there's little for the
+> nascent community to do, which will drastically impact uptake.
+
+
+OK - so defining the minimum. 
+
+
+> 
+>> Unwritten things: 
+>> So there is plenty of talk about the responsibilities, and making the board more active. But there doesn't seem to be much about the authority of the board. Where does authority end and begin? 
+> 
+> Ideally, the board exists to enforce a neutral, well-run project... It
+> does not, and should not, make technical decisions, or anything else
+> related to the development or "business" aspects of the project
+> and codebase. It's there to ensure collaboration and consensus-
+> based operations.
+> 
+
+Completely agree with this sentiment. 
+And completely happy for the definition to be that essentially the Board exists to safeguard the assets (trademarks, etc) of the foundation and ensure that it continues delivering on its mission, but doesn't meddle in the technical/business end of the software projects themselves. (actually - that is exactly the way I think it should be) 
+
+
+> Also, at the start, the board is there to be a wellspring of
+> experience, knowledge and insight. Think of at least some members
+> of the board as "midwives", helping the birth of the community.
+> 
+
+>> 
+>> There are no officers defined - not necessarily a problem, but?..
+>> 
+>> So not to call out the 800lb Gorilla in the room - but there is zero mention in the governance document or this email of the relationship to Red Hat. 
+>> Is the project completely free from RHT strings? Is it truly independent? Is there to be a legal entity holding various pieces of IP and providing some framework? 
+>> Assuming the answer to this is 'no'. What is the relationship to Red Hat, what are the limits on project (and board) authority? 
+> 
+> This is key: we (we == JMW, and myself, and Red Hat and everyone else)
+> want Gluster to be run as a *real* open source project. Not some
+> front for Red Hat, not as some kinda pseudo-FOSS project where
+> RH has ultimate control (ala Oracle and Java), but a real FOSS project.
+> RH will provide support and resources to the effort, of course,
+> but not use or abuse any sort of "control" over it, and the
+> board will be empowered to make sure that's the case (and not
+> only w/ RH of course).
+
+So not to indicate that its still confusing to me?.. but it is. 
+
+And for the record, I think corporate-sponsored/controlled projects can be done well. (I'll happily cite Fedora - which I think has generally shown incredibly good stewardship and generally precious little corporate meddling) They can also be done abominably as in some of the examples that you cite, and they can also be done with the best of intentions, but with results that make one go 'meh'. But I do think that it is important to know what the standing is. Fedora, for instance,  makes that perfectly clear in the person of the FPL who has absolute veto power over anything in the project as being the 'control' that is able to be exerted by RHT - though it is incredibly rarely used, because I think there was recognition that giving up 'control' results in greater investment by others. That's a fine solution for that particular problem. 
+
+Anyway, sorry for taking that segue - let me ask  a question that is more to the point. What/who is the legal entity that is assuming the risk behind the operations of the project? This, in my experience, determines where the real boundaries are, because that underlying organization has obligations, typically legal or regulatory, that necessarily impact the project, albeit in hopefully small ways. And if it is the primary sponsor, there also becomes a point at which it becomes no longer in the business interest of that sponsor to continue operations. 
+
+--David
+
+

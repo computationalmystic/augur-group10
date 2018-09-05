@@ -1,0 +1,26 @@
+From me at joejulian.name  Fri Nov 16 08:34:34 2012
+From: me at joejulian.name (Joe Julian)
+Date: Fri, 16 Nov 2012 00:34:34 -0800
+Subject: [Advisors] GlusterFS Life Cycle
+Message-ID: <50A5FA9A.1050806@joejulian.name>
+
+There's been a number of questions, lately, about the life cycle of a 
+GlusterFS version. Since I've not seen anything definite from anybody 
+yet, I've started the ball rolling on this. Please consider this and 
+discuss it on the Discussion tab.
+
+http://www.gluster.org/community/documentation/index.php/Life_Cycle
+
+From joe at julianfamily.org  Fri Nov 16 08:30:41 2012
+From: joe at julianfamily.org (Joe Julian)
+Date: Fri, 16 Nov 2012 00:30:41 -0800
+Subject: [Advisors] GlusterFS Life Cycle
+Message-ID: <50A5F9B1.4090400@julianfamily.org>
+
+There's been a number of questions, lately, about the life cycle of a 
+GlusterFS version. Since I've not seen anything definite from anybody 
+yet, I've started the ball rolling on this. Please consider this and 
+discuss it on the Discussion tab.
+
+http://www.gluster.org/community/documentation/index.php/Life_Cycle
+

@@ -1,0 +1,1219 @@
+From jowalker at redhat.com  Tue Aug  6 16:30:45 2013
+From: jowalker at redhat.com (John Mark Walker)
+Date: Tue, 6 Aug 2013 12:30:45 -0400 (EDT)
+Subject: [Advisors] Fwd: News: Gluster Developer Community Surges 300
+ Percent, Ships GlusterFS 3.4 Open Software-defined Storage Distro
+In-Reply-To: <415505836.12468246.1375805058213.JavaMail.root@redhat.com>
+References: <52011919.5040003@redhat.com> <52011D03.7070406@redhat.com>
+	<415505836.12468246.1375805058213.JavaMail.root@redhat.com>
+Message-ID: <1912376082.11975498.1375806645059.JavaMail.root@redhat.com>
+
+FYI... please forward wherever appropriate. 
+
+Thanks, 
+JM 
+
+
+----- Forwarded Message -----
+
+From: "Karin Bakis" <kbakis at redhat.com> 
+To: "John Mark Walker" <johnmark at redhat.com> 
+Sent: Tuesday, August 6, 2013 12:04:18 PM 
+Subject: News: Gluster Developer Community Surges 300 Percent, Ships GlusterFS 3.4 Open Software-defined Storage Distro 
+
+Gluster Developer Community Surges by Nearly 300 Percent, Ships GlusterFS 3.4 Open Software-defined Storage Distribution 
+
+
+August 6, 2013 
+
+by The Red Hat Storage Team 
+Congratulations to the Gluster Community! In addition to shipping GlusterFS 3.4, the latest release of the open source, scale-out storage system, the Gluster Community has significantly increased its number of projects and contributing developers in just three short months. Since May 2013, the Gluster Community has grown from seven projects for the GlusterFS distribution to more than 30 incubating open software-defined storage projects for big data, demonstrating nearly 300 percent growth in the number of developers. 
+
+As an open source community, the Gluster Community was created to drive open software-defined storage. The growth was enabled in part by recent important developments in the Gluster Community, including the introduction of Gluster Community Forge and the formation of The Gluster Community Board that includes eight leading organizations and technology providers in the storage and big data markets. The Gluster Community Forge is a collaborative development web site where like-minded developers and organizations can incubate, develop and collaborate on new open software-defined storage projects. The Gluster Community Forge also helps developers in individual projects independently manage their roadmaps, development, and implementation. 
+
+Now available for download, GlusterFS 3.4 offers KVM/QEMU integration, higher performance, and cloud enhancements to provide high reliability, scalability, and data mobility to enterprise users and application developers worldwide. 
+
+For virtualization, GlusterFS 3.4 features include QEMU integration with libgfapi, a new Block Device translator, and general performance enhancements for VM image storage for KVM. A new virtualization management user interface, oVirt 3.2, is available with its RESTful API gateway for integration with additional management tools. 
+
+For security, GlusterFS 3.4 now supports Server Quorum, SSL encryption, and a multi-threaded Glusterd that also added operating version support. Quorum enables split-brain prevention and resolution for replicated volumes. Security features include support for SSL-based encryption of ?in-flight? data, and NFSv3 ACLs, WORM (write once, read many) volume types. The multi-threaded Glusterd allows for better scaling and higher performance, and operating version support for Glusterd enables easier, rolling upgrades and using multiple versions of GlusterFS. 
+
+The Gluster Community also recently announced that GlusterFS is OpenStack-ready. This is primarily due to the work started in 2012 with the OpenStack community focused on how OpenStack cloud developers and operators can use GlusterFS to support the three primary OpenStack storage modes. Instructions for using GlusterFS with OpenStack are now documented for the native OpenStack storage interfaces Swift, Cinder, and Glance. This allows OpenStack application developers and service providers to gain the benefits of Gluster?s scale-out storage software. 
+
+Its an exciting time for the Gluster Community. Again, kudos to the Gluster Community for shipping GlusterFS 3.4 while it greatly expands its project scope, allowing participants to continue to drive open source sofware-defined storage innovation. 
+
+Here's how you can get more background: 
+
+
+    * For more information on the Gluster Community, visit www.gluster.org/ 
+    * To download GlusterFS 3.4, visit http://download.gluster.org/pub/gluster/glusterfs/3.4/3.4.0/ . 
+    * To download GlusterFS 3.4 release notes, visit https://github.com/gluster/glusterfs/blob/release-3.4/doc/release-notes/3.4.0.md . 
+    * 
+
+
+
+T o i nteract with The Gluster Community on Twitter, follow @GlusterOrg . 
+
+
+The OpenStack ? Word Mark and OpenStack Logo are either registered trademarks / service marks or trademarks / service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation or the OpenStack community. 
+
+Media Contact: 
+
+Karin Bakis 
+
+Red Hat, Inc. 
+
+(978) 392-1096 
+
+kbakis at redhat.com 
+
+
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20130806/3a8e76ef/attachment.html>
+
+From johnmark at johnmark.org  Sat Aug 10 15:40:43 2013
+From: johnmark at johnmark.org (John Mark Walker)
+Date: Sat, 10 Aug 2013 11:40:43 -0400
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+Message-ID: <CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+
+Adding advisors list.
+ On Aug 10, 2013 11:16 AM, "David Nalley" <david at gnsa.us> wrote:
+
+> Hi folks,
+>
+> Just tossing out a question or two.
+>
+> So I'd like to propose that we consider changing to either the ASLv2,
+> MIT, or BSD licenses.
+>
+> Why? So I personally strongly identify with copyleft principles, but
+> my experience in the past few years are that the practical and
+> irrational concerns around licensing hurt adoption and hurt
+> contribution.
+>
+> Specifically, I found that several very large enterprises (~100k
+> employees each) said that they never even considered CloudStack at the
+> time because it was licensed under a GPL license. The dual-licensing
+> bit muddies the waters a bit rather than helps. For the folks who are
+> educated very well in open source, it's great. For folks who aren't as
+> sophisiticated in OSS licensing it's merely confusing.
+>
+> Second - there's the potential damper on contribution. Despite how
+> long GPL has been around, much FUD still remains around copyleft
+> licensing; and that keeps people employed by large corporate users
+> from contributing (at least that has been my experience) The more
+> enlightened understand that it isn't going to virally apply to
+> anything that they develop, but there is still a substantial number of
+> companies that simply don't get it.
+>
+> Finally - I don't see a downside to becoming more permissively
+> licensed aside from the work involved. Moving to a single, liberal
+> open source license has the potential for us to increase our community
+> size, both user and contributor. And from a weird marketing angle,
+> it's also likely, as a one time event, to drive some interest in the
+> project, as relicensing events tend to be geeky news that attracts
+> attention.
+>
+> Having done it once, I know it's a ton of work to get all of the
+> contributors to agree to relicense. That said, what are the collective
+> thoughts on this?
+>
+> --David
+> _______________________________________________
+> Board mailing list
+> Board at gluster.org
+> http://supercolony.gluster.org/mailman/listinfo/board
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20130810/2c19c7ba/attachment.html>
+
+From abperiasamy at gmail.com  Sat Aug 10 17:54:37 2013
+From: abperiasamy at gmail.com (Anand Babu Periasamy)
+Date: Sat, 10 Aug 2013 10:54:37 -0700
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+Message-ID: <CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+
+I cannot agree more. I have been advocating to dual-license or re-license
+GlusterFS under Apache Software License v2 for the last two years. GPL
+defends freedom strongly, but hurts adoption. Folks at Red Hat care about
+software freedom more than adoption. Lets push it once again.
+-ab
+
+
+On Sat, Aug 10, 2013 at 8:40 AM, John Mark Walker <johnmark at johnmark.org>wrote:
+
+> Adding advisors list.
+>  On Aug 10, 2013 11:16 AM, "David Nalley" <david at gnsa.us> wrote:
+>
+>> Hi folks,
+>>
+>> Just tossing out a question or two.
+>>
+>> So I'd like to propose that we consider changing to either the ASLv2,
+>> MIT, or BSD licenses.
+>>
+>> Why? So I personally strongly identify with copyleft principles, but
+>> my experience in the past few years are that the practical and
+>> irrational concerns around licensing hurt adoption and hurt
+>> contribution.
+>>
+>> Specifically, I found that several very large enterprises (~100k
+>> employees each) said that they never even considered CloudStack at the
+>> time because it was licensed under a GPL license. The dual-licensing
+>> bit muddies the waters a bit rather than helps. For the folks who are
+>> educated very well in open source, it's great. For folks who aren't as
+>> sophisiticated in OSS licensing it's merely confusing.
+>>
+>> Second - there's the potential damper on contribution. Despite how
+>> long GPL has been around, much FUD still remains around copyleft
+>> licensing; and that keeps people employed by large corporate users
+>> from contributing (at least that has been my experience) The more
+>> enlightened understand that it isn't going to virally apply to
+>> anything that they develop, but there is still a substantial number of
+>> companies that simply don't get it.
+>>
+>> Finally - I don't see a downside to becoming more permissively
+>> licensed aside from the work involved. Moving to a single, liberal
+>> open source license has the potential for us to increase our community
+>> size, both user and contributor. And from a weird marketing angle,
+>> it's also likely, as a one time event, to drive some interest in the
+>> project, as relicensing events tend to be geeky news that attracts
+>> attention.
+>>
+>> Having done it once, I know it's a ton of work to get all of the
+>> contributors to agree to relicense. That said, what are the collective
+>> thoughts on this?
+>>
+>> --David
+>> _______________________________________________
+>> Board mailing list
+>> Board at gluster.org
+>> http://supercolony.gluster.org/mailman/listinfo/board
+>>
+>
+> _______________________________________________
+> Board mailing list
+> Board at gluster.org
+> http://supercolony.gluster.org/mailman/listinfo/board
+>
+>
+
+
+-- 
+-ab
+
+Imagination is more important than knowledge --Albert Einstein
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20130810/e9e04d0c/attachment.html>
+
+From david at gnsa.us  Sat Aug 10 18:07:30 2013
+From: david at gnsa.us (David Nalley)
+Date: Sat, 10 Aug 2013 14:07:30 -0400
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+	<CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+Message-ID: <CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+
+Personally, I see dual-licensing as being better, but not ideal. It
+still leaves a lot of confusion on the part of the non-FOSS-zealots.
+I'd personally advocate for a single permissive license.
+
+--David
+
+On Sat, Aug 10, 2013 at 1:54 PM, Anand Babu Periasamy
+<abperiasamy at gmail.com> wrote:
+> I cannot agree more. I have been advocating to dual-license or re-license
+> GlusterFS under Apache Software License v2 for the last two years. GPL
+> defends freedom strongly, but hurts adoption. Folks at Red Hat care about
+> software freedom more than adoption. Lets push it once again.
+> -ab
+>
+>
+> On Sat, Aug 10, 2013 at 8:40 AM, John Mark Walker <johnmark at johnmark.org>
+> wrote:
+>>
+>> Adding advisors list.
+>>
+>> On Aug 10, 2013 11:16 AM, "David Nalley" <david at gnsa.us> wrote:
+>>>
+>>> Hi folks,
+>>>
+>>> Just tossing out a question or two.
+>>>
+>>> So I'd like to propose that we consider changing to either the ASLv2,
+>>> MIT, or BSD licenses.
+>>>
+>>> Why? So I personally strongly identify with copyleft principles, but
+>>> my experience in the past few years are that the practical and
+>>> irrational concerns around licensing hurt adoption and hurt
+>>> contribution.
+>>>
+>>> Specifically, I found that several very large enterprises (~100k
+>>> employees each) said that they never even considered CloudStack at the
+>>> time because it was licensed under a GPL license. The dual-licensing
+>>> bit muddies the waters a bit rather than helps. For the folks who are
+>>> educated very well in open source, it's great. For folks who aren't as
+>>> sophisiticated in OSS licensing it's merely confusing.
+>>>
+>>> Second - there's the potential damper on contribution. Despite how
+>>> long GPL has been around, much FUD still remains around copyleft
+>>> licensing; and that keeps people employed by large corporate users
+>>> from contributing (at least that has been my experience) The more
+>>> enlightened understand that it isn't going to virally apply to
+>>> anything that they develop, but there is still a substantial number of
+>>> companies that simply don't get it.
+>>>
+>>> Finally - I don't see a downside to becoming more permissively
+>>> licensed aside from the work involved. Moving to a single, liberal
+>>> open source license has the potential for us to increase our community
+>>> size, both user and contributor. And from a weird marketing angle,
+>>> it's also likely, as a one time event, to drive some interest in the
+>>> project, as relicensing events tend to be geeky news that attracts
+>>> attention.
+>>>
+>>> Having done it once, I know it's a ton of work to get all of the
+>>> contributors to agree to relicense. That said, what are the collective
+>>> thoughts on this?
+>>>
+>>> --David
+>>> _______________________________________________
+>>> Board mailing list
+>>> Board at gluster.org
+>>> http://supercolony.gluster.org/mailman/listinfo/board
+>>
+>>
+>> _______________________________________________
+>> Board mailing list
+>> Board at gluster.org
+>> http://supercolony.gluster.org/mailman/listinfo/board
+>>
+>
+>
+>
+> --
+> -ab
+>
+> Imagination is more important than knowledge --Albert Einstein
+
+From abperiasamy at gmail.com  Sat Aug 10 19:00:03 2013
+From: abperiasamy at gmail.com (Anand Babu Periasamy)
+Date: Sat, 10 Aug 2013 12:00:03 -0700
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+	<CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+	<CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+Message-ID: <CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+
+Yes, ideally. How ever, linking to older GPLv2 code may be problematic with
+Apache License. QEMU is GPLv2.
+
+
+On Sat, Aug 10, 2013 at 11:07 AM, David Nalley <david at gnsa.us> wrote:
+
+> Personally, I see dual-licensing as being better, but not ideal. It
+> still leaves a lot of confusion on the part of the non-FOSS-zealots.
+> I'd personally advocate for a single permissive license.
+>
+> --David
+>
+> On Sat, Aug 10, 2013 at 1:54 PM, Anand Babu Periasamy
+> <abperiasamy at gmail.com> wrote:
+> > I cannot agree more. I have been advocating to dual-license or re-license
+> > GlusterFS under Apache Software License v2 for the last two years. GPL
+> > defends freedom strongly, but hurts adoption. Folks at Red Hat care about
+> > software freedom more than adoption. Lets push it once again.
+> > -ab
+> >
+> >
+> > On Sat, Aug 10, 2013 at 8:40 AM, John Mark Walker <johnmark at johnmark.org
+> >
+> > wrote:
+> >>
+> >> Adding advisors list.
+> >>
+> >> On Aug 10, 2013 11:16 AM, "David Nalley" <david at gnsa.us> wrote:
+> >>>
+> >>> Hi folks,
+> >>>
+> >>> Just tossing out a question or two.
+> >>>
+> >>> So I'd like to propose that we consider changing to either the ASLv2,
+> >>> MIT, or BSD licenses.
+> >>>
+> >>> Why? So I personally strongly identify with copyleft principles, but
+> >>> my experience in the past few years are that the practical and
+> >>> irrational concerns around licensing hurt adoption and hurt
+> >>> contribution.
+> >>>
+> >>> Specifically, I found that several very large enterprises (~100k
+> >>> employees each) said that they never even considered CloudStack at the
+> >>> time because it was licensed under a GPL license. The dual-licensing
+> >>> bit muddies the waters a bit rather than helps. For the folks who are
+> >>> educated very well in open source, it's great. For folks who aren't as
+> >>> sophisiticated in OSS licensing it's merely confusing.
+> >>>
+> >>> Second - there's the potential damper on contribution. Despite how
+> >>> long GPL has been around, much FUD still remains around copyleft
+> >>> licensing; and that keeps people employed by large corporate users
+> >>> from contributing (at least that has been my experience) The more
+> >>> enlightened understand that it isn't going to virally apply to
+> >>> anything that they develop, but there is still a substantial number of
+> >>> companies that simply don't get it.
+> >>>
+> >>> Finally - I don't see a downside to becoming more permissively
+> >>> licensed aside from the work involved. Moving to a single, liberal
+> >>> open source license has the potential for us to increase our community
+> >>> size, both user and contributor. And from a weird marketing angle,
+> >>> it's also likely, as a one time event, to drive some interest in the
+> >>> project, as relicensing events tend to be geeky news that attracts
+> >>> attention.
+> >>>
+> >>> Having done it once, I know it's a ton of work to get all of the
+> >>> contributors to agree to relicense. That said, what are the collective
+> >>> thoughts on this?
+> >>>
+> >>> --David
+> >>> _______________________________________________
+> >>> Board mailing list
+> >>> Board at gluster.org
+> >>> http://supercolony.gluster.org/mailman/listinfo/board
+> >>
+> >>
+> >> _______________________________________________
+> >> Board mailing list
+> >> Board at gluster.org
+> >> http://supercolony.gluster.org/mailman/listinfo/board
+> >>
+> >
+> >
+> >
+> > --
+> > -ab
+> >
+> > Imagination is more important than knowledge --Albert Einstein
+>
+
+
+
+-- 
+-ab
+
+Imagination is more important than knowledge --Albert Einstein
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20130810/683d0015/attachment.html>
+
+From johnmark at gluster.org  Mon Aug 12 15:20:14 2013
+From: johnmark at gluster.org (John Mark Walker)
+Date: Mon, 12 Aug 2013 11:20:14 -0400 (EDT)
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+	<CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+	<CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+	<CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+Message-ID: <1332903083.739123.1376320814765.JavaMail.root@redhat.com>
+
+----- Original Message -----
+
+> Yes, ideally. How ever, linking to older GPLv2 code may be problematic with
+> Apache License. QEMU is GPLv2.
+
+Of the reasons against, this is the one that gives me pause. Our signature feature that went into 3.4 was the QEMU integration. We cannot, under any circumstance, do anything to jeopardize that collaboration. I'm not entirely sure what the consequences are of linking Apache-licensed code to GPLv2 libraries. I can ask for a report on that and present the results here. 
+
+Otherwise, I'm generally in favor of the move. I used to be a huge fan of copyleft, but over the years I've seen that community governance and development process seem to mean a whole lot more than which license a project chooses. 
+
+I'd be very curious if anyone here strongly disagrees with a move to the Apache License 2.0, the QEMU integration issue notwithstanding. 
+
+-JM 
+
+> On Sat, Aug 10, 2013 at 11:07 AM, David Nalley < david at gnsa.us > wrote:
+
+> > Personally, I see dual-licensing as being better, but not ideal. It
+> 
+> > still leaves a lot of confusion on the part of the non-FOSS-zealots.
+> 
+> > I'd personally advocate for a single permissive license.
+> 
+
+> > --David
+> 
+
+> > On Sat, Aug 10, 2013 at 1:54 PM, Anand Babu Periasamy
+> 
+> > < abperiasamy at gmail.com > wrote:
+> 
+> > > I cannot agree more. I have been advocating to dual-license or re-license
+> 
+> > > GlusterFS under Apache Software License v2 for the last two years. GPL
+> 
+> > > defends freedom strongly, but hurts adoption. Folks at Red Hat care about
+> 
+> > > software freedom more than adoption. Lets push it once again.
+> 
+> > > -ab
+> 
+> > >
+> 
+> > >
+> 
+> > > On Sat, Aug 10, 2013 at 8:40 AM, John Mark Walker < johnmark at johnmark.org
+> > > >
+> 
+> > > wrote:
+> 
+> > >>
+> 
+> > >> Adding advisors list.
+> 
+> > >>
+> 
+> > >> On Aug 10, 2013 11:16 AM, "David Nalley" < david at gnsa.us > wrote:
+> 
+> > >>>
+> 
+> > >>> Hi folks,
+> 
+> > >>>
+> 
+> > >>> Just tossing out a question or two.
+> 
+> > >>>
+> 
+> > >>> So I'd like to propose that we consider changing to either the ASLv2,
+> 
+> > >>> MIT, or BSD licenses.
+> 
+> > >>>
+> 
+> > >>> Why? So I personally strongly identify with copyleft principles, but
+> 
+> > >>> my experience in the past few years are that the practical and
+> 
+> > >>> irrational concerns around licensing hurt adoption and hurt
+> 
+> > >>> contribution.
+> 
+> > >>>
+> 
+> > >>> Specifically, I found that several very large enterprises (~100k
+> 
+> > >>> employees each) said that they never even considered CloudStack at the
+> 
+> > >>> time because it was licensed under a GPL license. The dual-licensing
+> 
+> > >>> bit muddies the waters a bit rather than helps. For the folks who are
+> 
+> > >>> educated very well in open source, it's great. For folks who aren't as
+> 
+> > >>> sophisiticated in OSS licensing it's merely confusing.
+> 
+> > >>>
+> 
+> > >>> Second - there's the potential damper on contribution. Despite how
+> 
+> > >>> long GPL has been around, much FUD still remains around copyleft
+> 
+> > >>> licensing; and that keeps people employed by large corporate users
+> 
+> > >>> from contributing (at least that has been my experience) The more
+> 
+> > >>> enlightened understand that it isn't going to virally apply to
+> 
+> > >>> anything that they develop, but there is still a substantial number of
+> 
+> > >>> companies that simply don't get it.
+> 
+> > >>>
+> 
+> > >>> Finally - I don't see a downside to becoming more permissively
+> 
+> > >>> licensed aside from the work involved. Moving to a single, liberal
+> 
+> > >>> open source license has the potential for us to increase our community
+> 
+> > >>> size, both user and contributor. And from a weird marketing angle,
+> 
+> > >>> it's also likely, as a one time event, to drive some interest in the
+> 
+> > >>> project, as relicensing events tend to be geeky news that attracts
+> 
+> > >>> attention.
+> 
+> > >>>
+> 
+> > >>> Having done it once, I know it's a ton of work to get all of the
+> 
+> > >>> contributors to agree to relicense. That said, what are the collective
+> 
+> > >>> thoughts on this?
+> 
+> > >>>
+> 
+> > >>> --David
+> 
+> > >>> _______________________________________________
+> 
+> > >>> Board mailing list
+> 
+> > >>> Board at gluster.org
+> 
+> > >>> http://supercolony.gluster.org/mailman/listinfo/board
+> 
+> > >>
+> 
+> > >>
+> 
+> > >> _______________________________________________
+> 
+> > >> Board mailing list
+> 
+> > >> Board at gluster.org
+> 
+> > >> http://supercolony.gluster.org/mailman/listinfo/board
+> 
+> > >>
+> 
+> > >
+> 
+> > >
+> 
+> > >
+> 
+> > > --
+> 
+> > > -ab
+> 
+> > >
+> 
+> > > Imagination is more important than knowledge --Albert Einstein
+> 
+
+> --
+> -ab
+
+> Imagination is more important than knowledge --Albert Einstein
+
+> _______________________________________________
+> Advisors mailing list
+> Advisors at gluster.org
+> http://www.gluster.org/mailman/listinfo/advisors
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20130812/a2ec44e0/attachment-0001.html>
+
+From johnmark at gluster.org  Mon Aug 12 15:25:18 2013
+From: johnmark at gluster.org (John Mark Walker)
+Date: Mon, 12 Aug 2013 11:25:18 -0400 (EDT)
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+	<CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+	<CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+	<CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+Message-ID: <562361083.743819.1376321118176.JavaMail.root@redhat.com>
+
+----- Original Message ----- 
+
+> Yes, ideally. How ever, linking to older GPLv2 code may be problematic with
+> Apache License. QEMU is GPLv2.
+
+
+One other thought - if we have to dual-license to get around this, I can get on board with that, but my preference is to use a single license.
+
+-JM
+
+
+
+From greg.dekoenigsberg at eucalyptus.com  Mon Aug 12 15:30:57 2013
+From: greg.dekoenigsberg at eucalyptus.com (Greg DeKoenigsberg)
+Date: Mon, 12 Aug 2013 11:30:57 -0400
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <1332903083.739123.1376320814765.JavaMail.root@redhat.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+	<CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+	<CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+	<CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+	<1332903083.739123.1376320814765.JavaMail.root@redhat.com>
+Message-ID: <CAB8iOPC=1d+-8guY6VnRZk3U59rAaMrijXVWYn6757Nx7Riehg@mail.gmail.com>
+
+No sense in making a move to permissive licensing unless there's a
+plan to go with it.
+
+If you can identify big industry partners who would work with Gluster
+but do not because of the GPL, then I think it would be time to build
+a plan to move away from it.  Can you identify any such partners?
+
+You don't want to go through the hassle of a move until you have
+identified concrete benefits, I don't think.  And you obviously have a
+big issue to sort re: QEMU integration regardless.
+
+But generally, there's nothing inherently superior about GPL, and many
+drawbacks, and all things being equal, I think permissive is probably
+superior.  Even the dual-licensing tactic is suspect; you can get the
+same ability to create differentiated product offerings with
+permissive licenses, without the headaches of copyright
+assignment/licensing. The one unique benefit you *do* get from
+dual-licensing is proprietary redistribution lock-in -- and this may
+be a useful tactic down the road. You need ubiquity first. This was so
+successful for MySQL because of the sheer number of people using
+MySQL, and the fundamental suitability of a slightly-modified database
+as an embedded piece of other products.  I don't think Gluster has
+those same advantages.
+
+--g
+
+On Mon, Aug 12, 2013 at 11:20 AM, John Mark Walker <johnmark at gluster.org> wrote:
+>
+> ________________________________
+>
+> Yes, ideally. How ever, linking to older GPLv2 code may be problematic with
+> Apache License. QEMU is GPLv2.
+>
+>
+> Of the reasons against, this is the one that gives me pause. Our signature
+> feature that went into 3.4 was the QEMU integration. We cannot, under any
+> circumstance, do anything to jeopardize that collaboration. I'm not entirely
+> sure what the consequences are of linking Apache-licensed code to GPLv2
+> libraries. I can ask for a report on that and present the results here.
+>
+> Otherwise, I'm generally in favor of the move. I used to be a huge fan of
+> copyleft, but over the years I've seen that community governance and
+> development process seem to mean a whole lot more than which license a
+> project chooses.
+>
+> I'd be very curious if anyone here strongly disagrees with a move to the
+> Apache License 2.0, the QEMU integration issue notwithstanding.
+>
+> -JM
+>
+>
+>
+> On Sat, Aug 10, 2013 at 11:07 AM, David Nalley <david at gnsa.us> wrote:
+>>
+>> Personally, I see dual-licensing as being better, but not ideal. It
+>> still leaves a lot of confusion on the part of the non-FOSS-zealots.
+>> I'd personally advocate for a single permissive license.
+>>
+>> --David
+>>
+>> On Sat, Aug 10, 2013 at 1:54 PM, Anand Babu Periasamy
+>> <abperiasamy at gmail.com> wrote:
+>> > I cannot agree more. I have been advocating to dual-license or
+>> > re-license
+>> > GlusterFS under Apache Software License v2 for the last two years. GPL
+>> > defends freedom strongly, but hurts adoption. Folks at Red Hat care
+>> > about
+>> > software freedom more than adoption. Lets push it once again.
+>> > -ab
+>> >
+>> >
+>> > On Sat, Aug 10, 2013 at 8:40 AM, John Mark Walker
+>> > <johnmark at johnmark.org>
+>> > wrote:
+>> >>
+>> >> Adding advisors list.
+>> >>
+>> >> On Aug 10, 2013 11:16 AM, "David Nalley" <david at gnsa.us> wrote:
+>> >>>
+>> >>> Hi folks,
+>> >>>
+>> >>> Just tossing out a question or two.
+>> >>>
+>> >>> So I'd like to propose that we consider changing to either the ASLv2,
+>> >>> MIT, or BSD licenses.
+>> >>>
+>> >>> Why? So I personally strongly identify with copyleft principles, but
+>> >>> my experience in the past few years are that the practical and
+>> >>> irrational concerns around licensing hurt adoption and hurt
+>> >>> contribution.
+>> >>>
+>> >>> Specifically, I found that several very large enterprises (~100k
+>> >>> employees each) said that they never even considered CloudStack at the
+>> >>> time because it was licensed under a GPL license. The dual-licensing
+>> >>> bit muddies the waters a bit rather than helps. For the folks who are
+>> >>> educated very well in open source, it's great. For folks who aren't as
+>> >>> sophisiticated in OSS licensing it's merely confusing.
+>> >>>
+>> >>> Second - there's the potential damper on contribution. Despite how
+>> >>> long GPL has been around, much FUD still remains around copyleft
+>> >>> licensing; and that keeps people employed by large corporate users
+>> >>> from contributing (at least that has been my experience) The more
+>> >>> enlightened understand that it isn't going to virally apply to
+>> >>> anything that they develop, but there is still a substantial number of
+>> >>> companies that simply don't get it.
+>> >>>
+>> >>> Finally - I don't see a downside to becoming more permissively
+>> >>> licensed aside from the work involved. Moving to a single, liberal
+>> >>> open source license has the potential for us to increase our community
+>> >>> size, both user and contributor. And from a weird marketing angle,
+>> >>> it's also likely, as a one time event, to drive some interest in the
+>> >>> project, as relicensing events tend to be geeky news that attracts
+>> >>> attention.
+>> >>>
+>> >>> Having done it once, I know it's a ton of work to get all of the
+>> >>> contributors to agree to relicense. That said, what are the collective
+>> >>> thoughts on this?
+>> >>>
+>> >>> --David
+>> >>> _______________________________________________
+>> >>> Board mailing list
+>> >>> Board at gluster.org
+>> >>> http://supercolony.gluster.org/mailman/listinfo/board
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Board mailing list
+>> >> Board at gluster.org
+>> >> http://supercolony.gluster.org/mailman/listinfo/board
+>> >>
+>> >
+>> >
+>> >
+>> > --
+>> > -ab
+>> >
+>> > Imagination is more important than knowledge --Albert Einstein
+>
+>
+>
+>
+> --
+> -ab
+>
+> Imagination is more important than knowledge --Albert Einstein
+>
+> _______________________________________________
+> Advisors mailing list
+> Advisors at gluster.org
+> http://www.gluster.org/mailman/listinfo/advisors
+>
+>
+>
+> _______________________________________________
+> Advisors mailing list
+> Advisors at gluster.org
+> http://www.gluster.org/mailman/listinfo/advisors
+>
+
+
+
+-- 
+Greg DeKoenigsberg, Eucalyptus
+Build your own AWS-compatible cloud in 30 minutes:
+http://eucalyptus.com/faststart
+
+From david at gnsa.us  Mon Aug 12 15:39:08 2013
+From: david at gnsa.us (David Nalley)
+Date: Mon, 12 Aug 2013 11:39:08 -0400
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <1332903083.739123.1376320814765.JavaMail.root@redhat.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+	<CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+	<CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+	<CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+	<1332903083.739123.1376320814765.JavaMail.root@redhat.com>
+Message-ID: <CAKprHVZ36X-sYwNLPMZXNwCPCrAd6TkwmH2+sOGvaZkcEAz_MQ@mail.gmail.com>
+
+On Mon, Aug 12, 2013 at 11:20 AM, John Mark Walker <johnmark at gluster.org> wrote:
+>
+> ________________________________
+>
+> Yes, ideally. How ever, linking to older GPLv2 code may be problematic with
+> Apache License. QEMU is GPLv2.
+>
+>
+> Of the reasons against, this is the one that gives me pause. Our signature
+> feature that went into 3.4 was the QEMU integration. We cannot, under any
+> circumstance, do anything to jeopardize that collaboration. I'm not entirely
+> sure what the consequences are of linking Apache-licensed code to GPLv2
+> libraries. I can ask for a report on that and present the results here.
+
+Yes, please see if Mr Fontana will render an opinion for us.
+
+>
+> Otherwise, I'm generally in favor of the move. I used to be a huge fan of
+> copyleft, but over the years I've seen that community governance and
+> development process seem to mean a whole lot more than which license a
+> project chooses.
+>
+> I'd be very curious if anyone here strongly disagrees with a move to the
+> Apache License 2.0, the QEMU integration issue notwithstanding.
+>
+
+--David
+
+From david at gnsa.us  Mon Aug 12 15:43:56 2013
+From: david at gnsa.us (David Nalley)
+Date: Mon, 12 Aug 2013 11:43:56 -0400
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <CAB8iOPC=1d+-8guY6VnRZk3U59rAaMrijXVWYn6757Nx7Riehg@mail.gmail.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+	<CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+	<CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+	<CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+	<1332903083.739123.1376320814765.JavaMail.root@redhat.com>
+	<CAB8iOPC=1d+-8guY6VnRZk3U59rAaMrijXVWYn6757Nx7Riehg@mail.gmail.com>
+Message-ID: <CAKprHVbHSQ3N2GERwHhYcpvMLVmhfUnS6ASYH2zx56e60fbrhw@mail.gmail.com>
+
+On Mon, Aug 12, 2013 at 11:30 AM, Greg DeKoenigsberg
+<greg.dekoenigsberg at eucalyptus.com> wrote:
+> No sense in making a move to permissive licensing unless there's a
+> plan to go with it.
+>
+
+This.
+
+There needs to be a plan around it. There needs to be a real
+justification; ignoring my experience, and even our preferences -
+what's the project justification for such a painful change. Change for
+change's sake is awful.
+JMW is probably closer to this than most - but are there people who
+have objected to using gluster on the license grounds? Objected to
+contributing to gluster because of licensing? Perhaps a good place to
+look is deals where a competitor to Gluster has been chosen.
+
+--David
+
+From lance at osuosl.org  Mon Aug 12 18:53:58 2013
+From: lance at osuosl.org (Lance Albertson)
+Date: Mon, 12 Aug 2013 11:53:58 -0700
+Subject: [Advisors] Thoughts on a license change.
+In-Reply-To: <CAKprHVbHSQ3N2GERwHhYcpvMLVmhfUnS6ASYH2zx56e60fbrhw@mail.gmail.com>
+References: <CAKprHVbGsGV=7pi9_xpLECo=j=19NzTAj4zEf1246T_ip3ebKQ@mail.gmail.com>
+	<CAMUFnfbmkbM_nwuN0JNK_TrDeO0+Bzu-gkMCZ0zDppqRv8QyKQ@mail.gmail.com>
+	<CA+9ymO8xtKsuRQPMVo8pE74F=cBSWUyxRXU23TJ=z+U=T_nwjQ@mail.gmail.com>
+	<CAKprHVZALDe38L0bScAt6wRejXgL4cJ02eAJqvqbpXTWfejQiQ@mail.gmail.com>
+	<CA+9ymO9a0X1H81+F5M0JRUbPtKfsbRkT56L6xE1MkG4O=wJdKg@mail.gmail.com>
+	<1332903083.739123.1376320814765.JavaMail.root@redhat.com>
+	<CAB8iOPC=1d+-8guY6VnRZk3U59rAaMrijXVWYn6757Nx7Riehg@mail.gmail.com>
+	<CAKprHVbHSQ3N2GERwHhYcpvMLVmhfUnS6ASYH2zx56e60fbrhw@mail.gmail.com>
+Message-ID: <CAORfjXTpWPy36Kka7OpTZamTt92mwEKYu5MfPKFfWREzTxYOTg@mail.gmail.com>
+
+On Mon, Aug 12, 2013 at 8:43 AM, David Nalley <david at gnsa.us> wrote:
+
+> On Mon, Aug 12, 2013 at 11:30 AM, Greg DeKoenigsberg
+> <greg.dekoenigsberg at eucalyptus.com> wrote:
+> > No sense in making a move to permissive licensing unless there's a
+> > plan to go with it.
+> >
+>
+> This.
+>
+> There needs to be a plan around it. There needs to be a real
+> justification; ignoring my experience, and even our preferences -
+> what's the project justification for such a painful change. Change for
+> change's sake is awful.
+> JMW is probably closer to this than most - but are there people who
+> have objected to using gluster on the license grounds? Objected to
+> contributing to gluster because of licensing? Perhaps a good place to
+> look is deals where a competitor to Gluster has been chosen.
+
+
+I don't have much experience in this realm but from what I know its a big
+deal and can be disastrous if done incorrectly. I agree with David's
+statement above, there needs to be a solid reason for the move, a plan and
+community support behind it.
+
+-- 
+Lance Albertson
+Director
+Oregon State University | Open Source Lab
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20130812/bd721f63/attachment.html>
+
+From johnmark at gluster.org  Tue Aug 13 17:08:17 2013
+From: johnmark at gluster.org (John Mark Walker)
+Date: Tue, 13 Aug 2013 13:08:17 -0400 (EDT)
+Subject: [Advisors] [Gluster-devel] GlusterFS 3.5 planning
+In-Reply-To: <51F00F53.9030501@redhat.com>
+References: <51F00F53.9030501@redhat.com>
+Message-ID: <144609055.2239896.1376413697734.JavaMail.root@redhat.com>
+
+For those of you who wish to participate in the release process of GlusterFS (or you know someone who does), the GlusterFS core team has set a deadline of this Thursday, August 14, for proposing new features in this release cycle. 
+
+This will be the first release included in the Gluster Software Distribution (which will be a discussion topic at the next board meeting). 
+
+Please see the links at the bottom of this email and send any questions to gluster-devel.
+
+Thanks,
+JM
+
+
+----- Original Message -----
+> Hi All,
+> 
+> We are considering a 4 month release cycle for GlusterFS 3.5. The
+> tentative dates are as under:
+> 
+> 14th Aug, 2013 - Feature proposal freeze
+> 
+> 4th Oct, 2013 - Feature freeze & Branching
+> 
+> 10th Oct, 2013 - Community Test Day1
+> 
+> 29th Oct, 2013 - 3.5.0 Beta Release
+> 
+> 31st Oct, 2013 - Community Test Day2
+> 
+> 2nd Dec, 2013 - 3.5.0 GA
+> 
+> The planning page for 3.5 is at [1]. New features can be proposed at
+> [2]. After the proposal freeze, we can slot proposed projects into
+> "core" and "nice to have" feature buckets in the planning page over an
+> IRC meeting.
+> 
+> Please do chime in with your thoughts on planning and propose features
+> for addition to GlusterFS 3.5.
+> 
+> Cheers,
+> Vijay
+> 
+> [1] http://www.gluster.org/community/documentation/index.php/Planning35
+> [2]
+> http://www.gluster.org/community/documentation/index.php/Planning35#Proposing_New_Features
+> 
+> 
+> 
+> _______________________________________________
+> Gluster-devel mailing list
+> Gluster-devel at nongnu.org
+> https://lists.nongnu.org/mailman/listinfo/gluster-devel
+> 
+
+From jowalker at redhat.com  Fri Aug 23 16:36:16 2013
+From: jowalker at redhat.com (John Mark Walker)
+Date: Fri, 23 Aug 2013 12:36:16 -0400 (EDT)
+Subject: [Advisors] Your Attention Please: Blog Post Brouhaha
+In-Reply-To: <1550187336.4717546.1377275654514.JavaMail.root@redhat.com>
+Message-ID: <112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+
+See this post: http://www.gluster.org/2013/08/how-far-the-once-mighty-sourceforge-has-fallen/
+
+For obvious reasons, the proprietors of the site criticized in that post are none too happy.
+
+Do we...
+
+1. take it down
+2. leave it up, with the entire post, including the disclaimer, intact
+3. take editorial license and change some of the more inflammatory verbiage
+
+-JM
+
+From greg.dekoenigsberg at eucalyptus.com  Fri Aug 23 16:42:23 2013
+From: greg.dekoenigsberg at eucalyptus.com (Greg DeKoenigsberg)
+Date: Fri, 23 Aug 2013 12:42:23 -0400
+Subject: [Advisors] Your Attention Please: Blog Post Brouhaha
+In-Reply-To: <112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+References: <1550187336.4717546.1377275654514.JavaMail.root@redhat.com>
+	<112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+Message-ID: <CAB8iOPAhv6sotWhcgjVqdsVdLcYOg2PudsZjGhD=82Q+gGPv7Q@mail.gmail.com>
+
+Is Dice a Gluster customer?  A Red Hat customer?  Likely to become either?
+
+If so, I would vote for #3, with a note that some of the language has
+been toned down from the original.  Or possibly #2 with a more
+detailed disclaimer.
+
+If not, I would vote for #2 straight up.  Dice has no reason to expect
+the broader open source community to be happy with this change in SF
+policy.
+
+--g
+
+On Fri, Aug 23, 2013 at 12:36 PM, John Mark Walker <jowalker at redhat.com> wrote:
+> See this post: http://www.gluster.org/2013/08/how-far-the-once-mighty-sourceforge-has-fallen/
+>
+> For obvious reasons, the proprietors of the site criticized in that post are none too happy.
+>
+> Do we...
+>
+> 1. take it down
+> 2. leave it up, with the entire post, including the disclaimer, intact
+> 3. take editorial license and change some of the more inflammatory verbiage
+>
+> -JM
+> _______________________________________________
+> Advisors mailing list
+> Advisors at gluster.org
+> http://www.gluster.org/mailman/listinfo/advisors
+
+
+
+-- 
+Greg DeKoenigsberg, Eucalyptus
+Build your own AWS-compatible cloud in 30 minutes:
+http://eucalyptus.com/faststart
+
+From me at joejulian.name  Fri Aug 23 16:57:23 2013
+From: me at joejulian.name (Joe Julian)
+Date: Fri, 23 Aug 2013 09:57:23 -0700
+Subject: [Advisors] Your Attention Please: Blog Post Brouhaha
+In-Reply-To: <112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+References: <112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+Message-ID: <52179473.1020402@joejulian.name>
+
+I assume you're referring to the argument against the word "malware" at 
+https://news.ycombinator.com/item?id=6262347
+
+I agree with Justin. Installing something unintended that alters the 
+behavior or performance of someone's computer is malicious. Even a 
+seemingly benign google toolbar is still one strip of screen taken up 
+that would have otherwise been usable.
+
+The argument against the use of the word "malware" also assumes that the 
+"mal" is "malicious". The prefix "mal" comes from the french word and 
+indicates "illness" or "affliction" which most certainly matches with 
+the regard for these pieces of software.
+
+The post itself seems to reflect the attitude and mores of the community 
+that I've met and suggests that we believe in preserving trust and 
+acting with integrity.
+
+I also find it interesting that the most vocal opponent to the post is 
+someone who's profiting from the malware.
+
+My opinion is to leave it up as-is.
+
+On 08/23/2013 09:36 AM, John Mark Walker wrote:
+> See this post: http://www.gluster.org/2013/08/how-far-the-once-mighty-sourceforge-has-fallen/
+>
+> For obvious reasons, the proprietors of the site criticized in that post are none too happy.
+>
+> Do we...
+>
+> 1. take it down
+> 2. leave it up, with the entire post, including the disclaimer, intact
+> 3. take editorial license and change some of the more inflammatory verbiage
+>
+> -JM
+> _______________________________________________
+> Advisors mailing list
+> Advisors at gluster.org
+> http://www.gluster.org/mailman/listinfo/advisors
+
+
+From David.Nalley at citrix.com  Fri Aug 23 17:38:01 2013
+From: David.Nalley at citrix.com (David Nalley)
+Date: Fri, 23 Aug 2013 17:38:01 +0000
+Subject: [Advisors] Your Attention Please: Blog Post Brouhaha
+In-Reply-To: <112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+References: <1550187336.4717546.1377275654514.JavaMail.root@redhat.com>,
+	<112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+Message-ID: <377356C758D1B346B44A65FF891DB4A01005FEF7@FTLPEX01CL03.citrite.net>
+
+#2 IMO
+
+I'd even consider going so far as to do #4 which is #2 plus updates about their attempts to silence you and introduce them to the Streisand effect. 
+
+--David
+________________________________________
+From: advisors-bounces at gluster.org [advisors-bounces at gluster.org] on behalf of John Mark Walker [jowalker at redhat.com]
+Sent: Friday, August 23, 2013 9:36 AM
+To: advisors
+Subject: [Advisors] Your Attention Please: Blog Post Brouhaha
+
+See this post: http://www.gluster.org/2013/08/how-far-the-once-mighty-sourceforge-has-fallen/
+
+For obvious reasons, the proprietors of the site criticized in that post are none too happy.
+
+Do we...
+
+1. take it down
+2. leave it up, with the entire post, including the disclaimer, intact
+3. take editorial license and change some of the more inflammatory verbiage
+
+-JM
+_______________________________________________
+Advisors mailing list
+Advisors at gluster.org
+http://www.gluster.org/mailman/listinfo/advisors
+
+From me at louiszuckerman.com  Fri Aug 23 19:39:08 2013
+From: me at louiszuckerman.com (Louis Zuckerman)
+Date: Fri, 23 Aug 2013 15:39:08 -0400
+Subject: [Advisors] Your Attention Please: Blog Post Brouhaha
+In-Reply-To: <112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+References: <1550187336.4717546.1377275654514.JavaMail.root@redhat.com>
+	<112249338.4720702.1377275776407.JavaMail.root@redhat.com>
+Message-ID: <CAH0_W-w+G6cxcgH6-iWcUSgUDweSTSiCHh_Cd=MvEYLx+qjfBQ@mail.gmail.com>
+
+Of those three only option 2 seems reasonable.  However I also suggest that
+we add such a "disclaimer" not only to some posts, but to the whole blog
+section -- a common footer or sidebar visible on all blog pages.
+
+It should be made clear on every page of the blog section that the posts
+are published by individual authors and do not necessarily represent anyone
+else's views.  Along with that each post should have a signature with the
+authors preferred method of being contacted.  This seems like the best way
+to deflect such requests from being addressed to the blog administrator.
+
+John Mark, would you care to share what you received?  Just curious though,
+it probably wouldn't change my opinion any.
+
+best,
+
+-louis
+
+
+
+On Fri, Aug 23, 2013 at 12:36 PM, John Mark Walker <jowalker at redhat.com>wrote:
+
+> See this post:
+> http://www.gluster.org/2013/08/how-far-the-once-mighty-sourceforge-has-fallen/
+>
+> For obvious reasons, the proprietors of the site criticized in that post
+> are none too happy.
+>
+> Do we...
+>
+> 1. take it down
+> 2. leave it up, with the entire post, including the disclaimer, intact
+> 3. take editorial license and change some of the more inflammatory verbiage
+>
+> -JM
+> _______________________________________________
+> Advisors mailing list
+> Advisors at gluster.org
+> http://www.gluster.org/mailman/listinfo/advisors
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20130823/9acdc546/attachment.html>
+
+From jowalker at redhat.com  Fri Aug 30 16:23:32 2013
+From: jowalker at redhat.com (John Mark Walker)
+Date: Fri, 30 Aug 2013 12:23:32 -0400 (EDT)
+Subject: [Advisors] Call for Participation: Gluster Community Day New
+ Orleans, September 19
+Message-ID: <1399164987.10731135.1377879812671.JavaMail.root@redhat.com>
+
+Greetings,
+
+If any of you would like to present at the above-referenced event on a topic related to open software-defined storage (does not necessarily need to be about GlusterFS), send a note to cfp (at) gluster.org. I still have one or two slots available, depending on length.
+
+Thanks,
+JM
+

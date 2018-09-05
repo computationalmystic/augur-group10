@@ -1,0 +1,56 @@
+From jowalker at redhat.com  Thu Jul 11 20:38:44 2013
+From: jowalker at redhat.com (John Mark Walker)
+Date: Thu, 11 Jul 2013 16:38:44 -0400 (EDT)
+Subject: [Advisors] Fwd: The Summer of Gluster is Here
+In-Reply-To: <965175507.3777021.1373574506791.JavaMail.root@redhat.com>
+References: <965175507.3777021.1373574506791.JavaMail.root@redhat.com>
+Message-ID: <2057364004.3783020.1373575124547.JavaMail.root@redhat.com>
+
+
+I just posted this on gluster.org/blog/ but I wanted to share it with you all as well - 
+
+
+The Summer of Gluster is Here 
+
+I wanted to take a moment and share all the things that are going on in the Gluster Community. It really has been an amazing year, and we?re only halfway through. Here?s a recap for those of you watching from home: 
+
+
+    * Launched the Gluster Community Forge in early May ? http://forge.gluster.org/ 
+        * as of now, there are over 20 incubating projects on the Forge, 100 developers and over 1,000 commits to git repositories on the site. 
+        * future plans include upgrading to gitorious 3, adding integrated bug tracking capability and merging with the global look-and-feel under development for gluster.org 
+
+
+    * Announced the charter members of the Gluster Community: Intel , Red Hat , DataLab.es , OSUOSL , Linux Foundation , Hortonworks , NTTPC 
+        * The Gluster Community is the home of Open Software-defined Storage development 
+        * Held first board meeting in June 
+
+As we looked at the growth of the Gluster Community over the last year, it became clear that the community has evolved to be more than Red Hat, and that we needed a governance model that recognized this growth. For example, there are countless projects scattered across the internet that utilize GlusterFS, but there was no ?one-stop shop? to find them. We also knew there are many organizations that contribute to the success of the Gluster Community, but there was no way to formalize their involvement. And finally, we understood that this movement of which we are a part, the movement away from traditional, proprietary storage vendors, needed a name: Open Software-defined Storage. 
+
+In response, we have plotted out a series of steps to make the Gluster Community vision grander, more ubiquitous, and more integral to open source cloud and big data communities than ever before. Here are just some of the things that you can expect to see: 
+
+
+    * Graduation of incubating projects. Leading candidates thus far include gluster-swift , pmux and gflocator . The former cements our standing in the OpenStack object storage camp, and the latter two form a very interesting project that allows users to conduct file-based Map/Reduce jobs on distributed Gluster volumes. 
+    * GlusterFS 3.4 ? we are very very close to GA. Hang tight This is the release that includes QEMU integration and libgfapi , a new client library for developers 
+    * Much better performance for the vast majority of workloads. This will become more apparent when you try the imminent releases of 3.3.2 or 3.4.0. 
+    * Gluster Community Software Distribution. As the Gluster Community forms a software ecosystem around GlusterFS, we will formalize a timely release schedule that allows multiple projects to participate. 
+    * Higher frequency of point releases. This has been a big deal the past year. We have worked hard to fix this, and you?ll notice it very shortly. 
+    * More and better integration with multiple projects that make up OpenStack and Hadoop distributions 
+    * New Gluster.org site with complete redesign from the ground up and new branding 
+    * More Gluster Community Days , including at OSCON , LinuxCon North America & Europe, Stockholm, London and more. 
+    * More presence at OpenStack Summit , Hadoop Summit , and other related events. Gluster engineers will be more visible than ever at open source cloud and big data events 
+
+These steps are essential for building on our momentum and making a successful community that will, in turn, make all participants and collaborators more successful. 
+Want to be part of a winning team? Get involved ? host a meetup, present at a workshop or conference, help out new users on gluster-users and #gluster . 
+
+We?re deeply committed to making the Gluster community a wide tent for innovation in cloud storage, and we want to know how we can serve you in this mission. Let us know what you?d like to see from us and how we can best meet your needs: 
+
+
+    * Twitter 
+    * Facebook 
+    * Mailing lists 
+    * IRC on Freenode network 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://www.gluster.org/pipermail/advisors/attachments/20130711/0079bf1e/attachment.html>
+

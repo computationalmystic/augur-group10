@@ -1,0 +1,288 @@
+From johnmark at gluster.org  Thu May 16 16:33:34 2013
+From: johnmark at gluster.org (John Mark Walker)
+Date: Thu, 16 May 2013 12:33:34 -0400 (EDT)
+Subject: [Advisors] Fwd: Gluster Community Board - save the date: June 11 in
+	Boston
+In-Reply-To: <1241311879.3802272.1368720979317.JavaMail.root@redhat.com>
+References: <vpaoeyiefg1iel39jcv13hd3.1368639441808@email.android.com>
+	<1241311879.3802272.1368720979317.JavaMail.root@redhat.com>
+Message-ID: <632521516.3860640.1368722014339.JavaMail.root@redhat.com>
+
+Hi there,
+
+I'm going to keep the advisors@ list going, because I can think of many cases where we will need a sounding board for community things. 
+
+A few of you expressed interest in joining the Community Board, and I included you in the email that I just sent below. If you did *not* receive the email below and wish to be included in the new board, please let me know ASAP. 
+
+However, please note that in the new board, we cannot have multiple representatives from the same company, although we're making an exception for AB. Also note that on the new board, you will be delegated with tasks and expected to contribute to the greater community in some material way. Or you can just stay on the advisors list and not have any of that responsibility :)
+
+Thanks,
+JM
+
+
+----- Forwarded Message -----
+From: "John Mark Walker" <johnmark at gluster.org>
+To: johnmark at gluster.org
+Sent: Thursday, May 16, 2013 12:16:19 PM
+Subject: Gluster Community Board - save the date: June 11 in Boston
+
+Note: things discussed in this email are confidential. Please respect our desire to release this information on schedule, which I'll provide in detail below.
+
+Greetings,
+
+I wanted to reach out to each of you as the charter members of the Gluster Community Board. We currently have 7 organizations who have signed the letter of intent to join the Gluster Commumnity:
+
+- Intel
+- Red Hat
+- Open Source Lab at Oregon State
+- Linux Foundation
+- DataLab
+- HortonWorks
+- Harvard University
+
+There's also one more company that should sign this week, but I wanted to get started and open up the conversation.
+
+In addition to the companies mentioned above, there will also be 3 - 5 individuals representing the greater community's interests. Note that the number of board members has no hard limit, and we can vote on future additions.
+
+When I started putting together the governance model and business plan a few months ago, I never dreamed that we would pull together such an amazing group of technology leaders. We are going to surprise a whole lot of people when we announce.
+
+Speaking of announcing, here's the schedule:
+
+- 5/29 - General press release announcing new community charter members and new board. Expect an email this week from our press people for quotes from each of you. 
+
+- 6/11 - first board meeting - at Red Hat Summit in Boston. This is where we will discuss board officer selection, a marketing fund and committee, voting criteria, and some other things that will be on the agenda. For this first iteration, expect to meet for 2 hours. For those who can't make it to Boston, we'll set up a conference call.
+
+- 7/23 - OSCON party - would love to make this the coming-out party for the Gluster Community
+
+
+Other discussion points:
+
+- Partner workshops - we have a tentative schedule in place for the rest of the year. Would be good to get input on who can host and participate.
+
+- Gluster software distribution - Because we now have more than one project, we will have a distribution consisting of multiple pieces. One of the things the board will determine is how and when a project graduates to be in the official GSD releases. This may require a technical steering committee, which is something we can determine at the inaugural board meeting
+
+- As a side note, we are also having a workshop + hackfest in Boston on June 14. If you're interested in participating, please let me know.
+
+
+It's taken a lot of work to get here, but it's been very exciting. I look forward to working with all of you. I will set up a mailing list for board at gluster.org, but I wanted each of you to know who else is participating. Look for a mailing list invite soon, and then we can kick off board member introductions.
+
+
+Thanks!
+John Mark Walker
+Gluster Community Lead
+
+
+
+From jowalker at redhat.com  Thu May 16 16:53:04 2013
+From: jowalker at redhat.com (John Mark Walker)
+Date: Thu, 16 May 2013 12:53:04 -0400 (EDT)
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+References: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+	<00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+Message-ID: <496518298.3872733.1368723184439.JavaMail.root@redhat.com>
+
+I just realized that I never responded to this. Taking care of that now.
+
+----- Original Message -----
+> 
+> So  a couple of side comments - Apache and Eclipse are very different open
+> source orgs (as is oVirt). I understand some of the attraction to the
+> Eclipse model, but the mixing and matching causes some concern. Each of
+> those foundations has been successful in its own right, can you tell us why
+> not copy one or the other?
+
+Because we seem to be fairly unique. On one hand, we have a flagship project much like Eclipse, but on the other hand, I don't like how Eclipse mandates one specific license. As a result, I don't think Eclipse ever matured beyond the "we're a Java IDE" stage.
+
+Apache just seems to have too much overhead for my taste, but I admit to being biased there.
+
+oVirt did some good things and is probably the closest analog to what we're doing. However, they didn't mandate that its members actually make contributions and they didn't put in a clause where board members could be removed if they didn't fulfill their obligations, which is what we've done.
+
+> 
+> Members:
+> So this is somewhat confusing to me. So plenty of assumptions here on my part
+> - it appears that we are setting the stage for the Gluster Software
+> Foundation  - there will be multiple projects within the 'GSF'. What isn't
+
+Yup.
+
+> clear is how membership is handled across those groups, there is talk about
+> different standards being set within the group once a project is large
+> enough. So I guess a point of clarification - are you a member of the
+> 'Gluster Project' - or are you a member of Gluster sub-projects? or??
+
+There are a couple of different things here.
+
+- Organizations can join the Gluster community as contributing members, if they sign the LOI.
+
+This is separate from
+
+- Anyone can contribute a project to the Gluster Community. These projects will have to reach milestones before bringing a vote for graduation. The voting will be handled by the community board. Once reaching graduation, they can be included in the official Gluster Software Distribution. Right now, there are two projects in the GSD: GlusterFS and Gluster-Swift. 
+
+> 
+> Unwritten things:
+> So there is plenty of talk about the responsibilities, and making the board
+> more active. But there doesn't seem to be much about the authority of the
+> board. Where does authority end and begin?
+
+Legally speaking, Red Hat owns the Gluster copyrights and trademarks. However, because I want this to eventually be a foundation, I will run the board functionally as a foundation. Right now, that's the best we can do.
+
+> 
+> There are no officers defined - not necessarily a problem, but?..
+
+That will be voted on at the first board meeting.
+
+> 
+> So not to call out the 800lb Gorilla in the room - but there is zero mention
+> in the governance document or this email of the relationship to Red Hat.
+> Is the project completely free from RHT strings? Is it truly independent? Is
+> there to be a legal entity holding various pieces of IP and providing some
+> framework?
+
+See above re: trademarks and copyrights. Each project will be run individually by the engineers who work on it in a "whoever contributes code guides the projects". The Gluster board will function independently and govern the community process. 
+
+
+> Assuming the answer to this is 'no'. What is the relationship to Red Hat,
+> what are the limits on project (and board) authority?
+
+Right now, Red Hat controls the chairperson position in the form of "me". My hope is that we'll get to the point where we'll get so much momentum that Red Hat will be forced to push into a full-blown foundation, either joining another or forming its own. 
+
+Legally speaking, if Red Hat wanted to pull the plug and be the heavy, they could. But our goal is entirely opposite of that, and our strategy is that in order for us to be successful, we have to build long-lasting partnerships with community members. That means giving up control in return for a better software base and a more active community. I know itt's not the definitely answer you're looking for, but it basically amounts to "trust us."
+
+For determining the direction of Gluster.org and the Gluster community, the board holds the authority. I've managed this very carefully so that we don't get executives trying to push their viewpoints on the community. 
+
+Finally, some of you work for certain companies that I hope will join the Gluster Community as official members. It's too late now to join as a charter member, but becoming a member will be good for everyone.
+
+Thanks!
+JM
+
+
+
+From jimjag at redhat.com  Thu May 16 16:58:19 2013
+From: jimjag at redhat.com (Jim Jagielski)
+Date: Thu, 16 May 2013 12:58:19 -0400
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <496518298.3872733.1368723184439.JavaMail.root@redhat.com>
+References: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+	<00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+	<496518298.3872733.1368723184439.JavaMail.root@redhat.com>
+Message-ID: <F507BD04-4EAA-41E9-A7CE-1DB7285F0229@redhat.com>
+
+Just a FYI: Creating a new foundation from scratch is *incredibly*
+difficult, esp if the desire is a 501(c)3. A 501(c)6 is easier,
+but by being a "trade-group", the focus is, of course, on
+the corporate members, and hardly at ALL the individual member
+and/or contributor.
+
+So my 2c is expecting to spin-this out to its *own* foundation
+is likely wishful thinking...
+
+From jowalker at redhat.com  Thu May 16 17:10:48 2013
+From: jowalker at redhat.com (John Mark Walker)
+Date: Thu, 16 May 2013 13:10:48 -0400 (EDT)
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <F507BD04-4EAA-41E9-A7CE-1DB7285F0229@redhat.com>
+References: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+	<00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+	<496518298.3872733.1368723184439.JavaMail.root@redhat.com>
+	<F507BD04-4EAA-41E9-A7CE-1DB7285F0229@redhat.com>
+Message-ID: <1579780611.3883109.1368724248365.JavaMail.root@redhat.com>
+
+
+
+----- Original Message -----
+> Just a FYI: Creating a new foundation from scratch is *incredibly*
+> difficult, esp if the desire is a 501(c)3. A 501(c)6 is easier,
+> but by being a "trade-group", the focus is, of course, on
+> the corporate members, and hardly at ALL the individual member
+> and/or contributor.
+
+Yes, that's probably the least desirable route, as far as I can tell. I think OpenStack went that direction because of a loss of faith in the sponsoring organization.
+
+-JM
+
+From jowalker at redhat.com  Thu May 16 17:13:53 2013
+From: jowalker at redhat.com (John Mark Walker)
+Date: Thu, 16 May 2013 13:13:53 -0400 (EDT)
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <DA79AD52-C693-4601-A08A-F6E475D9D1C3@citrix.com>
+References: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+	<00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+	<0C8F02D5-26BB-4C10-9C37-1D577320FBDB@redhat.com>
+	<DA79AD52-C693-4601-A08A-F6E475D9D1C3@citrix.com>
+Message-ID: <1937945834.3884525.1368724433703.JavaMail.root@redhat.com>
+
+
+----- Original Message -----
+> Completely agree with this sentiment.
+> And completely happy for the definition to be that essentially the Board
+> exists to safeguard the assets (trademarks, etc) of the foundation and
+> ensure that it continues delivering on its mission, but doesn't meddle in
+> the technical/business end of the software projects themselves. (actually -
+> that is exactly the way I think it should be)
+
+That is the intent here. The Gluster Community Board will not meddle in the technical operations of the project, except to determine if they reach the criteria for graduation. 
+
+> And for the record, I think corporate-sponsored/controlled projects can be
+> done well. (I'll happily cite Fedora - which I think has generally shown
+> incredibly good stewardship and generally precious little corporate
+> meddling) They can also be done abominably as in some of the examples that
+> you cite, and they can also be done with the best of intentions, but with
+> results that make one go 'meh'. But I do think that it is important to know
+> what the standing is. Fedora, for instance,  makes that perfectly clear in
+> the person of the FPL who has absolute veto power over anything in the
+> project as being the 'control' that is able to be exerted by RHT - though it
+> is incredibly rarely used, because I think there was recognition that giving
+> up 'control' results in greater investment by others. That's a fine solution
+> for that particular problem.
+
+Ok.
+
+> 
+> Anyway, sorry for taking that segue - let me ask  a question that is more to
+> the point. What/who is the legal entity that is assuming the risk behind the
+> operations of the project? This, in my experience, determines where the real
+> boundaries are, because that underlying organization has obligations,
+> typically legal or regulatory, that necessarily impact the project, albeit
+> in hopefully small ways. And if it is the primary sponsor, there also
+> becomes a point at which it becomes no longer in the business interest of
+> that sponsor to continue operations.
+
+Yes, Red Hat assumes the legal risk. 
+
+As for business interests, it's pretty well-known inside Red Hat that the success of the Gluster community is absolutely essential to the success of Red Hat Storage.
+
+-JM
+
+
+
+From David.Nalley at citrix.com  Thu May 16 18:20:52 2013
+From: David.Nalley at citrix.com (David Nalley)
+Date: Thu, 16 May 2013 18:20:52 +0000
+Subject: [Advisors] Updates and Next Steps
+In-Reply-To: <F507BD04-4EAA-41E9-A7CE-1DB7285F0229@redhat.com>
+References: <328240829.46834351.1355170658721.JavaMail.root@redhat.com>
+	<00546FEF-4B28-4135-B85D-FDB2292EDD4F@citrix.com>
+	<496518298.3872733.1368723184439.JavaMail.root@redhat.com>,
+	<F507BD04-4EAA-41E9-A7CE-1DB7285F0229@redhat.com>
+Message-ID: <377356C758D1B346B44A65FF891DB4A00FF63A74@FTLPEX01CL03.citrite.net>
+
+Having gone through the process at attempting to form some manner of foundation twice with Fedora, I have to agree - I don't think the idea of spinning off to a separate foundation has legs, and speaking frankly. With groups like the ASF, TLF, Eclipse, SPI, Outercurve, etc. I have to wonder at the wisdom of even trying, running the org becomes a distraction to actually getting things done in the project(s). Yes, no existing group will be perfect (and neither will anything you create), but pick one that has a governance that you can live with if you really need to be independent. 
+
+
+________________________________________
+From: Jim Jagielski [jimjag at redhat.com]
+Sent: Thursday, May 16, 2013 9:58 AM
+To: John Mark Walker
+Cc: David Nalley; advisors; Jim Jagielski
+Subject: Re: [Advisors] Updates and Next Steps
+
+Just a FYI: Creating a new foundation from scratch is *incredibly*
+difficult, esp if the desire is a 501(c)3. A 501(c)6 is easier,
+but by being a "trade-group", the focus is, of course, on
+the corporate members, and hardly at ALL the individual member
+and/or contributor.
+
+So my 2c is expecting to spin-this out to its *own* foundation
+is likely wishful thinking...
+
