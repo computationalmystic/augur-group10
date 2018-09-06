@@ -168,7 +168,7 @@ class PiperMail:
 		#print(length)
 		mess_row_tot = 1
 		row_num = 0
-		if(length < 100):
+		if(length <= 100):
 			j = length
 		else:
 			mess_row_tot+= int(length/7000)
