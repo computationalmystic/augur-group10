@@ -41,7 +41,6 @@ class PiperMail:
 
 		path = "/augur/data/"
 		db_name = "mail_lists"
-		db_name_csv = os.getcwd() + path + db_name
 		columns1 = 'augurmsgID', 'backend_name','project','mailing_list','category',\
 		           'message_part','message_parts_tot', 'subject','date',\
 				   'message_from','message_id','message_text'
@@ -78,6 +77,7 @@ class PiperMail:
 			else:
 				print("Skipping")
 				continue
+			print("New value: ",new)
 			print(archives)
 			df = pd.DataFrame(columns=columns1)
 			df["date"] = pd.to_datetime(df["date"])
@@ -114,15 +114,15 @@ class PiperMail:
 						print(res[y].project)
 					res[y].last_message_date = last_date
 					session.commit()
-
-			df_mail_list,numb = self.add_row_mail_list(columns2,di[i],df_mail_list,archives[0],last_date,numb)
+			if(new):
+				df_mail_list,numb = self.add_row_mail_list(columns2,di[i],df_mail_list,archives[0],last_date,numb)
 			print("File uploaded ",row)
 		if(new == True):
-			name = os.getcwd() + path + "mailing_list_jobs"
 			df_mail_list.to_sql(name='mailing_list_jobs',con=db,if_exists='append',index=False)
 			print("Mailing List Job uploaded")
 		print("Finished")
-		return numb,mail_lists
+		mail_check[archives[0]] = 'update'
+		return numb,mail_lists,mail_check
 	
 	def convert_date(self,di):
 		'''
@@ -192,6 +192,7 @@ class PiperMail:
 		if(j+7000>length):
 			k+=1
 			row_num+=1
+			date = self.convert_date(di['data']['Date'])
 			li = [[augurmsgID,di['backend_name'],di['origin'],archives,
 			di['category'], row_num, mess_row_tot, di['data']['Subject'],
 			date, di['data']['From'],
