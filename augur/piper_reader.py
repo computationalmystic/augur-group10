@@ -156,22 +156,34 @@ class PiperMail:
 		:param di: messages in mailing list
 		'''
 		split = di.split()
-
+		s = " "
 		if( ("-" or "+") in di):
-			sign = split[5][0]
+			if(len(split) == 5):
+				sign = split[-1][0]
+				#print(split,"Here")
+				hours = int( (split[3].split(":"))[0] )
+				mins = int( (split[3].split(":"))[1])
+				date = parse(s.join(split[:4]))
+			else:
+				#print(split)
+				sign = split[-2][0]
+				hours = int( (split[4].split(":"))[0] )
+				mins = int( (split[4].split(":"))[1] )
+				date = parse(s.join(split[:5]))
+			#print(di)
+			#print(split)
 			#if("Tue, 11 Feb 2014 15:18:55" in di):
 			#	print("Sign",sign)
 			if sign == '-':
-				sign = +1
+				sign = 1
 			else:
 				sign = -1
-			hours = int(split[5][1:3]) * sign
-			mins = int(split[5][3:6]) * sign
+			hours *= sign
+			mins *= sign
 		else:
 			hours = 0
 			mins = 0
-		s = " "
-		date = parse(s.join(split[:5]))
+			date = parse(s.join(split[:5]))
 		date = date + timedelta(hours = hours)
 		date = date + timedelta(minutes = mins)
 		return date
