@@ -4,13 +4,44 @@
     <div class="error hidden"><br>Data is missing or unavailable for metric: <p style="color: black !important">{{ title }}</p></div>
     <div class="spinner loader"></div>
     <div class="hidefirst linechart" v-bind:class="{ invis: !detail, invisDet: detail }">
-      <!-- <div class="row">
-        <div class="col col-4" ><input type="radio" name="timeoption" value="month" v-model="timeperiod">Month</div>
-        <div class="col col-4" ><input type="radio" name="timeoption" value="year" v-model="timeperiod">Year</div>
-        <div class="col col-4" ><input type="radio" name="timeoption" value="all" v-model="timeperiod">All</div>        
-      </div> -->
+      <!-- <nav class="tabs">
+        <ul>
+          <li :class="{ active: (timeperiod == 'year'), hidden: !repo }"><input type="radio" :name="source" @click="setTimeframe" value="year" :id="source + 'year'" v-model="timeperiod"><label :for="source + 'year'">Year</label></li>
+          <li :class="{ active: (timeperiod == 'month'), hidden: !repo }"><input type="radio" :name="source" @click="setTimeframe" value="month" :id="source + 'month'" v-model="timeperiod"><label :for="source + 'month'">Month</label></li>
+          <li :class="{ active: (timeperiod == 'all'), hidden: !repo }"><input type="radio" :name="source" @click="setTimeframe" value="all" :id="source + 'all'" v-model="timeperiod"><label :for="source + 'all'">All</label></li>
+        </ul>
+      </nav> -->
       <vega-lite :spec="spec" :data="values"></vega-lite>
       <p> {{ chart }} </p>
+      <!-- <div class="row switch" :name="source">
+        <div class="col col-4 quality" ><input type="radio" :name="source" value="month" :id="source + 'month'" v-model="timeperiod"><label :for="source + 'month'">Month</label></div>
+        <div class="col col-4 quality" ><input type="radio" :name="source" value="year" :id="source + 'year'" v-model="timeperiod"><label :for="source + 'year'">Year</label></div>
+        <div class="col col-4 quality" ><input type="radio" :name="source" value="all" :id="source + 'all'" v-model="timeperiod"><label :for="source + 'all'">All</label></div>
+
+      </div> -->
+      <nav class="tabs">
+        <ul>
+          <li :class="{ active: (timeperiod == '1825'), hidden: !repo }"><input type="radio" :name="source" value="1825" :id="source + '5year'" v-model="timeperiod"><label :for="source + '5year'">5 Years</label></li>
+          <li :class="{ active: (timeperiod == '365'), hidden: !repo }"><input type="radio" :name="source" value="365" :id="source + 'year'" v-model="timeperiod"><label :for="source + 'year'">Year</label></li>
+          <li :class="{ active: (timeperiod == '30'), hidden: !repo }"><input type="radio" :name="source" value="30" :id="source + 'month'" v-model="timeperiod"><label :for="source + 'month'">Month</label></li>
+          <li :class="{ active: (timeperiod == 'all'), hidden: !repo }"><input type="radio" :name="source" value="all" :id="source + 'all'" v-model="timeperiod"><label :for="source + 'all'">All</label></li>
+        </ul>
+<!-- 
+<button data-kube="dropdown" data-target="#dropdown">
+    Show
+    <span class="caret is-down"></span>
+</button>
+
+
+<div id="dropdown" class="dropdown is-hidden">
+    <a href="#">Item 1</a>
+    <a href="#" class="is-active">Item 2</a>
+    <a href="#" class="is-separator">Item 3</a>
+    <a href="#">Item 4</a>
+</div> -->
+      </nav>
+      
+
     </div>
 
     <div class="row below-chart">
@@ -125,7 +156,7 @@ export default {
 
       //COLORS TO PICK FOR EACH REPO
       var colors = ["black", "#FF3647", "#4736FF","#3cb44b","#ffe119","#f58231","#911eb4","#42d4f4","#f032e6"]
-      let brush = {"filter": {"selection": "brush"}}
+      let brush = this.showDetail ? {"filter": {"selection": "brush"}} : {"filter": "datum.date > 0"}
       let config = {
         "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
         "config":{
@@ -141,8 +172,9 @@ export default {
         "vconcat": [
           {
             "title": {
-            "text": this.title,
-            "offset": 15
+              "text": this.title,
+              // "offset": 55
+              "offset": 10
             },
             "width": 520,
             "height": 250,
@@ -609,59 +641,39 @@ export default {
       buildMetric()
 
       //set dates from main control options
-      if(this.showDetail) {
+      if(!this.showDetail) {
         let today = new Date()
         let startyear = (this.timeperiod && this.timeperiod != 'all') ? (() => {
           let d = new Date()
-          switch (this.timeperiod) {
-            case "month":
-              d = new Date(d.setDate(d.getDate()-30))
-              return d.getFullYear();
-            case "year":
-              d = new Date(d.setDate(d.getDate()-365))
-              return d.getFullYear();
-          }
+          return new Date(d.setDate(d.getDate()-Number(this.timeperiod))).getFullYear()
         })() : this.earliest.getFullYear()
         let startmonth = (this.timeperiod && this.timeperiod != 'all') ? (() => {
           let d = new Date()
-          switch (this.timeperiod) {
-            case "month":
-              d = new Date(d.setDate(d.getDate()-30))
-              return d.getMonth();
-            case "year":
-              d = new Date(d.setDate(d.getDate()-365))
-              return d.getMonth();
-          }
+          return new Date(d.setDate(d.getDate()-Number(this.timeperiod))).getMonth()
         })() : this.earliest.getMonth()
         let startdate = (this.timeperiod && this.timeperiod != 'all') ? (() => {
           let d = new Date()
-          switch (this.timeperiod) {
-            case "month":
-              d = new Date(d.setDate(d.getDate()-30))
-              return d.getDate();
-            case "year":
-              d = new Date(d.setDate(d.getDate()-365))
-              return d.getDate();
-          }
+          return new Date(d.setDate(d.getDate()-Number(this.timeperiod))).getDate()
         })() : this.earliest.getDate()
-        // for(var i = 0; i < config.vconcat[0].layer.length; i++){
-        //   config.vconcat[0].layer[i].encoding.x["scale"] =
-        //     {
-        //       "domain": [{"year": startyear, "month": startmonth, "date": startdate},{"year": this.latest.getFullYear(), "month": this.latest.getMonth(), "date": this.latest.getDate()}]
-        //     }
-        // }
-        config.vconcat[1].encoding.x["scale"] = {
-            "domain": [{"year": startyear, "month": startmonth, "date": startdate},{"year": this.latest.getFullYear(), "month": this.latest.getMonth(), "date": this.latest.getDate()}]
-          }
-      }
-      else {
+        console.log("change:", this.timeperiod, startmonth, startdate, startyear)
         for(var i = 0; i < config.vconcat[0].layer.length; i++){
           config.vconcat[0].layer[i].encoding.x["scale"] =
             {
-              "domain": [{"year": this.earliest.getFullYear(), "month": this.earliest.getMonth(), "date": this.earliest.getDate()},{"year": this.latest.getFullYear(), "month": this.latest.getMonth(), "date": this.latest.getDate()}]
+              "domain": [{"year": startyear, "month": startmonth, "date": startdate},{"year": this.latest.getFullYear(), "month": this.latest.getMonth(), "date": this.latest.getDate()}]
             }
         }
+        // config.vconcat[1].encoding.x["scale"] = {
+        //     "domain": [{"year": startyear, "month": startmonth, "date": startdate},{"year": this.latest.getFullYear(), "month": this.latest.getMonth(), "date": this.latest.getDate()}]
+        //   }
       }
+      // else {
+      //   for(var i = 0; i < config.vconcat[0].layer.length; i++){
+      //     config.vconcat[0].layer[i].encoding.x["scale"] =
+      //       {
+      //         "domain": [{"year": this.earliest.getFullYear(), "month": this.earliest.getMonth(), "date": this.earliest.getDate()},{"year": this.latest.getFullYear(), "month": this.latest.getMonth(), "date": this.latest.getDate()}]
+      //       }
+      //   }
+      // }
 
       if ((!this.status.base && !this.comparedTo) || (!this.status.compared && !this.status.base)) {
         if(!this.showDetail){
@@ -777,9 +789,11 @@ export default {
                     baselineVals = AugurStats.rollingAverage(d, 'value', this.period, repo)
                   }
                   rolling = AugurStats.rollingAverage(d, 'value', this.period, repo)
-                  for (var i = 0; i < baselineVals.length; i++){
-                    if (rolling[i] && baselineVals[i])
-                      rolling[i].valueRolling -= baselineVals[i].valueRolling                   
+                  if (baselineVals){
+                    for (var i = 0; i < baselineVals.length; i++){
+                      if (rolling[i] && baselineVals[i])
+                        rolling[i].valueRolling -= baselineVals[i].valueRolling                   
+                    }
                   }
                 } else {
                   rolling = AugurStats.rollingAverage(d, 'value', this.period, repo)
@@ -886,6 +900,9 @@ export default {
     renderError () {
         $(this.$el).find('.spinner').removeClass('loader')
         $(this.$el).find('.error').removeClass('hidden')
+    },
+    setTimeframe (e) {
+      this.timeframe = e.target['value']
     }
   },// end methods
   created () {

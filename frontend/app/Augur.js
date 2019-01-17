@@ -50,7 +50,7 @@ export default function Augur () {
       showBelowAverage: false,
       rawWeekly: false,
       showArea: true,
-      showDetail: true,
+      showDetail: false,
       showTooltip: true,
       byDate: false
     },

@@ -63,7 +63,7 @@
                   <label class="checkbox"><input name="comparebaseline" value="each" type="checkbox" @change="onTooltipChange" :disabled="!disabled" :checked="disabled" checked>Show tooltip</label>
                 </div>
                 <div class="form-item form-checkboxes">
-                  <label class="checkbox"><input name="comparebaseline" value="each" type="checkbox" checked @change="onDetailChange">Enable detail</label>
+                  <label class="checkbox"><input name="comparebaseline" value="each" type="checkbox" @change="onDetailChange">Enable detail</label>
                 </div>
               </div>
               <label>Bubble Charts

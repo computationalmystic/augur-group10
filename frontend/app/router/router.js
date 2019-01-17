@@ -16,6 +16,7 @@ let routes = [
       {path: '/compare/:tab/:owner?/:repo/:domain?/comparedto/:comparedowner/:comparedrepo/:compareddomain?', component: AugurCards, name: 'singlecompare', props: true, canReuse: false,},
       // {path: '/:tab/:owner/:repo/comparedto/:comparedowner/:comparedrepo', component: AugurCards, name: 'singlecompare'},
       {path: '/groupcompare/:tab/:groupid', component: AugurCards, name: 'group', props: true, canReuse: false,},
+      // {path: '/singletest/:tab/:owner?/:repo', component: ConstrolsTabs, name: 'singletest', props: true, canReuse: false,}
 ]
 let downloadedRepos = [], repos = [], projects = []
 window.AugurAPI.getDownloadedGitRepos().then((data) => {

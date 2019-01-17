@@ -1,7 +1,9 @@
 <template>
    
   <div>
-    <augur-header></augur-header>
+    <div class="fullwidth">
+      <augur-header></augur-header>
+    </div>
     <!-- content to show if app has no state yet -->
     <div :class="{ hidden: hasState }">
       <!-- <login-form></login-form> -->
@@ -26,6 +28,8 @@
           <li :class="{ active: (currentTab == 'activity'), hidden: !baseRepo }"><a href="#" @click="changeTab" data-value="activity">Activity</a></li>
           <li :class="{ active: (currentTab == 'experimental'), hidden: !baseRepo }"><a href="#" @click="changeTab" data-value="experimental">Experimental</a></li>
           <li :class="{ active: (currentTab == 'git'), hidden: !gitRepo }"><a href="#" @click="changeTab" data-value="git">Git</a></li>
+          <li :class="{ active: (currentTab == 'overview'), hidden: comparedRepos.length < 2 }"><a href="#" @click="changeTab" data-value="overview">Group Overview</a></li>
+          <li :class="{ active: (currentTab == 'openended'), hidden: comparedRepos.length > 0 }"><a href="#" @click="changeTab" data-value="openended">Open Ended Questions</a></li>
         </ul>
       </nav>
 
@@ -53,6 +57,12 @@
         <div v-if="(gitRepo && (currentTab == 'git'))">
           <git-card></git-card>
         </div>
+        <div v-if="(comparedRepos.length >= 2 && (currentTab == 'overview'))">
+          <overview-card></overview-card>
+        </div>
+        <div v-if="(comparedRepos.length == 0 && (currentTab == 'openended'))">
+          <overview-card></overview-card>
+        </div>
       </div>
     </div>
   </div>
@@ -69,6 +79,7 @@ import RiskCard from './RiskCard'
 import ValueCard from './ValueCard'
 import DiversityInclusionCard from './DiversityInclusionCard'
 import GitCard from './GitCard'
+import OverviewCard from './OverviewCard.vue'
 import ExperimentalCard from './ExperimentalCard'
 import DownloadedReposCard from './DownloadedReposCard'
 import LoginForm from './LoginForm'
@@ -89,7 +100,8 @@ module.exports = {
     GitCard,
     ExperimentalCard,
     DownloadedReposCard,
-    LoginForm
+    LoginForm,
+    OverviewCard
   },
   created(to, from, next) {
     if(this.repo || this.groupid){
@@ -156,8 +168,10 @@ module.exports = {
     //   }
     // },
     '$route': function (to, from) {
-      if (to.name != from.name || to.name == 'group')
-        window.location.reload()
+      console.log(to, from)
+      if (to.path != from.path)
+        // window.location.reload()
+        window.location.replace(to.path)
     }
   },
   data() {
