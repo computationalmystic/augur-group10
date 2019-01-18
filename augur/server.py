@@ -29,7 +29,7 @@ class Server(object):
         # Create Flask application
         self.app = Flask(__name__)
         self.api_version = AUGUR_API_VERSION
-        app = self.app
+        app = self.appr
         CORS(app)
         app.url_map.strict_slashes = False
 
@@ -265,12 +265,15 @@ class Server(object):
 
             if repo_url_base:
                 kwargs['repo_url'] = str(base64.b64decode(repo_url_base).decode())
-                print(kwargs['repo_url'])
+                # print(kwargs['repo_url'])
 
             if not args and not kwargs:
                 data = func()
             elif args and not kwargs:
-                data = func(*args)
+                if len(args) == 1:
+                    data = func(args)
+                else:
+                    data = func(*args)
             else:
                 data = func(*args, **kwargs)
                 
@@ -359,6 +362,15 @@ def run():
     host = server._augur.read_config('Server', 'host', 'AUGUR_HOST', '0.0.0.0')
     port = server._augur.read_config('Server', 'port', 'AUGUR_PORT', '5000')
     Server().app.run(host=host, port=int(port))
+
+def run_shell():
+    server = Server()
+    host = server._augur.read_config('Server', 'host', 'AUGUR_HOST', '0.0.0.0')
+    port = server._augur.read_config('Server', 'port', 'AUGUR_PORT', '5000')
+    Server().app.run(host=host, port=int(port))
+    time.sleep(15)
+    pid = open("logs/backend.pid", "r").read()
+    os.kill(int(pid), 0)
 
 wsgi_app = None
 def wsgi(env, start_response):

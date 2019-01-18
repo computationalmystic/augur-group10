@@ -3,6 +3,7 @@
 Data source that uses the GHTorrent relational database of GitHub activity. 
 """
 
+import datetime
 import pandas as pd
 import sqlalchemy as s
 import numpy as np
@@ -28,6 +29,9 @@ class GHTorrent(object):
             self.userid('howderek')
         except Exception as e:
             logger.error("Could not connect to GHTorrent database. Error: " + str(e))
+
+        # self.current_year = datetime.datetime.now().year
+        self.current_year = 2018
 
     def __single_table_count_by_date(self, table, repo_col='project_id', user_col='author_id', group_by="week"):
         """
@@ -1044,3 +1048,71 @@ class GHTorrent(object):
             GROUP BY YEARWEEK(created_at)
         """)
         return pd.read_sql(newWatchersSQL, self.db, params={"repoid": str(repoid)})
+
+    @annotate(tag='top-watchers')
+    def top_watchers(self, limit):
+        """
+        List of X repositories with the top watchers of all time across all projects
+
+        :param limit: The maximum number of results to be returned (i.e. top 10 repos)
+        :return: DataFrame with top X repositories with the top watchers of all time across all projects
+        """
+
+        if limit == None:
+            limit = 10
+
+        topWatchersSQL = s.sql.text("""
+            SELECT repo_id, COUNT(*) as 'watchers' 
+            FROM watchers
+            GROUP BY repo_id
+            ORDER BY count(*) DESC
+            LIMIT :limit
+        """)
+        return pd.read_sql(topWatchersSQL, self.db, params={"limit": int(limit)})
+
+    @annotate(tag='top-watchers-for-year')
+    def top_watchers_for_year(self, limit=None, year=None):
+        """
+        List of X repositories with the top watchers for the given year across all projects
+
+        :param limit: The specified number of results to be returned (i.e. top 10 repos)
+        :param year: The year for which to calculate the number of top watchers
+        :return: DataFrame with top X repositories with the top watchers for the given year across all projects
+        """
+
+        if year is None:
+            year = self.current_year
+
+        topWatchersForYearSQL = s.sql.text("""
+            SELECT repo_id, COUNT(*) as 'watchers', projects.created_at
+            FROM watchers
+            JOIN projects ON projects.id = watchers.repo_id
+            WHERE projects.created_at > ':year-01-01 00:00:00'
+            GROUP BY repo_id
+            ORDER BY count(*) DESC
+            LIMIT :limit
+        """)
+        return pd.read_sql(topWatchersForYearSQL, self.db, params={"limit": int(limit), "year": int(year)})
+
+    @annotate(tag='top-new-watchers-for-year')
+    def top_new_watchers_for_year(self, limit=None, year=None):
+        """
+        List of top X repositories with the top NEW watchers for that year across all projects
+
+        :param limit: The maximum number of results to be returned (i.e. top 10 repos)
+        :param year: The year for which to calculate the number of top NEW watchers
+        :return: DataFrame with top X repositories with the top NEW watchers for the given year across all projects
+        """
+
+        if year is None:
+            year = self.current_year
+
+        topNewWatchersForYearSQL = s.sql.text("""
+            SELECT repo_id, COUNT(*) as 'new_watchers', created_at 
+            FROM watchers
+            WHERE created_at > ':year-01-01 00:00:00'
+            GROUP BY repo_id
+            ORDER BY count(*) DESC
+            LIMIT :limit
+        """)
+        return pd.read_sql(topNewWatchersForYearSQL, self.db, params={"limit": int(limit), "year": int(year)})

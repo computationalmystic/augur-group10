@@ -16,7 +16,6 @@ def filter_by(status, key, value):
 def create_routes(server):
 
     metrics_status = server._augur['metrics_status']()
-    metrics_status.create_metrics_status()
 
     metrics_status_url = "metrics/status"
 
@@ -178,7 +177,7 @@ def create_routes(server):
 
         filtered_metrics_status = metrics_status.raw_metrics_status
 
-        valid_filters = [key for key in Metric().__dict__.keys() if key != 'name' and key != 'url']
+        valid_filters = [key for key in Metric().__dict__ if key not in ('name', 'url')]
 
         for valid_filter in valid_filters:
             filtered_metrics_status = filter_by(filtered_metrics_status, valid_filter, request.args.get(valid_filter))

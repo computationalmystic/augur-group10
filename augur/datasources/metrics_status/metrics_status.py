@@ -138,6 +138,8 @@ class MetricsStatus(object):
         self.raw_metrics_status = []
         self.metadata = []
 
+        self.create_metrics_status()
+
     def create_metrics_status(self):
 
         self.build_implemented_metrics()

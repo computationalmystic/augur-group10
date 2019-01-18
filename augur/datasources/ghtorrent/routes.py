@@ -782,7 +782,7 @@ def create_routes(server):
     server.addTimeseries(ghtorrent.fakes, 'fakes')
 
     """
-    @api {get} /:owner/:repo/timeseries/new_watchers Fakes
+    @api {get} /:owner/:repo/timeseries/new_watchers New Watchers
     @apiName new_watchers
     @apiGroup Experimental
     @apiDescription This is an Augur-specific metric. We are currently working to define these more formally.
@@ -805,6 +805,107 @@ def create_routes(server):
     server.addTimeseries(ghtorrent.new_watchers, 'new_watchers')
 
     """
+    @api {get} /top_watchers?limit=:limit Top Watchers
+    @apiName top_watchers
+    @apiGroup Experimental
+    @apiDescription This is an Augur-specific metric. We are currently working to define these more formally.
+
+    @apiParam {string} [limit] The number of results to be returned
+
+    @apiSuccessExample {json} Success-Response:
+                        [
+                            {
+                                "repo_id": 97438724,
+                                "watchers": 27254
+                            },
+                            {
+                                "repo_id": 18089783,
+                                "watchers": 24002
+                            }
+                        ]
+    """
+    @server.app.route('/{}/top_watchers/'.format(server.api_version))
+    def ghtorrent_top_watchers():
+
+        limit = request.args.get('limit')
+
+        data = server.transform(ghtorrent.top_watchers, args=(limit))
+
+        return Response(response=data,
+                        status=200,
+                        mimetype="application/json")
+
+    """
+    @api {get} /top_watchers_for_year?limit=:limit&year=:year Top Watchers For Year
+    @apiName top_watchers_for_year
+    @apiGroup Experimental
+    @apiDescription This is an Augur-specific metric. We are currently working to define these more formally.
+
+    @apiParam {string} [limit] The number of results to be returned
+    @apiParam {string} [year] The year for which to calculate the repos with the most watchers
+
+    @apiSuccessExample {json} Success-Response:
+                        [
+                            {
+                                "repo_id": 97438724,
+                                "new_watchers": 27254,
+                                "created_at": "2018-05-09T12:03:18.000Z"
+                            },
+                            {
+                                "repo_id": 87703222,
+                                "new_watchers": 22223,
+                                "created_at": "2018-02-06T23:54:00.000Z"
+                            }
+                        ]
+    """
+    @server.app.route('/{}/top_watchers_for_year/'.format(server.api_version))
+    def ghtorrent_top_watchers_for_year():
+
+        year = request.args.get('year')
+        limit = request.args.get('limit')
+
+        data = server.transform(ghtorrent.top_watchers_for_year, args=(limit, year))
+
+        return Response(response=data,
+                        status=200,
+                        mimetype="application/json")
+
+    """
+    @api {get} /top_new_watchers_for_year?limit=:limit&year=:year Top New Watchers For Year
+    @apiName top_new_watchers_for_year
+    @apiGroup Experimental
+    @apiDescription This is an Augur-specific metric. We are currently working to define these more formally.
+
+    @apiParam {string} [limit] The number of results to be returned
+    @apiParam {string} [year] The year for which to calculate the repos with the most watchers
+
+    @apiSuccessExample {json} Success-Response:
+                        [
+                            {
+                                "repo_id": 97438724,
+                                "new_watchers": 27254,
+                                "created_at": "2018-05-21T03:23:41.000Z"
+                            },
+                            {
+                                "repo_id": 18089783,
+                                "new_watchers": 24002,
+                                "created_at": "2018-01-06T07:25:48.000Z"
+                            }
+                        ]
+    """
+    @server.app.route('/{}/top_new_watchers_for_year/'.format(server.api_version))
+    def ghtorrent_top_new_watchers_for_year():
+
+        year = request.args.get('year')
+        limit = request.args.get('limit')
+
+        data = server.transform(ghtorrent.top_new_watchers_for_year, args=(limit, year))
+
+        return Response(response=data,
+                        status=200,
+                        mimetype="application/json")
+
+    """
     @api {get} /ghtorrent_range GHTorrent Date Range
     @apiName GhtorrentRange
     @apiGroup Utility
@@ -823,7 +924,6 @@ def create_routes(server):
                         ]
     """
     @server.app.route('/{}/ghtorrent_range'.format(server.api_version))
-
     def ghtorrent_range():
         ghr = server.transform(ghtorrent.ghtorrent_range())
         return Response(response=ghr,
