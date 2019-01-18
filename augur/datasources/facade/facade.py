@@ -144,3 +144,45 @@ class Facade(object):
         """)
         results = pd.read_sql(commitsByMonthSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
+
+    @annotate(tag='top-new-repos-this-year-commits')
+    def top_new_repos_this_year_commits(self, limit=None):
+        """
+        Returns top new repos this year by commits
+
+        :param limit: number of repos the user wishes to display
+        """
+        
+        if limit is None:
+            limit = 10
+
+        topNewReposCommits = s.sql.text("""
+            SELECT repos_id, (cast(added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches
+            FROM repo_annual_cache
+            WHERE year = YEAR(CURDATE())
+            ORDER BY patches 
+            LIMIT :limit
+        """)
+        results = pd.read_sql(topNewReposCommits, self.db, params={"limit": int(limit)})
+        return results
+
+    @annotate(tag='top-new-repos-this-year-lines-of-code')
+    def top_new_repos_this_year_lines_of_code(self, limit=None):
+        """
+        Returns top new repos this year by lines of code
+
+        :param limit: number of repos the user wishes to display
+        """
+        
+        if limit is None:
+            limit = 10
+      
+        topNewReposLines = s.sql.text("""
+            SELECT repos_id, (cast(added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches
+            FROM repo_annual_cache
+            WHERE year = YEAR(CURDATE())
+            ORDER BY net 
+            LIMIT :limit
+        """)
+        results = pd.read_sql(topNewReposLines, self.db, params={"limit": int(limit)})
+        return results

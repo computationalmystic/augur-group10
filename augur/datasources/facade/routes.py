@@ -3,7 +3,7 @@
 Creates routes for the facade data source plugin
 """
 
-from flask import Response
+from flask import Response, request
 
 def create_routes(server):
 
@@ -146,3 +146,25 @@ def create_routes(server):
                         ]
     """
     server.addGitMetric(facade.commits_by_week, 'commits_by_week')
+
+    @server.app.route('/{}/git/top_new_repos_this_year_commits'.format(server.api_version))
+    def facade_top_new_repos_this_year_commits():
+
+       limit = request.args.get('limit')
+
+       data = server.transform(facade.top_new_repos_this_year_commits, args=(limit))
+
+       return Response(response=data,
+                       status=200,
+                       mimetype="application/json")
+
+    @server.app.route('/{}/git/top_new_repos_this_year_lines_of_code'.format(server.api_version))
+    def facade_top_new_repos_this_year_lines_of_code():
+
+       limit = request.args.get('limit')
+
+       data = server.transform(facade.top_new_repos_this_year_lines_of_code, args=(limit))
+
+       return Response(response=data,
+                       status=200,
+                       mimetype="application/json")
