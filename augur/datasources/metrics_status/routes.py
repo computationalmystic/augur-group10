@@ -71,7 +71,7 @@ def create_routes(server):
     """
     @server.app.route("/{}/{}".format(server.api_version, metrics_status_url))
     def metrics_status_view():
-        return Response(response=json.dumps(metrics_status.raw_metrics_status),
+        return Response(response=json.dumps(metrics_status.metrics_status_data),
                         status=200,
                         mimetype="application/json")
 
@@ -175,7 +175,7 @@ def create_routes(server):
     @server.app.route("/{}/{}/filter".format(server.api_version, metrics_status_url))
     def filtered_metrics_status_view():
 
-        filtered_metrics_status = metrics_status.raw_metrics_status
+        filtered_metrics_status = metrics_status.metrics_status_data
 
         valid_filters = [key for key in Metric().__dict__ if key not in ('name', 'url')]
 

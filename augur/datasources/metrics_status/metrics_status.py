@@ -135,7 +135,7 @@ class MetricsStatus(object):
 
         self.implemented_metrics = []
 
-        self.raw_metrics_status = []
+        self.metrics_status_data = []
         self.metadata = []
 
         self.create_metrics_status()
@@ -161,9 +161,9 @@ class MetricsStatus(object):
 
         self.find_defined_metrics()
 
-        self.get_raw_metrics_status()
+        self.build_metrics_status_data()
 
-        self.get_metadata()
+        self.build_metadata()
 
     def build_implemented_metrics(self):
         frontend_status_extractor = FrontendStatusExtractor()
@@ -252,12 +252,12 @@ class MetricsStatus(object):
                     metric.is_defined = 'true'
                     metric.documentation_url = "https://github.com/{}/blob/wg-gmd/activity-metrics/{}.md".format(MetricsStatus.activity_repo, metric.tag)
 
-    def get_raw_metrics_status(self):
+    def build_metrics_status_data(self):
         for group in self.metrics_by_group:
             for metric in group:
-                self.raw_metrics_status.append(metric.__dict__)
+                self.metrics_status_data.append(metric.__dict__)
 
-    def get_metadata(self):
+    def build_metadata(self):
         self.get_metric_sources()
         self.get_metric_types()
         self.get_metric_tags()
@@ -277,21 +277,21 @@ class MetricsStatus(object):
        }
 
     def get_metric_sources(self):
-        for data_source in [metric['data_source'] for metric in self.raw_metrics_status]:
+        for data_source in [metric['data_source'] for metric in self.metrics_status_data]:
             data_source = data_source.lower()
             if data_source not in self.data_sources and data_source != "none":
                 self.data_sources.append(data_source)
         self.data_sources.append("all")
 
     def get_metric_types(self):
-        for metric_type in [metric['metric_type'] for metric in self.raw_metrics_status]:
+        for metric_type in [metric['metric_type'] for metric in self.metrics_status_data]:
             metric_type = metric_type.lower()
             if metric_type not in self.metric_types and metric_type != "none":
                 self.metric_types.append(metric_type)
         self.metric_types.append("all")
 
     def get_metric_tags(self):
-        for tag in [(metric['tag'], metric['group']) for metric in self.raw_metrics_status]:
+        for tag in [(metric['tag'], metric['group']) for metric in self.metrics_status_data]:
             # tag[0] = tag[0].lower()
             if tag[0] not in [tag[0] for tag in self.tags] and tag[0] != "none":
                 self.tags[tag[0]] = tag[1]
