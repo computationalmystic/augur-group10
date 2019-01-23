@@ -29,7 +29,7 @@ class Server(object):
         # Create Flask application
         self.app = Flask(__name__)
         self.api_version = AUGUR_API_VERSION
-        app = self.appr
+        app = self.app
         CORS(app)
         app.url_map.strict_slashes = False
 
