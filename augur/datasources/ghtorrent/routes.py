@@ -804,6 +804,8 @@ def create_routes(server):
     """
     server.addTimeseries(ghtorrent.new_watchers, 'new_watchers')
 
+    server.addMetric(ghtorrent.total_watchers, 'total_watchers')
+
     """
     @api {get} /top_watchers?limit=:limit Top Watchers
     @apiName top_watchers

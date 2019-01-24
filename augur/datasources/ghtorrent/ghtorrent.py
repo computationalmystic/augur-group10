@@ -1049,7 +1049,7 @@ class GHTorrent(object):
         """)
         return pd.read_sql(newWatchersSQL, self.db, params={"repoid": str(repoid)})
 
-    @annotate(tag='top-watchers')
+@annotate(tag='top-watchers')
     def top_watchers(self, limit):
         """
         List of X repositories with the top watchers of all time across all projects
@@ -1116,3 +1116,20 @@ class GHTorrent(object):
             LIMIT :limit
         """)
         return pd.read_sql(topNewWatchersForYearSQL, self.db, params={"limit": int(limit), "year": int(year)})
+
+
+    @annotate(tag='total-watchers')
+    def total_watchers(self, owner, repo=None): 
+        """
+
+        :param owner: The name of the project owner or the id of the project in the projects table of the project in the projects table.
+        :param repo: The name of the repo. Unneeded if repository id was passed as owner.
+        :return: 
+        """
+        repoid = self.repoid(owner, repo)
+        newWatchersSQL = s.sql.text("""
+            SELECT SUBDATE(DATE(created_at), WEEKDAY(DATE(created_at))) as "date", COUNT(*) as "watchers"
+            FROM watchers
+            WHERE repo_id = :repoid
+        """)
+        return pd.read_sql(totalWatchersSQL, self.db, params={"repoid": str(repoid)})

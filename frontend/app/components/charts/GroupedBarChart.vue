@@ -20,8 +20,38 @@ export default {
     }
   },
   computed: {
-    repo() {
+        repo () {
       return this.$store.state.baseRepo
+    },
+    gitRepos () {
+      return this.$store.state.gitRepo
+    },
+    period () {
+      return this.$store.state.trailingAverage
+    },
+    earliest () {
+      return this.$store.state.startDate
+    },
+    latest () {
+      return this.$store.state.endDate
+    },
+    compare () {
+      return this.$store.state.compare
+    },
+    comparedRepos () {
+      return this.$store.state.comparedRepos
+    },
+    rawWeekly () {
+      return this.$store.state.rawWeekly
+    },
+    showArea () {
+      return this.$store.state.showArea
+    },
+    showTooltip () {
+      return this.$store.state.showTooltip
+    },
+    showDetail () {
+      return this.$store.state.showDetail
     },
     spec() {
       let config = {
@@ -56,10 +86,36 @@ export default {
           }
       }
 
-
-      $(this.$el).find('.showme, .hidefirst').removeClass('invis')
-      $(this.$el).find('.stackedbarchart').removeClass('loader')
-
+      // Get the repos we need
+      let repos = []
+      if (this.repo) {
+        if (window.AugurRepos[this.repo])
+          repos.push(window.AugurRepos[this.repo])
+        else if (this.domain){
+          let temp = window.AugurAPI.Repo({"gitURL": this.gitRepo})
+          if (window.AugurRepos[temp])
+            temp = window.AugurRepos[temp]
+          else
+            window.AugurRepos[temp] = temp
+          repos.push(temp)
+        }
+        // repos.push(this.repo)
+      } // end if (this.$store.repo)
+      this.comparedRepos.forEach(function(repo) {
+        repos.push(window.AugurRepos[repo])
+      });
+            /*
+       * Takes a string like "commits,lines_changed:additions+deletions"
+       * and makes it into an array of endpoints:
+       *
+       *   endpoints = ['commits','lines_changed']
+       *
+       * and a map of the fields wanted from those endpoints:
+       *
+       *   fields = {
+       *     'lines_changed': ['additions', 'deletions']
+       *   }
+       */
       let endpoints = []
       let fields = {}
       this.source.split(',').forEach((endpointAndFields) => {
@@ -69,91 +125,48 @@ export default {
           fields[split[0]] = split[1].split('+')
         }
       })
-
-      // Get the repos we need
-      let repos = []
-      if (this.repo) {
-        repos.push(window.AugurRepos[this.repo])
+      if (this.data) {
+        processGitData(this.data)
+      } else {
+        console.log(repos, endpoints)
+        window.AugurAPI.batchMapped(repos, endpoints).then((data) => {
+          console.log("DATA", data)
+          processData(data)
+        }, () => {
+          //this.renderError()
+        }) // end batch request
       }
+
+      $(this.$el).find('.showme, .hidefirst').removeClass('invis')
+      $(this.$el).find('.stackedbarchart').removeClass('loader')
+
+      let processGitData = (data) => {
+        let repo = window.AugurAPI.Repo({ gitURL: this.repo })
+        let dat = []
+        repo.changesByAuthor().then((changes) => {
+          console.log("CHANGES", changes)
+          dat.push(changes)
+        })
+        console.log(dat)
+      }
+      let defaultProcess = (obj, key, field) => {
+            let d = null
+            if (typeof(field) == "string") field = [field]
+
+            d = AugurStats.convertKey(obj[key], key, 'value')
+
+
+            d = AugurStats.convertDates(d, this.earliest, this.latest, 'date')
+
+            return d
+          }
 
       let processData = (data) => {
-        // We usually want to limit dates and convert the key to being vega-lite friendly
-        let defaultProcess = (obj, key, field, count) => {
-          let d = AugurStats.convertKey(obj[key], field)
-          return AugurStats.convertDates(d, this.earliest, this.latest)
-        }
-
-        // Normalize the data into [{ date, value },{ date, value }]
-        // BuildLines iterates over the fields requested and runs onCreateData on each
-        let normalized = []
-        let buildLines = (obj, onCreateData) => {
-          if (!obj) {
-            return
-          }
-          if (!onCreateData) {
-            onCreateData = (obj, key, field, count) => {
-              let d = defaultProcess(obj, key, field, count)
-              normalized.push(d)
-            }
-          }
-          let count = 0
-          for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-              if (fields[key]) {
-                fields[key].forEach((field) => {
-                  onCreateData(obj, key, field, count)
-                  count++
-                })
-              } else {
-                if (Array.isArray(obj[key]) && obj[key].length > 0) {
-                  let field = Object.keys(obj[key][0]).splice(1)
-                  onCreateData(obj, key, field, count)
-                  count++
-                } else {
-                  this.renderError()
-                  return
-                }
-              }
-            } // end hasOwnProperty
-          } // end for in
-        } // end normalize function
-
-        let values = []
-
-        buildLines(data[this.repo], (obj, key, field, count) => {
-          // Build basic chart
-          normalized.push(defaultProcess(obj, key, field, count))
-        })
-
-        if (normalized.length == 0) {
-          this.renderError()
-        } else {
-            for(var i = 0; i < normalized.length; i++){
-              normalized[i].forEach(d => {
-                //d.name = legend[i]
-                //d.color = colors[i]
-                values.push(d);
-              })
-            }
-          }
-
-        $(this.$el).find('.showme, .hidefirst').removeClass('invis')
-        $(this.$el).find('.stackedbarchart').removeClass('loader')
-        this.values = values
+        console.log(data[this.repo], Object.keys(data[this.repo])[0])
+        let d = defaultProcess(data[this.repo], Object.keys(data[this.repo])[0], 'value')
+        console.log(d)
       }
-
-      if (this.data) {
-        processData(this.data)
-      } else {
-        window.AugurAPI.batchMapped(repos, endpoints).then((data) => {
-          processData(data)
-        })
-      }
-
-
-
       return config
-
     },
   }
 }

@@ -26,16 +26,17 @@ export default class AugurStats {
       data = data.map((datum) => {
         return AugurStats.convertKey(datum, key)
       })
-    } else if (key.length > 1){
-      return data.map((d) => {
-        let obj = {
-          date: d.date,
-          field: d[key[1]]
-        }
-        obj[newName] = d[key]
-        return obj
-      })
-    }
+    } 
+    // else if (key.length > 1){
+    //   return data.map((d) => {
+    //     let obj = {
+    //       date: d.date,
+    //       field: d[key[1]]
+    //     }
+    //     obj[newName] = d[key]
+    //     return obj
+    //   })
+    // }
     else{
       return data.map((d) => {
         let obj = {
