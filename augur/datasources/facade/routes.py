@@ -147,24 +147,45 @@ def create_routes(server):
     """
     server.addGitMetric(facade.commits_by_week, 'commits_by_week')
 
-    @server.app.route('/{}/git/top_new_repos_this_year_commits'.format(server.api_version))
-    def facade_top_new_repos_this_year_commits():
+    server.addGitMetric(facade.top_repos_all_time_lines_of_code, 'top_repos_all_time_lines_of_code')
 
-       limit = request.args.get('limit')
+    server.addGitMetric(facade.top_repos_all_time_commits, 'top_repos_all_time_commits')
 
-       data = server.transform(facade.top_new_repos_this_year_commits, args=(limit))
+    server.addGitMetric(facade.top_new_repos_this_year_lines_of_code, 'top_new_repos_this_year_lines_of_code')
 
-       return Response(response=data,
-                       status=200,
-                       mimetype="application/json")
+    server.addGitMetric(facade.top_new_repos_this_year_commits, 'top_new_repos_this_year_commits')
 
-    @server.app.route('/{}/git/top_new_repos_this_year_lines_of_code'.format(server.api_version))
-    def facade_top_new_repos_this_year_lines_of_code():
+    # @server.app.route('/{}/git/top_repos_all_time_lines_of_code'.format(server.api_version))
+    # def facade_top_repos_all_time_lines_of_code():
 
-       limit = request.args.get('limit')
+    #    limit = request.args.get('limit')
 
-       data = server.transform(facade.top_new_repos_this_year_lines_of_code, args=(limit))
+    #    project = request.args.get('project')
 
-       return Response(response=data,
-                       status=200,
-                       mimetype="application/json")
+    #    data = server.transform(facade.top_repos_all_time_lines_of_code, args=(limit, project))
+
+    #    return Response(response=data,
+    #                    status=200,
+    #                    mimetype="application/json")
+
+    # @server.app.route('/{}/git/top_new_repos_this_year_commits'.format(server.api_version))
+    # def facade_top_new_repos_this_year_commits():
+
+    #    limit = request.args.get('limit')
+
+    #    data = server.transform(facade.top_new_repos_this_year_commits, args=(limit))
+
+    #    return Response(response=data,
+    #                    status=200,
+    #                    mimetype="application/json")
+
+    # @server.app.route('/{}/git/top_new_repos_this_year_lines_of_code'.format(server.api_version))
+    # def facade_top_new_repos_this_year_lines_of_code():
+
+    #    limit = request.args.get('limit')
+
+    #    data = server.transform(facade.top_new_repos_this_year_lines_of_code, args=(limit))
+
+    #    return Response(response=data,
+    #                    status=200,
+    #                    mimetype="application/json")

@@ -104,6 +104,7 @@ export default class AugurAPI {
       processedData[repo.toString()] = {}
     })
     return this.batch(endpoints).then((data) => {
+      console.log(data)
       return new Promise((resolve, reject) => {
         if (Array.isArray(data)) {
           data.forEach(response => {
@@ -290,6 +291,10 @@ export default class AugurAPI {
     if (repo.gitURL) {
       // Other
       GitEndpoint(repo, 'changesByAuthor', 'changes_by_author')
+      GitEndpoint(repo, 'topNewReposThisYearCommits', 'top_new_repos_this_year_commits')
+      GitEndpoint(repo, 'topNewReposThisYearLinesOfCode', 'top_new_repos_this_year_lines_of_code')
+      GitEndpoint(repo, 'topReposAllTimeCommits', 'top_repos_all_time_commits')
+      GitEndpoint(repo, 'topReposAllTimeLinesOfCode', 'top_repos_all_time_lines_of_code')
     }
 
     return repo

@@ -525,6 +525,7 @@ var AugurAPI = function () {
         processedData[repo.toString()] = {};
       });
       return this.batch(endpoints).then(function (data) {
+        console.log(data);
         return new Promise(function (resolve, reject) {
           if (Array.isArray(data)) {
             data.forEach(function (response) {
@@ -715,6 +716,10 @@ var AugurAPI = function () {
       if (repo.gitURL) {
         // Other
         GitEndpoint(repo, 'changesByAuthor', 'changes_by_author');
+        GitEndpoint(repo, 'topNewReposThisYearCommits', 'top_new_repos_this_year_commits');
+        GitEndpoint(repo, 'topNewReposThisYearLinesOfCode', 'top_new_repos_this_year_lines_of_code');
+        GitEndpoint(repo, 'topReposAllTimeCommits', 'top_repos_all_time_commits');
+        GitEndpoint(repo, 'topReposAllTimeLinesOfCode', 'top_repos_all_time_lines_of_code');
       }
 
       return repo;
@@ -2348,6 +2353,10 @@ var _GroupedBarChart = require('./charts/GroupedBarChart');
 
 var _GroupedBarChart2 = _interopRequireDefault(_GroupedBarChart);
 
+var _StackedBarChart = require('./charts/StackedBarChart');
+
+var _StackedBarChart2 = _interopRequireDefault(_StackedBarChart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -2364,14 +2373,15 @@ module.exports = {
     NormalizedStackedBarChart: _NormalizedStackedBarChart2.default,
     OneDimensionalStackedBarChart: _OneDimensionalStackedBarChart2.default,
     HorizontalBarChart: _HorizontalBarChart2.default,
-    GroupedBarChart: _GroupedBarChart2.default
+    GroupedBarChart: _GroupedBarChart2.default,
+    StackedBarChart: _StackedBarChart2.default
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('div',{staticStyle:{"display":"inline-block"}},[_c('h2',{staticStyle:{"display":"inline-block","color":"black !important"}},[_vm._v(_vm._s(_vm.$store.state.gitRepo))]),_vm._v(" "),(_vm.$store.state.comparedRepos.length > 0)?_c('h2',{staticClass:"repolisting",staticStyle:{"display":"inline-block"}},[_vm._v(" compared to: ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.$store.state.comparedRepos),function(repo,index){return _c('h2',{staticStyle:{"display":"inline-block"}},[_c('span',{staticClass:"repolisting",style:({ 'color': _vm.colors[index] })},[_vm._v(" "+_vm._s(repo)+" ")])])})],2),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-50px) !important"}},[_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"totalWatchers","title":"Top 5 repos watchers"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-left":"65px"}})])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('div',{staticStyle:{"display":"inline-block"}},[_c('h2',{staticStyle:{"display":"inline-block","color":"black !important"}},[_vm._v(_vm._s(_vm.$store.state.gitRepo))]),_vm._v(" "),(_vm.$store.state.comparedRepos.length > 0)?_c('h2',{staticClass:"repolisting",staticStyle:{"display":"inline-block"}},[_vm._v(" compared to: ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.$store.state.comparedRepos),function(repo,index){return _c('h2',{staticStyle:{"display":"inline-block"}},[_c('span',{staticClass:"repolisting",style:({ 'color': _vm.colors[index] })},[_vm._v(" "+_vm._s(repo)+" ")])])})],2),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-50px) !important"}},[_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"topReposAllTimeCommits","title":"Top 5 repos commits"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"topReposAllTimeLinesOfCode","title":"Top 5 repos LoC"}})],1)])])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -2380,7 +2390,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7117fe96", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-7117fe96", __vue__options__)
+    hotAPI.reload("data-v-7117fe96", __vue__options__)
   }
 })()}
 });
@@ -3722,9 +3732,7 @@ exports.default = {
     repo: function repo() {
       return this.$store.state.baseRepo;
     },
-<<<<<<< Updated upstream
-=======
-    gitRepos: function gitRepos() {
+    gitRepo: function gitRepo() {
       return this.$store.state.gitRepo;
     },
     period: function period() {
@@ -3754,56 +3762,47 @@ exports.default = {
     showDetail: function showDetail() {
       return this.$store.state.showDetail;
     },
->>>>>>> Stashed changes
     spec: function spec() {
       var _this = this;
 
       var config = {
         "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
-        "data": { "url": "data/population.json" },
-        "transform": [{ "filter": "datum.year == 2000" }, { "calculate": "datum.sex == 2 ? 'Female' : 'Male'", "as": "gender" }],
-        "mark": "bar",
-        "encoding": {
-          "column": {
-            "field": "age", "type": "ordinal"
-          },
-          "y": {
-            "aggregate": "sum", "field": "people", "type": "quantitative",
-            "axis": { "title": "population", "grid": false }
-          },
-          "x": {
-            "field": "gender", "type": "nominal",
-            "scale": { "rangeStep": 12 },
-            "axis": { "title": "" }
-          },
-          "color": {
-            "field": "gender", "type": "nominal",
-            "scale": { "range": ["#EA98D2", "#659CCA"] }
-          }
+        "config": {},
+        "title": {
+          "text": this.title,
+
+          "offset": 10
         },
-        "config": {
-          "view": { "stroke": "transparent" },
-          "axis": { "domainWidth": 1 }
-        }
+
+        "layer": [{
+          "transform": [],
+          "mark": "bar",
+          "encoding": {
+            "row": {
+              "field": "name", "type": "ordinal",
+              "scale": { "rangeStep": 12 },
+              "axis": { "title": "" }
+            },
+            "x": {
+              "field": "net", "type": "quantitative"
+            },
+            "y": {
+              "field": "name", "type": "ordinal",
+              "scale": { "rangeStep": 12 },
+              "axis": { "title": "" }
+            },
+            "color": {
+              "field": "repo", "type": "nominal",
+              "scale": { "range": ["#EA98D2", "#659CCA"] }
+            }
+          }
+        }]
       };
 
-<<<<<<< Updated upstream
-      $(this.$el).find('.showme, .hidefirst').removeClass('invis');
-      $(this.$el).find('.stackedbarchart').removeClass('loader');
-=======
       var repos = [];
-      if (this.repo) {
-        if (window.AugurRepos[this.repo]) repos.push(window.AugurRepos[this.repo]);else if (this.domain) {
-          var temp = window.AugurAPI.Repo({ "gitURL": this.gitRepo });
-          if (window.AugurRepos[temp]) temp = window.AugurRepos[temp];else window.AugurRepos[temp] = temp;
-          repos.push(temp);
-        }
+      if (this.gitRepo) {
+        repos.push(window.AugurAPI.Repo({ gitURL: this.gitRepo }));
       }
-      this.comparedRepos.forEach(function (repo) {
-        repos.push(window.AugurRepos[repo]);
-      });
->>>>>>> Stashed changes
-
       var endpoints = [];
       var fields = {};
       this.source.split(',').forEach(function (endpointAndFields) {
@@ -3813,88 +3812,12 @@ exports.default = {
           fields[split[0]] = split[1].split('+');
         }
       });
-<<<<<<< Updated upstream
-
-      var repos = [];
-      if (this.repo) {
-        repos.push(window.AugurRepos[this.repo]);
-      }
-
-      var processData = function processData(data) {
-        var defaultProcess = function defaultProcess(obj, key, field, count) {
-          var d = _AugurStats2.default.convertKey(obj[key], field);
-          return _AugurStats2.default.convertDates(d, _this.earliest, _this.latest);
-        };
-
-        var normalized = [];
-        var buildLines = function buildLines(obj, onCreateData) {
-          if (!obj) {
-            return;
-          }
-          if (!onCreateData) {
-            onCreateData = function onCreateData(obj, key, field, count) {
-              var d = defaultProcess(obj, key, field, count);
-              normalized.push(d);
-            };
-          }
-          var count = 0;
-          for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-              if (fields[key]) {
-                fields[key].forEach(function (field) {
-                  onCreateData(obj, key, field, count);
-                  count++;
-                });
-              } else {
-                if (Array.isArray(obj[key]) && obj[key].length > 0) {
-                  var field = Object.keys(obj[key][0]).splice(1);
-                  onCreateData(obj, key, field, count);
-                  count++;
-                } else {
-                  _this.renderError();
-                  return;
-                }
-              }
-            }
-          }
-        };
-
-        var values = [];
-
-        buildLines(data[_this.repo], function (obj, key, field, count) {
-          normalized.push(defaultProcess(obj, key, field, count));
-        });
-
-        if (normalized.length == 0) {
-          _this.renderError();
-        } else {
-          for (var i = 0; i < normalized.length; i++) {
-            normalized[i].forEach(function (d) {
-              values.push(d);
-            });
-          }
-        }
-
-        $(_this.$el).find('.showme, .hidefirst').removeClass('invis');
-        $(_this.$el).find('.stackedbarchart').removeClass('loader');
-        _this.values = values;
-      };
-
-      if (this.data) {
-        processData(this.data);
-      } else {
-        window.AugurAPI.batchMapped(repos, endpoints).then(function (data) {
-          processData(data);
-        });
-      }
-
-=======
       if (this.data) {
         processGitData(this.data);
       } else {
-        console.log(repos, endpoints);
-        window.AugurAPI.batchMapped(repos, endpoints).then(function (data) {
-          console.log("DATA", data);
+        var repo = window.AugurAPI.Repo({ gitURL: this.gitRepo });
+        repo[this.source]().then(function (data) {
+          console.log("batch data", data);
           processData(data);
         }, function () {});
       }
@@ -3906,28 +3829,23 @@ exports.default = {
         var repo = window.AugurAPI.Repo({ gitURL: _this.repo });
         var dat = [];
         repo.changesByAuthor().then(function (changes) {
-          console.log("CHANGES", changes);
           dat.push(changes);
         });
-        console.log(dat);
       };
-      var defaultProcess = function defaultProcess(obj, key, field) {
+      var defaultProcess = function defaultProcess(obj, key) {
         var d = null;
         if (typeof field == "string") field = [field];
-
-        d = _AugurStats2.default.convertKey(obj[key], key, 'value');
-
-        d = _AugurStats2.default.convertDates(d, _this.earliest, _this.latest, 'date');
-
+        d = _AugurStats2.default.convertKey(obj[key], key);
         return d;
       };
 
       var processData = function processData(data) {
-        console.log(data[_this.repo], Object.keys(data[_this.repo])[0]);
-        var d = defaultProcess(data[_this.repo], Object.keys(data[_this.repo])[0], 'value');
-        console.log(d);
+        console.log(repos, data, "CHECK");
+        repos.forEach(function (repo) {
+          console.log("repo data", data);
+          _this.values = data;
+        });
       };
->>>>>>> Stashed changes
       return config;
     }
   }
@@ -3936,7 +3854,7 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('div',{staticClass:"groupedbarchart hidefirst invis"},[_c('vega-lite',{attrs:{"spec":_vm.spec,"data":_vm.values}}),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('div',{staticClass:"groupedbarchart"},[_c('vega-lite',{attrs:{"spec":_vm.spec,"data":_vm.values}}),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -4863,11 +4781,6 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 });
 
 ;require.register("components/charts/RepoStatsTable.vue", function(exports, require, module) {
-<<<<<<< Updated upstream
-var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
-if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('h3',[_vm._v("NEW TABLE FOR NEW METRICS")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_vm._m(0),_vm._v(" "),_c('tbody',_vm._l((_vm.contributors.slice(0, 10)),function(contributor){return _c('tr',[_c('td',[_vm._v(_vm._s(contributor.author_email))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[year]) ? contributor[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear + '-' + month]) ? contributor[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(contributor.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear]) ? contributor[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))])])}
-=======
 ;(function(){
 'use strict';
 
@@ -4924,7 +4837,6 @@ if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('h3',[_vm._v("NEW TABLE FOR NEW METRICS")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_vm._m(0),_vm._v(" "),_c('tbody',_vm._l((_vm.repos.slice(0, 10)),function(repo){return _c('tr',[_c('td',[_vm._v(_vm._s(_vm.contributor.author_email))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((_vm.contributor[year]) ? _vm.contributor[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((_vm.contributor[_vm.setYear + '-' + month]) ? _vm.contributor[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(_vm.contributor.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((_vm.contributor[_vm.setYear]) ? _vm.contributor[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))])])}
->>>>>>> Stashed changes
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('thead',[_c('tr',[_vm._v("Project/Group ID: ")]),_vm._v(" "),_c('tr',[_vm._v("Metric: ")]),_vm._v(" "),_c('tr',[_c('th',[_vm._v("Project")]),_vm._v(" "),_c('th',[_vm._v("Repo")]),_vm._v(" "),_c('th',[_vm._v("Start")]),_vm._v(" "),_c('th',[_vm._v("End")]),_vm._v(" "),_c('th',[_vm._v("High")]),_vm._v(" "),_c('th',[_vm._v("Low")]),_vm._v(" "),_c('th',[_vm._v("%")])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

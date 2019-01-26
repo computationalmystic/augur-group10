@@ -10,12 +10,14 @@
       <div class="row" style="transform: translateY(-50px) !important">
 
         <div class="col col-6" style="padding-right: 35px">
-          <grouped-bar-chart source="totalWatchers"
-          title="Top 5 repos watchers"></grouped-bar-chart>
+          <grouped-bar-chart source="topReposAllTimeCommits"
+          title="Top 5 repos commits"></grouped-bar-chart>
         </div>
-        <div class="col col-6" style="padding-left: 65px">
+        <div class="col col-6" style="padding-right: 35px">
+          <grouped-bar-chart source="topReposAllTimeLinesOfCode"
+          title="Top 5 repos LoC"></grouped-bar-chart>
+        </div>
 
-        </div>
       </div>
     </div>
   </section>
@@ -30,6 +32,7 @@ import NormalizedStackedBarChart from './charts/NormalizedStackedBarChart'
 import OneDimensionalStackedBarChart from './charts/OneDimensionalStackedBarChart'
 import HorizontalBarChart from './charts/HorizontalBarChart'
 import GroupedBarChart from './charts/GroupedBarChart'
+import StackedBarChart from './charts/StackedBarChart'
 
 module.exports = {
   data() {
@@ -44,7 +47,8 @@ module.exports = {
     NormalizedStackedBarChart,
     OneDimensionalStackedBarChart,
     HorizontalBarChart,
-    GroupedBarChart
+    GroupedBarChart,
+    StackedBarChart
   }
 }
 

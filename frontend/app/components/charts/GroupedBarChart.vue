@@ -1,6 +1,6 @@
 <template>
   <div ref="holder">
-    <div class="groupedbarchart hidefirst invis">
+    <div class="groupedbarchart">
       <vega-lite :spec="spec" :data="values"></vega-lite>
       <p> {{ chart }} </p>
     </div>
@@ -20,10 +20,10 @@ export default {
     }
   },
   computed: {
-        repo () {
+    repo () {
       return this.$store.state.baseRepo
     },
-    gitRepos () {
+    gitRepo () {
       return this.$store.state.gitRepo
     },
     period () {
@@ -56,54 +56,62 @@ export default {
     spec() {
       let config = {
           "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
-          "data": { "url": "data/population.json"},
-          "transform": [
-            {"filter": "datum.year == 2000"},
-            {"calculate": "datum.sex == 2 ? 'Female' : 'Male'", "as": "gender"}
-          ],
-          "mark": "bar",
-          "encoding": {
-              "column": {
-                "field": "age", "type": "ordinal"
-              },
-              "y": {
-                "aggregate": "sum", "field": "people", "type": "quantitative",
-                "axis": {"title": "population", "grid": false}
-              },
-              "x": {
-                "field": "gender", "type": "nominal",
-                "scale": {"rangeStep": 12},
-                "axis": {"title": ""}
-              },
-              "color": {
-                "field": "gender", "type": "nominal",
-                "scale": {"range": ["#EA98D2", "#659CCA"]}
-              }
-          },
           "config": {
-              "view": {"stroke": "transparent"},
-              "axis": {"domainWidth": 1}
-          }
+              // "view": {"stroke": "transparent"},
+              // "axis": {"domainWidth": 1}
+          },
+          "title": {
+            "text": this.title,
+            // "offset": 55
+            "offset": 10
+          },
+          // "width": 520,
+          // "height": 450,
+          "layer": [
+            {
+              "transform": [
+
+              ],
+              "mark": "bar",
+              "encoding": {
+                  "row": {
+                     "field": "name", "type": "ordinal",
+                    "scale": {"rangeStep": 12},
+                    "axis": {"title": ""}
+                  },
+                  "x": {
+                    "field": "net", "type": "quantitative",
+                  },
+                  "y": {
+                    "field": "name", "type": "ordinal",
+                    "scale": {"rangeStep": 12},
+                    "axis": {"title": ""}
+                  },
+                  "color": {
+                    "field": "repo", "type": "nominal",
+                    "scale": {"range": ["#EA98D2", "#659CCA"]}
+                  }
+              },
+            },
+          ]
       }
 
       // Get the repos we need
       let repos = []
-      if (this.repo) {
-        if (window.AugurRepos[this.repo])
-          repos.push(window.AugurRepos[this.repo])
-        else if (this.domain){
-          let temp = window.AugurAPI.Repo({"gitURL": this.gitRepo})
-          if (window.AugurRepos[temp])
-            temp = window.AugurRepos[temp]
-          else
-            window.AugurRepos[temp] = temp
-          repos.push(temp)
-        }
-        // repos.push(this.repo)
+      if (this.gitRepo) {
+        repos.push(window.AugurAPI.Repo({ gitURL: this.gitRepo }))
+        // else if (this.domain){
+        //   let temp = window.AugurAPI.Repo({"gitURL": this.gitRepo})
+        //   if (window.AugurRepos[temp])
+        //     temp = window.AugurRepos[temp]
+        //   else
+        //     window.AugurRepos[temp] = temp
+        //   repos.push(temp)
+        // }
       } // end if (this.$store.repo)
-      this.comparedRepos.forEach(function(repo) {
-        repos.push(window.AugurRepos[repo])
-      });
+      // this.comparedRepos.forEach(function(repo) {
+      //   repos.push(window.AugurRepos[repo])
+      // });
             /*
        * Takes a string like "commits,lines_changed:additions+deletions"
        * and makes it into an array of endpoints:
@@ -128,9 +136,9 @@ export default {
       if (this.data) {
         processGitData(this.data)
       } else {
-        console.log(repos, endpoints)
-        window.AugurAPI.batchMapped(repos, endpoints).then((data) => {
-          console.log("DATA", data)
+        let repo = window.AugurAPI.Repo({ gitURL: this.gitRepo })
+        repo[this.source]().then((data) => {
+          console.log("batch data", data)
           processData(data)
         }, () => {
           //this.renderError()
@@ -144,27 +152,25 @@ export default {
         let repo = window.AugurAPI.Repo({ gitURL: this.repo })
         let dat = []
         repo.changesByAuthor().then((changes) => {
-          console.log("CHANGES", changes)
           dat.push(changes)
         })
-        console.log(dat)
       }
-      let defaultProcess = (obj, key, field) => {
+      let defaultProcess = (obj, key) => {
             let d = null
             if (typeof(field) == "string") field = [field]
-
-            d = AugurStats.convertKey(obj[key], key, 'value')
-
-
-            d = AugurStats.convertDates(d, this.earliest, this.latest, 'date')
-
+            d = AugurStats.convertKey(obj[key], key)
             return d
           }
 
       let processData = (data) => {
-        console.log(data[this.repo], Object.keys(data[this.repo])[0])
-        let d = defaultProcess(data[this.repo], Object.keys(data[this.repo])[0], 'value')
-        console.log(d)
+        console.log(repos, data, "CHECK")
+        repos.forEach((repo) => {
+          // let d = defaultProcess(data[repo], Object.keys(data[this.repo])[0])
+          // d[0].repo = repo.gitURL ? repo.gitURL : repo.githubURL
+          // this.values.push(d[0])
+          console.log("repo data", data)
+          this.values = data
+        })
       }
       return config
     },

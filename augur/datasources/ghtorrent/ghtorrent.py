@@ -1049,7 +1049,7 @@ class GHTorrent(object):
         """)
         return pd.read_sql(newWatchersSQL, self.db, params={"repoid": str(repoid)})
 
-@annotate(tag='top-watchers')
+    @annotate(tag='top-watchers')
     def top_watchers(self, limit):
         """
         List of X repositories with the top watchers of all time across all projects
@@ -1127,8 +1127,8 @@ class GHTorrent(object):
         :return: 
         """
         repoid = self.repoid(owner, repo)
-        newWatchersSQL = s.sql.text("""
-            SELECT SUBDATE(DATE(created_at), WEEKDAY(DATE(created_at))) as "date", COUNT(*) as "watchers"
+        totalWatchersSQL = s.sql.text("""
+            SELECT SUBDATE(DATE(created_at), WEEKDAY(DATE(created_at))) as "date", COUNT(*) as "totalWatchers"
             FROM watchers
             WHERE repo_id = :repoid
         """)

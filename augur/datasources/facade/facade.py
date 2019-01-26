@@ -146,21 +146,19 @@ class Facade(object):
         return results
 
     @annotate(tag='top-new-repos-this-year-commits')
-    def top_new_repos_this_year_commits(self, limit=None, repo_url):
+    def top_new_repos_this_year_commits(self, repo_url):
         """
         Returns top new repos this year by commits
 
         :param limit: number of repos the user wishes to display
         """
         
-        if limit is None:
-            limit = 10
 
         topNewReposCommits = s.sql.text("""
            SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
            FROM repo_annual_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
-           WHERE git LIKE :repo_url
+           WHERE git LIKE :repourl
            and repos.projects_id = projects.id
            and YEAR(repos.added) = YEAR(CURDATE())
            LIMIT 1)
@@ -168,27 +166,23 @@ class Facade(object):
            and repos.projects_id = projects.id
            group by repos_id
            ORDER BY net desc
-           LIMIT :limit
+           LIMIT 10
         """)
-        results = pd.read_sql(topNewReposCommits, self.db, params={"limit": int(limit)})
+        results = pd.read_sql(topNewReposCommits, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
     @annotate(tag='top-new-repos-this-year-lines-of-code')
-    def top_new_repos_this_year_lines_of_code(self, limit=None, repo_url):
+    def top_new_repos_this_year_lines_of_code(self, repo_url):
         """
         Returns top new repos this year by lines of code
 
         :param limit: number of repos the user wishes to display
-        """
-        
-        if limit is None:
-            limit = 10
-      
+        """       
         topNewReposLines = s.sql.text("""
             SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
            FROM repo_annual_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
-           WHERE git LIKE :repo_url
+           WHERE git LIKE :repourl
            and YEAR(repos.added) = YEAR(CURDATE())
            and repos.projects_id = projects.id
            LIMIT 1)
@@ -196,61 +190,55 @@ class Facade(object):
            and repos.projects_id = projects.id
            group by repos_id
            ORDER BY net desc
-           LIMIT :limit
+           LIMIT 10
         """)
-        results = pd.read_sql(topNewReposLines, self.db, params={"limit": int(limit)})
+        results = pd.read_sql(topNewReposLines, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-        @annotate(tag='top-new-repos-this-year-commits-all-time')
-    def top_new_repos_this_year_commits_all_time(self, limit=None, repo_url):
+    @annotate(tag='top-repos-all-time-commits')
+    def top_repos_all_time_commits(self, repo_url):
         """
         Returns top new repos of all time by commits
 
         :param limit: number of repos the user wishes to display
-        """
-        
-        if limit is None:
-            limit = 10
+        """       
 
         topNewReposCommitsAllTime = s.sql.text("""
-           SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
+           SELECT repos_id, repos.name as name, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches
            FROM repo_annual_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
-           WHERE git LIKE :repo_url
+           WHERE git LIKE :repourl
            and repos.projects_id = projects.id
            LIMIT 1)
            and repo_annual_cache.repos_id = repos.id
            and repos.projects_id = projects.id
            group by repos_id
            ORDER BY net desc
-           LIMIT :limit
+           LIMIT 10
         """)
-        results = pd.read_sql(topNewReposCommitsAllTime, self.db, params={"limit": int(limit)})
+        results = pd.read_sql(topNewReposCommitsAllTime, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-        @annotate(tag='top-new-repos-this-year-lines-of-code-all-time')
-    def top_new_repos_this_year_lines_of_code_all_time(self, limit=None, repo_url:
+    @annotate(tag='top-repos-all-time-lines-of-code')
+    def top_repos_all_time_lines_of_code(self, repo_url):
         """
         Returns top new repos of all time by lines of code
 
         :param limit: number of repos the user wishes to display
         """
-        
-        if limit is None:
-            limit = 10
-      
+
         topNewReposLinesAllTime = s.sql.text("""
-            SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
+            SELECT repos_id, repos.name as name, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches
            FROM repo_annual_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
-           WHERE git LIKE :repo_url
+           WHERE git LIKE :repourl
            and repos.projects_id = projects.id
            LIMIT 1)
            and repo_annual_cache.repos_id = repos.id
            and repos.projects_id = projects.id
            group by repos_id
            ORDER BY net desc
-           LIMIT :limit
+           LIMIT 10
         """)
-        results = pd.read_sql(topNewReposLinesAllTime, self.db, params={"limit": int(limit)})
+        results = pd.read_sql(topNewReposLinesAllTime, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
