@@ -163,12 +163,14 @@ class Application(object):
                 string = string.replace(source, '$({})'.format(variable))
         return string
 
-    def path(self, path):
+    def path(self, path, create=False):
         """
         Returns the absolute path for the given relative path
         """
         path = self.replace_config_variables(path)
         path = os.path.abspath(os.path.expanduser(path))
+        if not os.path.exists(path) and create:
+            os.makedirs(path)
         return path
 
     @staticmethod
