@@ -44,6 +44,7 @@
         request.send();
     </script>
     <h2 class="col" style="margin-bottom:20px">CII Best Practices</h2>
+    <img class="col" width="200px" height="200px" src="https://www.r-consortium.org/wp-content/uploads/sites/13/2018/06/cii_badge-300x300.png" href="https://bestpractices.coreinfrastructure.org/en">
     <div class="row">
         <div id="CIIbp" class="col-6">
             <div size="total">
