@@ -18,14 +18,21 @@ class DoSOCSv2(object):
         Connect to DoSOCSv2
         """
         self.__repo_folder = repo_folder
-        self.scan('chaoss', 'augur')
+        self.scan('nebrethar', 'DoSOCSv2')
 
     def scan(self, owner, repo):
         repo_url = 'https://github.com/' + owner + '/' + repo + '.git'
 
         repo_path = os.path.join(self.__repo_folder, repo)
 
-        subprocess.call(['git', 'clone', repo_url, repo_path], shell=False)
-        istr = subprocess.check_output(['dosocs2', 'oneshot', repo_path])
-
-        print(istr.decode('UTF-8'))
+        temp=open("temp.txt", "r+")
+        subprocess.call(['git', 'clone', repo_url, '/home/repos/' + repo], shell=False)
+        pope = subprocess.Popen(['sudo', 'dosocs2', 'oneshot', '/home/repos/' + repo, '-T', '/home/nebrethar/augur/2.0.tag'], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = pope.communicate()
+        if out:
+            print(out)
+        if err:
+            print(err)
+        print (out)
+        find = re.findall(r'\n(LicenseID): (.*[^\s]*)\n(LicenseName): (.*[^s])\n(ExtractedText): b\'(.*[^s])\'\n(LicenseCrossReference): (.*)\n(LicenseComment): (.*[^s])', out.decode('UTF-8'))
+        print(find)
