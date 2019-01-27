@@ -27,14 +27,7 @@ class DoSOCSv2(object):
 
         redirect = open(r"temp.txt", "w")
         subprocess.call(['git', 'clone', repo_url, repo_path], shell=False)
-        LSTRING = subprocess.Popen(['dosocs2', 'oneshot', repo_path], shell=False, stdout=subprocess.PIPE)
         istr = subprocess.check_output(['dosocs2', 'oneshot', repo_path])
-        direct = open("/home/nebrethar/augur/temp.txt", "r")
-        direct.tell()
-        direct.seek(0)
-        direct.tell()
-        lstr = direct.read()
-
 
         print("OUTPUTS")
         print(redirect)
