@@ -245,6 +245,7 @@ export default class AugurAPI {
       Timeseries(repo, 'pullRequestsOpen', 'pulls')
 
       // RISK
+      Endpoint(repo, 'licenseInformation', 'dosocsv2/retrieve_license_information')
 
       // VALUE
 
