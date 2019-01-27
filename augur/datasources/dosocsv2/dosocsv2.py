@@ -25,10 +25,7 @@ class DoSOCSv2(object):
 
         repo_path = os.path.join(self.__repo_folder, repo)
 
-        redirect = open(r"temp.txt", "w")
         subprocess.call(['git', 'clone', repo_url, repo_path], shell=False)
         istr = subprocess.check_output(['dosocs2', 'oneshot', repo_path])
 
-        print("OUTPUTS")
-        print(redirect)
         print(istr.decode('UTF-8'))
