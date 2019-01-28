@@ -1,0 +1,323 @@
+
+SPDXVersion: SPDX-2.0
+DataLicense: CC0-1.0
+DocumentNamespace: sqlite:////home/nebrethar/.config/dosocs2/dosocs2.sqlite3/augur-15f3db72-e455-4f62-a0b8-cd918a7a9584
+DocumentName: augur
+SPDXID: SPDXRef-DOCUMENT
+DocumentComment: 
+
+## External Document References
+
+
+## Creation Information
+Creator: Tool: dosocs2-0.16.1
+Created: 2019-01-26T19:59:47Z
+CreatorComment: 
+LicenseListVersion: 2.2
+
+
+## Document Annotations
+
+
+## Document Relationships
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-HEAD-f6f2-9d18e957
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-config-a54d-97fa7546
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-description-85ab-10b11a5f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-applypatch_msg_sampl-0223-ae48fce9
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-commit_msg_sample-1f74-5622638e
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-post_update_sample-8176-b664e762
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-pre_applypatch_sampl-e15c-30edb132
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-pre_commit_sample-12c7-bfa7ad01
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-pre_push_sample-4b11-740cef55
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-pre_rebase_sample-14b5-fc6e9e0f
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-prepare_commit_msg_s-f7e5-8153b324
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-update_sample-751c-6ae98429
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-exclude-6671-2525ad67
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-pack_aa69a6cb9d725bf-fb1b-e29dbfff
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-pack_aa69a6cb9d725bf-4315-1ceda1c5
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-file-pack_aa69a6cb9d725bf-6e09-63a4d565
+Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-package-augur-6c3e-c9b98271
+
+## Package Information
+
+PackageName: augur
+SPDXID: SPDXRef-package-augur-6c3e-c9b98271
+PackageFileName: augur
+PackageSupplier: NOASSERTION
+PackageOriginator: NOASSERTION
+PackageDownloadLocation: NOASSERTION
+PackageVerificationCode: 6c3ea056312f24a467824e3483838f0cf353d5bf
+PackageHomePage: NOASSERTION
+PackageLicenseConcluded: NOASSERTION
+PackageLicenseInfoFromFiles: 
+PackageLicenseDeclared: NOASSERTION
+PackageLicenseComments: 
+PackageCopyrightText: NOASSERTION
+PackageSummary: 
+PackageDescription: 
+PackageComment: 
+
+
+## Relationships
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-HEAD-f6f2-9d18e957
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-config-a54d-97fa7546
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-description-85ab-10b11a5f
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-applypatch_msg_sampl-0223-ae48fce9
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-commit_msg_sample-1f74-5622638e
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-post_update_sample-8176-b664e762
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-pre_applypatch_sampl-e15c-30edb132
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-pre_commit_sample-12c7-bfa7ad01
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-pre_push_sample-4b11-740cef55
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-pre_rebase_sample-14b5-fc6e9e0f
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-prepare_commit_msg_s-f7e5-8153b324
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-update_sample-751c-6ae98429
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-exclude-6671-2525ad67
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-pack_aa69a6cb9d725bf-fb1b-e29dbfff
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-pack_aa69a6cb9d725bf-4315-1ceda1c5
+Relationship: SPDXRef-package-augur-6c3e-c9b98271 CONTAINS SPDXRef-file-pack_aa69a6cb9d725bf-6e09-63a4d565
+
+
+## File Information
+
+
+FileName: ./.git/HEAD
+SPDXID: SPDXRef-file-HEAD-f6f2-9d18e957
+FileType: OTHER
+FileChecksum: SHA256: f6f2b945f6c411b02ba3da9c7ace88dcf71b6af65ba2e0d89aa82900042b5a10
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-HEAD-f6f2-9d18e957 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-HEAD-f6f2-9d18e957 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/config
+SPDXID: SPDXRef-file-config-a54d-97fa7546
+FileType: OTHER
+FileChecksum: SHA256: a54db190367018592688564f5dd7a2d3ca19dda09677423866ecbc4752d15a2c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-config-a54d-97fa7546 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-config-a54d-97fa7546 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/description
+SPDXID: SPDXRef-file-description-85ab-10b11a5f
+FileType: OTHER
+FileChecksum: SHA256: 85ab6c163d43a17ea9cf7788308bca1466f1b0a8d1cc92e26e9bf63da4062aee
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-description-85ab-10b11a5f DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-description-85ab-10b11a5f CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/applypatch-msg.sample
+SPDXID: SPDXRef-file-applypatch_msg_sampl-0223-ae48fce9
+FileType: SOURCE
+FileChecksum: SHA256: 0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-applypatch_msg_sampl-0223-ae48fce9 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-applypatch_msg_sampl-0223-ae48fce9 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/commit-msg.sample
+SPDXID: SPDXRef-file-commit_msg_sample-1f74-5622638e
+FileType: SOURCE
+FileChecksum: SHA256: 1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-commit_msg_sample-1f74-5622638e DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-commit_msg_sample-1f74-5622638e CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/post-update.sample
+SPDXID: SPDXRef-file-post_update_sample-8176-b664e762
+FileType: SOURCE
+FileChecksum: SHA256: 81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-post_update_sample-8176-b664e762 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-post_update_sample-8176-b664e762 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/pre-applypatch.sample
+SPDXID: SPDXRef-file-pre_applypatch_sampl-e15c-30edb132
+FileType: SOURCE
+FileChecksum: SHA256: e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-pre_applypatch_sampl-e15c-30edb132 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-pre_applypatch_sampl-e15c-30edb132 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/pre-commit.sample
+SPDXID: SPDXRef-file-pre_commit_sample-12c7-bfa7ad01
+FileType: SOURCE
+FileChecksum: SHA256: 12c723235131f1c5576c652ac2a0a007f261a93c0ddc445b1dcee6cd98e30788
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-pre_commit_sample-12c7-bfa7ad01 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-pre_commit_sample-12c7-bfa7ad01 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/pre-push.sample
+SPDXID: SPDXRef-file-pre_push_sample-4b11-740cef55
+FileType: SOURCE
+FileChecksum: SHA256: 4b1119e1e13a212571976f4aee77847cdbd40978546d6273a557e238981a40d1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-pre_push_sample-4b11-740cef55 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-pre_push_sample-4b11-740cef55 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/pre-rebase.sample
+SPDXID: SPDXRef-file-pre_rebase_sample-14b5-fc6e9e0f
+FileType: SOURCE
+FileChecksum: SHA256: 14b57168a2e847946ee1291e617cf6a0d8598387ba404565f1b18cc4c7f15651
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-pre_rebase_sample-14b5-fc6e9e0f DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-pre_rebase_sample-14b5-fc6e9e0f CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/prepare-commit-msg.sample
+SPDXID: SPDXRef-file-prepare_commit_msg_s-f7e5-8153b324
+FileType: SOURCE
+FileChecksum: SHA256: f7e5627b5a26d0026ef50352f7393350ee58cc101f5e8337f944b57a5039968c
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-prepare_commit_msg_s-f7e5-8153b324 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-prepare_commit_msg_s-f7e5-8153b324 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/hooks/update.sample
+SPDXID: SPDXRef-file-update_sample-751c-6ae98429
+FileType: SOURCE
+FileChecksum: SHA256: 751c037320024ec2ee2757f3ffae0b10ad2c946367684e7059d4dc97eac7e431
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-update_sample-751c-6ae98429 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-update_sample-751c-6ae98429 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/info/exclude
+SPDXID: SPDXRef-file-exclude-6671-2525ad67
+FileType: OTHER
+FileChecksum: SHA256: 6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-exclude-6671-2525ad67 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-exclude-6671-2525ad67 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/objects/pack/pack-aa69a6cb9d725bf7f3d27445e4ce72631a90e346.idx
+SPDXID: SPDXRef-file-pack_aa69a6cb9d725bf-fb1b-e29dbfff
+FileType: OTHER
+FileChecksum: SHA256: fb1bb48bb4e9a05d86279f7ec6efee83a83059225b70dfcc95cc52c97a1edfac
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-pack_aa69a6cb9d725bf-fb1b-e29dbfff DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-pack_aa69a6cb9d725bf-fb1b-e29dbfff CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/objects/pack/pack-aa69a6cb9d725bf7f3d27445e4ce72631a90e346.keep
+SPDXID: SPDXRef-file-pack_aa69a6cb9d725bf-4315-1ceda1c5
+FileType: OTHER
+FileChecksum: SHA256: 4315245dae89726a0de66550635a6e55d749a0ef6d5ad7b8ef1eabf50b937fc4
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-pack_aa69a6cb9d725bf-4315-1ceda1c5 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-pack_aa69a6cb9d725bf-4315-1ceda1c5 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+
+FileName: ./.git/objects/pack/pack-aa69a6cb9d725bf7f3d27445e4ce72631a90e346.pack
+SPDXID: SPDXRef-file-pack_aa69a6cb9d725bf-6e09-63a4d565
+FileType: OTHER
+FileChecksum: SHA256: 6e09ba7bcba588e2344a458aa10faccf47c9df726226a1f788ff2f41161b20e9
+LicenseConcluded: NOASSERTION
+LicenseInfoInFile: NOASSERTION
+LicenseComments: 
+FileCopyrightText: NOASSERTION
+FileComment: 
+FileNotice: 
+## Relationships
+Relationship: SPDXRef-file-pack_aa69a6cb9d725bf-6e09-63a4d565 DESCRIBED_BY SPDXRef-DOCUMENT
+Relationship: SPDXRef-file-pack_aa69a6cb9d725bf-6e09-63a4d565 CONTAINED_BY SPDXRef-package-augur-6c3e-c9b98271
+
+

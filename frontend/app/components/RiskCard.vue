@@ -11,17 +11,18 @@
     </div>
     <script type="application/javascript">
         var request = new XMLHttpRequest;
+        var licensr = new XMLHttpRequest;
         async function loader() {
-            const augURL = 'https://github.com/' + document.getElementById("base").innerHTML;
-            console.log(augURL);
+            const basestr = document.getElementById("base").innerHTML;
+            const augURL = 'https://github.com/' + basestr;
             request.open('GET', 'https://bestpractices.coreinfrastructure.org/projects.json?pq=' + augURL, true);
             request.onload = function () {
                 var data = JSON.parse(this.response)[0];
                 if (data != undefined) {
-                    console.log('CII NAME: ' + data.name);
-                    console.log(data);
+                    //console.log('CII NAME: ' + data.name);
+                    //console.log(data);
                     badgeURL = 'https://bestpractices.coreinfrastructure.org/projects/' + data.id + '/badge';
-                    console.log(badgeURL);
+                    //console.log(badgeURL);
                     document.getElementById("CIIbadge").src = badgeURL;
                     if (data.badge_percentage_0 < 100) {
                         document.getElementById("CII").innerHTML = data.name + ' is currently not passing CII Best Practices.';
@@ -39,6 +40,27 @@
                     document.getElementById("CII").innerHTML = 'No best practice data for this repository.';
                 }
             }
+            const splitbase = basestr.split("/");
+            const owner = splitbase[0];
+            const repo = splitbase[1];
+            console.log(owner + ' ' + repo);
+            var apistring = 'https://127.0.0.1:3333/api/unstable/' + owner + '/' + repo + '/dosocsv2/retrieve_license_information/';
+            /*console.log("LOADING");
+            licensr.onerror = function () {console.log("ERROR API");}
+            licensr.open('GET', apistring, true);
+            licensr.onload = function () {
+                console.log("API LOADED");
+                console.log(licensr.response);
+                var licenseinfo = JSON.parse(licensr.response)[0];
+            }
+            console.log(licensr)*/
+            fetch(apistring)
+              .then(function(response)  {
+              return response.json;
+            })
+              .then(function(myJson)  {
+              console.log(JSON.stringify(myJson));
+            });
         }
         loader();
         request.send();

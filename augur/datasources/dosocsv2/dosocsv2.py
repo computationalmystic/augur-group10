@@ -22,22 +22,22 @@ class DoSOCSv2(object):
         # self.scan('nebrethar', 'DoSOCSv2')
 
     def scan(self, owner, repo):
-        # repo_url = 'https://github.com/' + owner + '/' + repo + '.git'
+        repo_url = 'https://github.com/' + owner + '/' + repo + '.git'
 
-        # repo_path = os.path.join(self.__repo_folder, repo)
+        repo_path = os.path.join(self.__repo_folder, repo)
 
-        # temp = open("temp.txt", "r+")
-        # subprocess.call(['git', 'clone', repo_url, '/home/repos/' + repo], shell=False)
-        # pope = subprocess.Popen(['sudo', 'dosocs2', 'oneshot', '/home/repos/' + repo, '-T', '/home/nebrethar/augur/2.0.tag'], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # out, err = pope.communicate()
-        # if out:
-        #     print(out)
-        # if err:
-        #     print(err)
-        # print (out)
-        # find = re.findall(r'\n(LicenseID): (.*[^\s]*)\n(LicenseName): (.*[^s])\n(ExtractedText): b\'(.*[^s])\'\n(LicenseCrossReference): (.*)\n(LicenseComment): (.*[^s])', out.decode('UTF-8'))
-        # print(find)
-        scan_results = [('LicenseID', 'LicenseRef-Python', 'LicenseName', 'Python', 'ExtractedText', 'licenses/CNRI-Python.html",\\n        "is_spdx_official": true,\\n        "name": "CNRI Python License', 'LicenseCrossReference', '', 'LicenseComment', 'found by nomos\n'), ('LicenseID', 'LicenseRef-IJG-possibility', 'LicenseName', 'IJG-possibility', 'ExtractedText', 'Independent JPEG Group', 'LicenseCrossReference', '', 'LicenseComment', 'found by nomos\n'), ('LicenseID', 'LicenseRef-Classpath-exception-2.0', 'LicenseName', 'Classpath-exception-2.0', 'ExtractedText', 'Classpath exception', 'LicenseCrossReference', '', 'LicenseComment', 'found by nomos\n')]
+        temp = open("temp.txt", "r+")
+        subprocess.call(['sudo', 'git', 'clone', repo_url, '/home/repos/' + repo], shell=False)
+        pope = subprocess.Popen(['sudo', 'dosocs2', 'oneshot', '/home/repos/' + repo, '-T', '/home/nebrethar/augur/2.0.tag'], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = pope.communicate()
+        if out:
+            print(out)
+        if err:
+            print(err)
+        print (out)
+        scan_results = re.findall(r'\n(LicenseID): (.*[^\s]*)\n(LicenseName): (.*[^s])\n(ExtractedText): b\'(.*[^s])\'\n(LicenseCrossReference): (.*)\n(LicenseComment): (.*[^s])', out.decode('UTF-8'))
+        print(scan_results)
+        #scan_results = [('LicenseID', 'LicenseRef-Python', 'LicenseName', 'Python', 'ExtractedText', 'licenses/CNRI-Python.html",\\n        "is_spdx_official": true,\\n        "name": "CNRI Python License', 'LicenseCrossReference', '', 'LicenseComment', 'found by nomos\n'), ('LicenseID', 'LicenseRef-IJG-possibility', 'LicenseName', 'IJG-possibility', 'ExtractedText', 'Independent JPEG Group', 'LicenseCrossReference', '', 'LicenseComment', 'found by nomos\n'), ('LicenseID', 'LicenseRef-Classpath-exception-2.0', 'LicenseName', 'Classpath-exception-2.0', 'ExtractedText', 'Classpath exception', 'LicenseCrossReference', '', 'LicenseComment', 'found by nomos\n')]
         return scan_results
 
     def retrieve_license_information(self, owner, repo):
