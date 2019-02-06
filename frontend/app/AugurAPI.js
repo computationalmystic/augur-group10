@@ -15,6 +15,7 @@ export default class AugurAPI {
     this.openRequests = 0
     this.getMetricsStatus = this.__EndpointFactory('metrics/status/filter')
     this.getMetricsStatusMetadata = this.__EndpointFactory('metrics/status/metadata')
+    this.getLicenseInfo = this.__EndpointFactoryRisk('dosocsv2/retrieve_license_information')
   }
 
   // __autobatcher (url, params, fireTimeout) {
@@ -37,6 +38,11 @@ export default class AugurAPI {
 
   __endpointURL (endpoint) {
     return '' + this._host + this._version + '/' + endpoint
+  }
+
+  //fix this funct -Matt 2/4/2019
+  __endpointURLRisk (endpoint) {
+    return '' + this._host + this._version + '/owner/repo/' + endpoint
   }
 
   __URLFunctionFactory (url) {
@@ -64,6 +70,10 @@ export default class AugurAPI {
 
   __EndpointFactory (endpoint) {
     return this.__URLFunctionFactory(this.__endpointURL(endpoint))
+  }
+
+  __EndpointFactoryRisk (endpoint) {
+    return this.__URLFunctionFactory(this.__endpointURLRisk(endpoint))
   }
 
   batch (endpoints) {

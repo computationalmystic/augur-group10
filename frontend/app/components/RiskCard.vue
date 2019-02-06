@@ -1,4 +1,5 @@
 \\<template>
+
   <section>
     <h1>Risk</h1>
     <div style="display: inline-block;">
@@ -10,9 +11,8 @@
       </h2>
     </div>
     <script type="application/javascript">
-        var request = new XMLHttpRequest;
-        var licensr = new XMLHttpRequest;
-        async function loader() {
+        var request = new XMLHttpRequest();
+        function loader() {
             const basestr = document.getElementById("base").innerHTML;
             const augURL = 'https://github.com/' + basestr;
             request.open('GET', 'https://bestpractices.coreinfrastructure.org/projects.json?pq=' + augURL, true);
@@ -21,7 +21,7 @@
                 if (data != undefined) {
                     //console.log('CII NAME: ' + data.name);
                     //console.log(data);
-                    badgeURL = 'https://bestpractices.coreinfrastructure.org/projects/' + data.id + '/badge';
+                    var badgeURL = 'https://bestpractices.coreinfrastructure.org/projects/' + data.id + '/badge';
                     //console.log(badgeURL);
                     document.getElementById("CIIbadge").src = badgeURL;
                     if (data.badge_percentage_0 < 100) {
@@ -39,29 +39,21 @@
                 } else {
                     document.getElementById("CII").innerHTML = 'No best practice data for this repository.';
                 }
-            }
+            };
+        }
+            /*
             const splitbase = basestr.split("/");
             const owner = splitbase[0];
             const repo = splitbase[1];
             console.log(owner + ' ' + repo);
-            var apistring = 'https://127.0.0.1:3333/api/unstable/' + owner + '/' + repo + '/dosocsv2/retrieve_license_information/';
-            /*console.log("LOADING");
-            licensr.onerror = function () {console.log("ERROR API");}
-            licensr.open('GET', apistring, true);
-            licensr.onload = function () {
-                console.log("API LOADED");
-                console.log(licensr.response);
-                var licenseinfo = JSON.parse(licensr.response)[0];
-            }
-            console.log(licensr)*/
-            fetch(apistring)
-              .then(function(response)  {
-              return response.json;
-            })
-              .then(function(myJson)  {
-              console.log(JSON.stringify(myJson));
-            });
-        }
+            var apistring = 'https://localhost:5555/api/unstable/' + owner + '/' + repo + '/dosocsv2/retrieve_license_information/';
+            var apisec = 'https://localhost:5555/api/' + owner + '/' + repo + 'timeseries/issue_comments';
+            var apithird = 'https://localhost:5555/api/unstable';
+            */
+        console.log("LICENSE INFO");
+        window.AugurAPI.getLicenseInfo().then((data) => {
+            document.getElementById("licenseInfo").innerHTML = JSON.stringify(data);
+        })
         loader();
         request.send();
     </script>
@@ -80,15 +72,14 @@
             <p id="CII"></p>
             </div>
         </div>
-      </div>
+    </div>
+    <div class="row">
+        <p id="licenseInfo"></p>
     </div>
   </section> 
 </template> 
-
-w<script>
-import DynamicLineChart from './charts/DynamicLineChart'
-import BubbleChart from './charts/BubbleChart'
-import StackedBarChart from './charts/StackedBarChart'
+<script>
+//import RiskChart from './charts/RiskChart'
 module.exports = {
   data() {
     return {
@@ -96,9 +87,7 @@ module.exports = {
     }
   },
   components: {
-    DynamicLineChart,
-    BubbleChart,
-    StackedBarChart
+    //RiskChart
   }
 }
 </script>

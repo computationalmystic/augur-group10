@@ -26,7 +26,7 @@ class Server(object):
         self.app = Flask(__name__, static_folder='../frontend/public')
         self.api_version = AUGUR_API_VERSION
         app = self.app
-        CORS(app)
+        CORS(app, resources={r"/api/*": {"origins": "*"}})
         app.url_map.strict_slashes = False
 
         # Create Augur application
@@ -69,9 +69,11 @@ class Server(object):
             status = {
                 'status': 'OK'
             }
-            return Response(response=json.dumps(status),
+            return  Response(response=json.dumps(status),
                             status=200,
                             mimetype="application/json")
+            respond.headers['Access-Control-Allow-Origin'] = '*'
+            return respond
 
         """
         @api {post} /batch Batch Requests
