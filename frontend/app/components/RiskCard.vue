@@ -52,7 +52,76 @@
             */
         console.log("LICENSE INFO");
         window.AugurAPI.getLicenseInfo().then((data) => {
-            document.getElementById("licenseInfo").innerHTML = JSON.stringify(data);
+            populate = document.getElementById("populate")
+            populate.parentNode.removeChild(populate);
+            //Retrieve raw data
+            //document.getElementById("licenseInfo").innerHTML = JSON.stringify(data);
+
+            var column = []
+            column.push("Tag")
+            column.push("Info")
+            tableID = document.getElementById("licenseTable");
+            //Add border
+            //tableID.setAttribute("border", "2");
+            var tr = tableID.insertRow(0);
+            for (var i = 0; i < 2; i++)
+            {
+                var th = document.createElement("th");
+                th.innerHTML = column[i];
+                tr.appendChild(th);
+            }
+            console.log(data);
+            var g = 0;
+            var m = 0;
+            for (var k in data[0]) {
+                //console.log(data[0][k]);
+                if (k)
+                {
+                    tr = tableID.insertRow(g+1);
+                    for (var j = 0; j < 2; j++) {
+                    var tab = tr.insertCell(j-1);
+                    var info = data[0][k];
+                        if (m % 2 == 0)
+                        {
+                            tab.style.backgroundColor =  "#EAEAEA";
+                        }
+                        if (j % 2 != 0) {
+                            tab.innerHTML = k;
+                        }
+                        else {
+                            if (info == "NOASSERTION" || !info)
+                            {
+                                info = "None provided";
+                            }
+                            tab.innerHTML = info;
+                        }
+                    }
+                    m++;
+                    g++;
+                }
+            }
+            tableLI = document.getElementById("licenseTableLI");
+            //Add border
+            //tableLI.setAttribute("border", "2");
+            var tr = tableLI.insertRow(0);
+            var th = document.createElement("th");
+            th.innerHTML = "Licenses identified";
+            tr.appendChild(th);
+            g = 0;
+            m = 0;
+            for (var n in data[1])
+            {
+                console.log(data[1][n]);
+                tr = tableLI.insertRow(g+1);
+                var tabTwo = tr.insertCell(-1);
+                tabTwo.innerHTML = data[1][n];
+                if (m % 2 == 0)
+                {
+                    tabTwo.style.backgroundColor =  "#EAEAEA";
+                }
+                m++;
+                g++;
+            }
         })
         loader();
         request.send();
@@ -69,12 +138,19 @@
         <div id="CIIbp" class="col-6">
             <div size="total">
             <img id="CIIbadge2">
-            <p id="CII"></p>
+            <p id="CII2"></p>
             </div>
         </div>
     </div>
     <div class="row">
+        <p id="populate">Populating...</p>
         <p id="licenseInfo"></p>
+        <table id="licenseTable">
+            <tbody></tbody>
+        </table>
+        <table id="licenseTableLI">
+            <tbody></tbody>
+        </table>
     </div>
   </section> 
 </template> 

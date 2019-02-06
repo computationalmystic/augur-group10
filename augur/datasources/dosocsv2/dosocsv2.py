@@ -22,7 +22,8 @@ class DoSOCSv2(object):
         # self.scan('nebrethar', 'DoSOCSv2')
 
     def scan(self, owner, repo):
-        repo_url = 'https://github.com/' + 'Nebrethar' + '/' + 'DoSOCSv2' + '.git'
+    
+        repo_url = 'https://github.com/' + 'rails' + '/' + 'rails' + '.git'
 
         repo_path = os.path.join(self.__repo_folder, repo)
         cwd = os.path.dirname(os.path.realpath(__file__))
@@ -30,7 +31,7 @@ class DoSOCSv2(object):
         temp = open("temp.txt", "r+")
         subprocess.call(['sudo', 'git', 'clone', repo_url, cwd + '/repodl/' + repo], shell=False)
         pope = subprocess.Popen(['sudo', 'dosocs2', 'oneshot', cwd + '/repodl/' + repo, '-T', cwd + '/2.0.tag.3'], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        #subprocess.call(['sudo', 'dosocs2', 'oneshot', '/home/repos/' + repo], shell=False, stdout=temp)
+        subprocess.call(['sudo', 'dosocs2', 'oneshot', cwd + '/repodl/' + repo], shell=False, stdout=temp)
         out, err = pope.communicate()
         #if out:
             #print(out)
