@@ -11,10 +11,10 @@
       </h2>
     </div>
     <script type="application/javascript">
-    if (localStorage.getItem("lRun") != "Scanning") {
-        localStorage.setItem("lRun", "Stopped");
-        console.log(localStorage.getItem("lRun"));
-    }
+        window.onbeforeunload = function(event) {
+            console.log("Stopping on page exit");
+            localStorage.setItem("lRun", "Stopped");
+        }
         var request = new XMLHttpRequest();
         console.log("Refreshed Page");
         function loader() {
@@ -49,8 +49,8 @@
         }
         console.log("LICENSE INFO");
         console.log(localStorage.getItem("lRun"));
-        if (localStorage.getItem("lRun") != "Scanning") {
-            localStorage.setItem("lRun", "Scanning");
+        if (localStorage.getItem("lRun") != "Running") {
+            localStorage.setItem("lRun", "Running");
             window.AugurAPI.getLicenseInfo().then(function(data) {
                 populate = document.getElementById("populate");
                 populate.parentNode.removeChild(populate);
@@ -99,37 +99,40 @@
                     g++;
                     }
                 }
-            tableLI = document.getElementById("licenseTableLI");
-            //Add border
-            //tableLI.setAttribute("border", "2");
-            var tr = tableLI.insertRow(0);
-            var th = document.createElement("th");
-            th.innerHTML = "Licenses identified";
-            tr.appendChild(th);
-            g = 0;
-            m = 0;
-            for (var n in data[1])
-            {
-                //console.log(data[1][n]);
-                tr = tableLI.insertRow(g+1);
-                var tabTwo = tr.insertCell(-1);
-                tabTwo.innerHTML = data[1][n];
-                if (m % 2 == 0)
+                tableLI = document.getElementById("licenseTableLI");
+                //Add border
+                //tableLI.setAttribute("border", "2");
+                var tr = tableLI.insertRow(0);
+                var th = document.createElement("th");
+                th.innerHTML = "Licenses identified";
+                tr.appendChild(th);
+                g = 0;
+                m = 0;
+                for (var n in data[1])
                 {
-                    tabTwo.style.backgroundColor =  "#EAEAEA";
+                    //console.log(data[1][n]);
+                    tr = tableLI.insertRow(g+1);
+                    var tabTwo = tr.insertCell(-1);
+                    tabTwo.innerHTML = data[1][n];
+                    if (m % 2 == 0)
+                    {
+                        tabTwo.style.backgroundColor =  "#EAEAEA";
+                    }
+                    m++;
+                    g++;
                 }
-                m++;
-                g++;
-            }
-            console.log("Scanned. Stopping now...");
-            localStorage.setItem("lRun", "Stopped");
-        })
+                console.log("Scanned. Stopping now...");
+                localStorage.setItem("lRun", "Stopped");
+            })
         .then( () => { 
         }, error => {
             console.log("Error encountered. Stopping now...");
             localStorage.setItem("lRun", "Stopped");
-            document.getElementById("populate").innerHTML = "Error occurred when processing license information.";
+            document.getElementById("populate").innerHTML = "Error occurred when processing license information. Please reload the page.";
         });
+        } else {
+            localStorage.setItem("lRun", "Stopped");
+            location.reload();
         }
         loader();
         request.send();
@@ -156,7 +159,7 @@
         </div>-->
     </div>
     <div class="row">
-        <p id="populate">{{ $store.state.licenseRunning }}</p>
+        <p id="populate">Scanning the repository. This may take some time...</p>
         <p id="licenseInfo"></p>
         <table id="licenseTable">
             <tbody></tbody>
