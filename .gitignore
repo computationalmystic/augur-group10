@@ -79,3 +79,13 @@ augur/plugins/
 *.cfg.*
 !sample.config.json
 Anaconda.sh
+frontend/public/app.js
+frontend/public/app.js.map
+frontend/public/vendor.js
+frontend/public/vendor.js.map
+augur/datasources/dosocsv2../downloads/DoSOCSv2/
+augur/datasources/dosocsv2/dosocsv2.py.save
+augur/datasources/dosocsv2/repodl/DoSOCSv2/
+augur/datasources/dosocsv2/repodl/rails/
+augur/datasources/dosocsv2/repodl/repo/
+augur/datasources/downloads/DoSOCSv2/
