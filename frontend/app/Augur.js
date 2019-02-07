@@ -52,7 +52,8 @@ export default function Augur () {
       showArea: true,
       showDetail: true,
       showTooltip: true,
-      byDate: false
+      byDate: false,
+      licenseRunning: "Scanning...",
     },
     mutations: {
       setGitRepo(state, payload) {

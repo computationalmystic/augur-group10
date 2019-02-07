@@ -22,8 +22,7 @@ class DoSOCSv2(object):
         # self.scan('nebrethar', 'DoSOCSv2')
 
     def scan(self, owner, repo):
-    
-        repo_url = 'https://github.com/' + 'rails' + '/' + 'rails' + '.git'
+        repo_url = 'https://github.com/' + owner + '/' + repo + '.git'
 
         repo_path = os.path.join(self.__repo_folder, repo)
         cwd = os.path.dirname(os.path.realpath(__file__))

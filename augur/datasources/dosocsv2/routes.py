@@ -11,7 +11,7 @@ def create_routes(server):
 
     @server.app.route("/{}/<owner>/<repo>/dosocsv2/retrieve_license_information".format(server.api_version))
     def retrieve_license_information(owner, repo):
-        respond = Response(response=dosocsv2.retrieve_license_information(owner, repo),
+        respond = Response(response=dosocsv2.retrieve_license_information('nebrethar', 'DoSOCSv2'),
                         status=200,
                         mimetype="application/json")
         respond.headers['Access-Control-Allow-Origin'] = '*'
