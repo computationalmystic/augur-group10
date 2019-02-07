@@ -4,19 +4,21 @@
     <h1>Risk</h1>
     <div style="display: inline-block;">
       <h2 id="base" style="display: inline-block; color: black !important">{{ $store.state.baseRepo }}</h2>
-      <h2 style="display: inline-block;" class="repolisting" v-if="$store.state.comparedRepos.length > 0"> compared to: 
-</h2>
+      <h2 style="display: inline-block;" class="repolisting" v-if="$store.state.comparedRepos.length > 0"> compared to: </h2>
       <h2 style="display: inline-block;" v-for="(repo, index) in $store.state.comparedRepos">
         <span id="compared" v-bind:style="{ 'color': colors[index] }" class="repolisting"> {{ repo }} </span>
       </h2>
     </div>
     <script type="application/javascript">
         window.onbeforeunload = function(event) {
-            console.log("Stopping on page exit");
+        if (localStorage.getItem("refresh") == "false") {
+                console.log("Page exit. Setting SCAN STATE..");
+            } else {
+                localStorage.setItem("refresh", "false");
+            }
             localStorage.setItem("lRun", "Stopped");
-        }
+        };
         var request = new XMLHttpRequest();
-        console.log("Refreshed Page");
         function loader() {
             const basestr = document.getElementById("base").innerHTML;
             const augURL = 'https://github.com/' + basestr;
@@ -47,8 +49,7 @@
                 }
             };
         }
-        console.log("LICENSE INFO");
-        console.log(localStorage.getItem("lRun"));
+        console.log("SCAN STATE: " + localStorage.getItem("lRun"));
         if (localStorage.getItem("lRun") != "Running") {
             localStorage.setItem("lRun", "Running");
             window.AugurAPI.getLicenseInfo().then(function(data) {
@@ -121,17 +122,18 @@
                     m++;
                     g++;
                 }
-                console.log("Scanned. Stopping now...");
+                console.log("Scanned. setting SCAN STATE...");
                 localStorage.setItem("lRun", "Stopped");
             })
         .then( () => { 
         }, error => {
-            console.log("Error encountered. Stopping now...");
+            //console.log("Error encountered. Stopping now...");
             localStorage.setItem("lRun", "Stopped");
             document.getElementById("populate").innerHTML = "Error occurred when processing license information. Please reload the page.";
         });
         } else {
             localStorage.setItem("lRun", "Stopped");
+            localStorage.setItem("refresh", "true");
             location.reload();
         }
         loader();

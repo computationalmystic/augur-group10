@@ -11,6 +11,8 @@ export default class AugurAPI {
     this.__timeout = null
     this.__pending = {}
 
+    this._riskRepo = window.location
+
     this.getDownloadedGitRepos = this.__EndpointFactory('git/repos')
     this.openRequests = 0
     this.getMetricsStatus = this.__EndpointFactory('metrics/status/filter')
@@ -42,7 +44,8 @@ export default class AugurAPI {
 
   //fix this funct -Matt 2/4/2019
   __endpointURLRisk (endpoint) {
-    return '' + this._host + this._version + '/owner/repo/' + endpoint
+    var riskuse = this._riskRepo.toString().split( '/' )
+    return '' + this._host + this._version + '/' + riskuse[riskuse.length-2] + '/' +  riskuse[riskuse.length-1] + '/' + endpoint
   }
 
   __URLFunctionFactory (url) {

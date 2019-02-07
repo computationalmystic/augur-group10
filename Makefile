@@ -58,14 +58,14 @@ install-msr:
 	@ ./util/install-msr.sh
 
 version:
-	$(eval OLDVERSION=$(shell python ./util/print-version.py))
+	$(eval OLDVERSION=$(shell python3 ./util/print-version.py))
 	@ echo "installed version: $(OLDVERSION)"
 
 download-upgrade:
 	git pull
 
 upgrade: version download-upgrade install-dev
-	@ python util/post-upgrade.py $(OLDVERSION)
+	@ python3 util/post-upgrade.py $(OLDVERSION)
 	@ echo "Upgraded from $(OLDVERSION) to $(shell python util/print-version.py)."
 
 
@@ -105,7 +105,7 @@ monitor:
 dev-restart: dev-stop dev-start
 
 server:
-	@ python -m augur.server
+	@ python3 -m augur.server
 
 frontend:
 	bash -c 'cd frontend; brunch build'
@@ -125,11 +125,11 @@ build: frontend docs
 test:test-ds test-api
 
 test-ds:
-	bash -c '$(CONDAACTIVATE) python -m pytest augur/datasources/$(SOURCE)/test_$(SOURCE).py'
+	bash -c '$(CONDAACTIVATE) python3 -m pytest augur/datasources/$(SOURCE)/test_$(SOURCE).py'
 
 test-api:
 	make dev-start
-	python test/api/test_api.py
+	python3 test/api/test_api.py
 	make dev-stop
 
 .PHONY: unlock
@@ -158,7 +158,7 @@ jupyter:
 		@ bash -c '$(CONDAACTIVATE) cd notebooks; jupyter notebook'
 
 create-jupyter-env:
-		bash -c '$(CONDAACTIVATE) python -m ipykernel install --user --name augur --display-name "Python (augur)";'
+		bash -c '$(CONDAACTIVATE) python3 -m ipykernel install --user --name augur --display-name "Python (augur)";'
 
 
 
@@ -167,7 +167,7 @@ create-jupyter-env:
 #
 .PHONY: to-json
 to-json:
-	@ bash -c '$(CONDAACTIVATE) python util/post-upgrade.py migrate_config_to_json'
+	@ bash -c '$(CONDAACTIVATE) python3 util/post-upgrade.py migrate_config_to_json'
 
 .PHONY: to-env
 to-env:
