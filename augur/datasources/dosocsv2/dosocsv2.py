@@ -24,7 +24,6 @@ class DoSOCSv2(object):
     def scan(self, owner, repo):
         repo_url = 'https://github.com/' + owner + '/' + repo + '.git'
 
-        repo_path = os.path.join(self.__repo_folder, repo)
         cwd = os.path.dirname(os.path.realpath(__file__))
 
         temp = open("temp.txt", "r+")
@@ -49,9 +48,9 @@ class DoSOCSv2(object):
 
         #print(results_l)
         license_information = []
-        print('\n')
-        print(results_l)
-        print('\n')
+        #print('\n')
+        #print(results_l)
+        #print('\n')
         temp = {}
         for i in range(0, 17):
             j = i*2
@@ -64,7 +63,7 @@ class DoSOCSv2(object):
         for i in range(0, len(results_l[0])):
             temp_l["License #" + str(i)] = results_l[0][i][1]
             i += 1
-        print(temp_l)
+        #print(temp_l)
         license_information.append(temp_l)
         #dfinal = dict(temp)
         #dfinal.update(temp_l)

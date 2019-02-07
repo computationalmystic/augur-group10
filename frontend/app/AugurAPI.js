@@ -42,7 +42,6 @@ export default class AugurAPI {
     return '' + this._host + this._version + '/' + endpoint
   }
 
-  //fix this funct -Matt 2/4/2019
   __endpointURLRisk (endpoint) {
     var riskuse = this._riskRepo.toString().split( '/' )
     return '' + this._host + this._version + '/' + riskuse[riskuse.length-2] + '/' +  riskuse[riskuse.length-1] + '/' + endpoint
@@ -76,6 +75,8 @@ export default class AugurAPI {
   }
 
   __EndpointFactoryRisk (endpoint) {
+    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+    console.log(this.__URLFunctionFactory(this.__endpointURLRisk(endpoint)))
     return this.__URLFunctionFactory(this.__endpointURLRisk(endpoint))
   }
 
