@@ -2,7 +2,6 @@
 """
 Analyzes Augur source and CHAOSS repos to determine metric implementation status
 """
-
 import re
 from abc import ABC
 import requests
@@ -11,7 +10,9 @@ from augur.util import metric_metadata
 class FrontendStatusExtractor(object):
 
     def __init__(self):
-        self.api_text = open("frontend/app/AugurAPI.js", 'r').read()
+        import os
+        pathAPI = os.path.dirname(__file__) + "/../../../frontend/app/AugurAPI.js"
+        self.api_text = open(pathAPI, 'r').read()
         self.attributes = re.findall(r'(?:(GitEndpoint|Endpoint|Timeseries)\(repo, )\'(.*)\', \'(.*)\'', self.api_text)
         self.timeseries = [attribute for attribute in self.attributes if attribute[0] == "Timeseries"]
         self.endpoints = [attribute for attribute in self.attributes if attribute[0] == "Endpoint"]

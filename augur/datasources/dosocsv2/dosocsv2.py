@@ -1,6 +1,6 @@
 #SPDX-License-Identifier: MIT
 """
-Data source that uses the DoSOCSv2 scanner to identify SPDX license information. 
+Data source that uses the DoSOCSv2 scanner to identify SPDX license information.
 """
 
 import json
@@ -34,7 +34,7 @@ class DoSOCSv2(object):
         #if out:
             #print(out)
         if err:
-            print(err)
+            print(err.decode('UTF-8'))
         #print (out)
         scan_results = re.findall(r'(PackageName): (.*)\n(SPDXID): (.*)\n(PackageVersion|):? ?(.*|)\n?(PackageFileName): (.*)\n(PackageSupplier): (.*)\n(PackageOriginator): (.*)\n(PackageDownloadLocation): (.*)\n(PackageVerificationCode): (.*)\n(PackageChecksum|):? ?(.*|)\n?(PackageHomePage): (.*)\n(PackageLicenseConcluded): (.*)\n*(PackageLicenseDeclared): (.*)\n(PackageLicenseComments): (.*)\n(PackageCopyrightText): (.*)\n(PackageSummary): (.*)\n(PackageDescription): (.*)\n(PackageComment): (.*|)', out.decode('UTF-8'))
         scan_results_l = re.findall(r'(PackageLicenseInfoFromFiles): (.*)\n?', out.decode('UTF-8')),
@@ -68,5 +68,3 @@ class DoSOCSv2(object):
         #dfinal = dict(temp)
         #dfinal.update(temp_l)
         return json.dumps(license_information)
-
-
