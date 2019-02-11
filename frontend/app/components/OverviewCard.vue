@@ -11,11 +11,11 @@
 
         <div class="col col-6" style="padding-right: 35px">
           <grouped-bar-chart source="topReposAllTimeCommits"
-          title="Top 5 repos commits"></grouped-bar-chart>
+          title="Top repos commits"></grouped-bar-chart>
         </div>
         <div class="col col-6" style="padding-right: 35px">
           <grouped-bar-chart source="topReposAllTimeLinesOfCode"
-          title="Top 5 repos LoC"></grouped-bar-chart>
+          title="Top repos LoC"></grouped-bar-chart>
         </div>
 
       </div>

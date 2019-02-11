@@ -85,11 +85,16 @@ export default {
                   "y": {
                     "field": "name", "type": "ordinal",
                     "scale": {"rangeStep": 12},
-                    "axis": {"title": ""}
+                    "axis": {"title": ""},
+                    "sort": {
+                      "field": "net",
+                      "op": "mean",
+                      "order": "descending"
+                    },
                   },
                   "color": {
-                    "field": "repo", "type": "nominal",
-                    "scale": {"range": ["#EA98D2", "#659CCA"]}
+                    "field": "name", "type": "ordinal",
+                    "scale": {"scheme": "category10"}
                   }
               },
             },

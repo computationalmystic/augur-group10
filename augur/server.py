@@ -265,7 +265,7 @@ class Server(object):
 
             if repo_url_base:
                 kwargs['repo_url'] = str(base64.b64decode(repo_url_base).decode())
-                # print(kwargs['repo_url'])
+                print(kwargs['repo_url'], repo_url_base, "hello")
 
             if not args and not kwargs:
                 data = func()
@@ -328,6 +328,12 @@ class Server(object):
 
     def addGitMetric(self, function, endpoint, cache=True):
         """Simplifies adding git routes"""
+        endpoint = '/{}/git/{}'.format(self.api_version, endpoint)
+        self.app.route(endpoint)(self.flaskify(function, cache=cache))
+        self.updateMetricMetadata(function, endpoint=endpoint, metric_type='git')
+
+    def addUseCaseMetric(self, function, endpoint, cache=True):
+        """Simplifies adding use case routes"""
         endpoint = '/{}/git/{}'.format(self.api_version, endpoint)
         self.app.route(endpoint)(self.flaskify(function, cache=cache))
         self.updateMetricMetadata(function, endpoint=endpoint, metric_type='git')

@@ -150,7 +150,7 @@ class Facade(object):
         """
         Returns top new repos this year by commits
 
-        :param limit: number of repos the user wishes to display
+
         """
         
 
@@ -176,7 +176,7 @@ class Facade(object):
         """
         Returns top new repos this year by lines of code
 
-        :param limit: number of repos the user wishes to display
+
         """       
         topNewReposLines = s.sql.text("""
             SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
@@ -198,9 +198,9 @@ class Facade(object):
     @annotate(tag='top-repos-all-time-commits')
     def top_repos_all_time_commits(self, repo_url):
         """
-        Returns top new repos of all time by commits
+        Returns top new repos of all time by commits within given repo's organization
 
-        :param limit: number of repos the user wishes to display
+
         """       
 
         topNewReposCommitsAllTime = s.sql.text("""
@@ -222,7 +222,7 @@ class Facade(object):
     @annotate(tag='top-repos-all-time-lines-of-code')
     def top_repos_all_time_lines_of_code(self, repo_url):
         """
-        Returns top new repos of all time by lines of code
+        Returns top new repos of all time by lines of code within given repo's organization
 
         :param limit: number of repos the user wishes to display
         """
@@ -241,4 +241,86 @@ class Facade(object):
            LIMIT 10
         """)
         results = pd.read_sql(topNewReposLinesAllTime, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        return results
+
+    @annotate(tag='contributions-by-time-interval')
+    def contributions_by_time_interval(self, repo_url, year=None):
+        """
+        Returns commits and lines of code data for a given time interval throughout the current or a given year
+
+        :param year: 
+        :param interval: 
+        """
+
+        if year == None:
+            year = 2019
+
+        contributionsByTimeIntervalSQL = s.sql.text("""
+            SELECT sum(cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, 
+            sum(IFNULL(added, 0)) as added, sum(IFNULL(removed, 0)) as removed, sum(IFNULL(whitespace, 0)) as whitespace, 
+            IFNULL(patches, 0) as commits, a.month
+            FROM (select month from repo_monthly_cache group by month) a 
+            LEFT JOIN (SELECT name, repo_monthly_cache.added, removed, whitespace, patches, month, IFNULL(year, 2018) as year      
+            FROM repo_monthly_cache, repos
+            WHERE repos_id = (SELECT id FROM repos WHERE git LIKE :repourl LIMIT 1)
+            AND year = :year
+            AND repos.id = repos_id     
+            GROUP BY month) b 
+            ON a.month = b.month
+            GROUP BY month
+        """)
+        results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url), 'year': str(year)})
+        return results
+
+    @annotate(tag='top-repos-all-time-lines-of-code')
+    def new_repos_added_by_time_period(self, repo_url, year, interval):
+        """
+        Returns commits and lines of code data for a given time interval throughout the current or a given year
+
+        :param year: 
+        :param interval: 
+        """
+
+        contributionsByTimeIntervalSQL = s.sql.text("""
+            SELECT repos.name AS repo
+            FROM repos
+            WHERE repos.projects_id = (SELECT projects.id FROM repos, projects 
+            WHERE git LIKE 'https://review.gluster.org/gluster-swift' 
+            and repos.projects_id = projects.id
+            LIMIT 1)
+            AND YEAR(repos.added) = :year
+            ORDER BY repo ASC
+        """)
+        results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        return results
+
+    @annotate(tag='outside-contributions-by-time-interval')
+    def outside_contributions_by_time_interval(self, repo_url, year, interval):
+        """
+        Returns commits and lines of code data for a given time interval throughout the current or a given year
+
+        :param year: 
+        :param interval: 
+        """
+
+        contributionsByTimeIntervalSQL = s.sql.text("""
+            SELECT added, whitespace, removed, (cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, patches, a.month, affiliation 
+            FROM (SELECT month FROM repo_monthly_cache GROUP BY month) a 
+            LEFT JOIN
+            (
+                SELECT SUM(repo_monthly_cache.added) AS added, SUM(whitespace) as whitespace, SUM(removed) as removed, month, SUM(patches) as patches, repo_monthly_cache.`affiliation` as affiliation
+                FROM repo_monthly_cache, repos, projects
+                WHERE repo_monthly_cache.repos_id = repos.id
+                AND repos.projects_id = (SELECT projects.id FROM repos, projects 
+                WHERE git LIKE 'https://github.com/twitter/twemoji' 
+                and repos.projects_id = projects.id
+                LIMIT 1)
+                AND projects.id = rep`os.projects_id
+                AND repo_monthly_cache.`affiliation` <> projects.name
+                AND year = 2018
+                GROUP BY month, affiliation
+            ) b ON a.month = b.month
+            ORDER BY month
+        """)
+        results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results

@@ -155,18 +155,18 @@ def create_routes(server):
 
     server.addGitMetric(facade.top_new_repos_this_year_commits, 'top_new_repos_this_year_commits')
 
-    # @server.app.route('/{}/git/top_repos_all_time_lines_of_code'.format(server.api_version))
-    # def facade_top_repos_all_time_lines_of_code():
+    @server.app.route('/{}/git/contributions_by_time_interval'.format(server.api_version))
+    def contributions_by_time_interval():
 
-    #    limit = request.args.get('limit')
+        repo_url_base = request.args.get('repo_url_base')
 
-    #    project = request.args.get('project')
+        year = request.args.get('year')
 
-    #    data = server.transform(facade.top_repos_all_time_lines_of_code, args=(limit, project))
+        data = server.transform(facade.contributions_by_time_interval, repo_url_base=repo_url_base, kwargs=({'year': year}))
 
-    #    return Response(response=data,
-    #                    status=200,
-    #                    mimetype="application/json")
+        return Response(response=data,
+                       status=200,
+                       mimetype="application/json")
 
     # @server.app.route('/{}/git/top_new_repos_this_year_commits'.format(server.api_version))
     # def facade_top_new_repos_this_year_commits():
