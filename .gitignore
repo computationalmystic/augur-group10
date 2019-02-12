@@ -28,7 +28,8 @@
 ######################
 *.log
 *.pid
-*.sql
+# Need to include .sql for data rewrite
+# *.sql
 *.sqlite
 *.cfg
 *.cfg.old
