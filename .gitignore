@@ -90,3 +90,4 @@ augur/datasources/dosocsv2/repodl/rails/
 augur/datasources/dosocsv2/repodl/repo/
 augur/datasources/downloads/DoSOCSv2/
 augur/datasources/dosocsv2/repodl/
+frontend/public/*.map
