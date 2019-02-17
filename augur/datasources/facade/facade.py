@@ -146,17 +146,20 @@ class Facade(object):
         return results
 
     @annotate(tag='top-new-repos-this-year-commits')
-    def top_new_repos_this_year_commits(self, repo_url):
+    def top_new_repos_commits(self, repo_url, timeframe=None):
         """
         Returns top new repos this year by commits
 
 
         """
+        if timeframe == None:
+            timeframe == 'year'
+
         
 
         topNewReposCommits = s.sql.text("""
-           SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
-           FROM repo_annual_cache, projects, repos
+           SELECT repos_id, sum(cast(repo_monthly_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
+           FROM repo_monthly_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
            WHERE git LIKE :repourl
            and repos.projects_id = projects.id
@@ -172,38 +175,59 @@ class Facade(object):
         return results
 
     @annotate(tag='top-new-repos-this-year-lines-of-code')
-    def top_new_repos_this_year_lines_of_code(self, repo_url):
+    def top_new_repos_lines_of_code(self, repo_url, timeframe=None):
         """
         Returns top new repos this year by lines of code
 
 
         """       
-        topNewReposLines = s.sql.text("""
-            SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
-           FROM repo_annual_cache, projects, repos
-           where projects.name = (SELECT projects.name FROM repos, projects
-           WHERE git LIKE :repourl
-           and YEAR(repos.added) = YEAR(CURDATE())
-           and repos.projects_id = projects.id
-           LIMIT 1)
-           and repo_annual_cache.repos_id = repos.id
-           and repos.projects_id = projects.id
-           group by repos_id
-           ORDER BY net desc
-           LIMIT 10
-        """)
+
+        if timeframe == None:
+            timeframe = 'year'
+
+        topNewReposLines = None
+        if timeframe == 'year':
+            topNewReposLines = s.sql.text("""
+                SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
+               FROM repo_annual_cache, projects, repos
+               where projects.name = (SELECT projects.name FROM repos, projects
+               WHERE git LIKE :repourl
+               and YEAR(repos.added) = YEAR(CURDATE())
+               and repos.projects_id = projects.id
+               LIMIT 1)
+               and repo_annual_cache.repos_id = repos.id
+               and repos.projects_id = projects.id
+               group by repos_id
+               ORDER BY net desc
+               LIMIT 10
+            """)
+        elif timeframe == 'month':
+            topNewReposLines = s.sql.text("""
+                SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
+               FROM repo_annual_cache, projects, repos
+               where projects.name = (SELECT projects.name FROM repos, projects
+               WHERE git LIKE :repourl
+               and MONTH(repos.added) = MONTH(CURDATE())
+               and repos.projects_id = projects.id
+               LIMIT 1)
+               and repo_annual_cache.repos_id = repos.id
+               and repos.projects_id = projects.id
+               group by repos_id
+               ORDER BY net desc
+               LIMIT 10
+            """)
         results = pd.read_sql(topNewReposLines, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-    @annotate(tag='top-repos-all-time-commits')
-    def top_repos_all_time_commits(self, repo_url):
+    @annotate(tag='top-repos-commits')
+    def top_repos_commits(self, repo_url):
         """
         Returns top new repos of all time by commits within given repo's organization
 
 
         """       
 
-        topNewReposCommitsAllTime = s.sql.text("""
+        topNewReposCommits = s.sql.text("""
            SELECT repos_id, repos.name as name, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches
            FROM repo_annual_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
@@ -216,18 +240,21 @@ class Facade(object):
            ORDER BY net desc
            LIMIT 10
         """)
-        results = pd.read_sql(topNewReposCommitsAllTime, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        results = pd.read_sql(topNewReposCommits, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-    @annotate(tag='top-repos-all-time-lines-of-code')
-    def top_repos_all_time_lines_of_code(self, repo_url):
+    @annotate(tag='top-repos-lines-of-code')
+    def top_repos_lines_of_code(self, repo_url, timeframe=None):
         """
         Returns top new repos of all time by lines of code within given repo's organization
 
         :param limit: number of repos the user wishes to display
         """
 
-        topNewReposLinesAllTime = s.sql.text("""
+        if timeframe == None:
+            timeframe == 'year'
+
+        topNewReposLines = s.sql.text("""
             SELECT repos_id, repos.name as name, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches
            FROM repo_annual_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
@@ -240,11 +267,11 @@ class Facade(object):
            ORDER BY net desc
            LIMIT 10
         """)
-        results = pd.read_sql(topNewReposLinesAllTime, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        results = pd.read_sql(topNewReposLines, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
     @annotate(tag='contributions-by-time-interval')
-    def contributions_by_time_interval(self, repo_url, year=None):
+    def contributions_by_time_interval(self, repo_url, year=None, interval=None):
         """
         Returns commits and lines of code data for a given time interval throughout the current or a given year
 
@@ -254,13 +281,17 @@ class Facade(object):
 
         if year == None:
             year = 2019
+        if interval == None:
+            interval = 'monthly'
+
+
 
         contributionsByTimeIntervalSQL = s.sql.text("""
             SELECT sum(cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, 
             sum(IFNULL(added, 0)) as added, sum(IFNULL(removed, 0)) as removed, sum(IFNULL(whitespace, 0)) as whitespace, 
-            IFNULL(patches, 0) as commits, a.month
+            IFNULL(patches, 0) as commits, a.month, IFNULL(year, :year) as year
             FROM (select month from repo_monthly_cache group by month) a 
-            LEFT JOIN (SELECT name, repo_monthly_cache.added, removed, whitespace, patches, month, IFNULL(year, 2018) as year      
+            LEFT JOIN (SELECT name, repo_monthly_cache.added, removed, whitespace, patches, month, IFNULL(year, :year) as year      
             FROM repo_monthly_cache, repos
             WHERE repos_id = (SELECT id FROM repos WHERE git LIKE :repourl LIMIT 1)
             AND year = :year
@@ -269,10 +300,10 @@ class Facade(object):
             ON a.month = b.month
             GROUP BY month
         """)
-        results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url), 'year': str(year)})
+        results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url), 'year': year})
         return results
 
-    @annotate(tag='top-repos-all-time-lines-of-code')
+    @annotate(tag='new-repos-added-by-time-period')
     def new_repos_added_by_time_period(self, repo_url, year, interval):
         """
         Returns commits and lines of code data for a given time interval throughout the current or a given year
@@ -315,7 +346,7 @@ class Facade(object):
                 WHERE git LIKE 'https://github.com/twitter/twemoji' 
                 and repos.projects_id = projects.id
                 LIMIT 1)
-                AND projects.id = rep`os.projects_id
+                AND projects.id = repos.projects_id
                 AND repo_monthly_cache.`affiliation` <> projects.name
                 AND year = 2018
                 GROUP BY month, affiliation
@@ -324,3 +355,35 @@ class Facade(object):
         """)
         results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
+
+    @annotate(tag='outside-contributions-by-time-interval')
+    def project_wide_contributions_by_time_interval(self, repo_url, year, interval):
+        """
+        Returns commits and lines of code data for a given time interval throughout the current or a given year
+
+        :param year: 
+        :param interval: 
+        """
+
+        projectWideContributionsByTimeIntervalSQL = s.sql.text("""
+            SELECT name, added, whitespace, removed, (cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, patches, a.month
+            FROM (SELECT month FROM repo_monthly_cache GROUP BY month) a 
+            LEFT JOIN
+            (
+                SELECT repos.name, SUM(repo_monthly_cache.added) AS added, SUM(whitespace) as whitespace, SUM(removed) as removed, month, SUM(patches) as patches
+                FROM repo_monthly_cache, repos, projects
+                WHERE repo_monthly_cache.repos_id = repos.id
+                AND repos.projects_id = (SELECT projects.id FROM repos, projects 
+                    WHERE git LIKE 'https://github.com/twitter/twemoji' 
+                    and repos.projects_id = projects.id
+                    LIMIT 1)
+                AND projects.id = repos.projects_id
+                AND repos_id = repos.id
+                AND year = 2018
+                GROUP BY month, repos.name
+            ) b ON a.month = b.month
+            ORDER BY name, month
+        """)
+        results = pd.read_sql(projectWideContributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        return results
+

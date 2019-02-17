@@ -147,13 +147,60 @@ def create_routes(server):
     """
     server.addGitMetric(facade.commits_by_week, 'commits_by_week')
 
-    server.addGitMetric(facade.top_repos_all_time_lines_of_code, 'top_repos_all_time_lines_of_code')
 
-    server.addGitMetric(facade.top_repos_all_time_commits, 'top_repos_all_time_commits')
+    @server.app.route('/{}/git/top_repos_lines_of_code'.format(server.api_version))
+    def top_repos_lines_of_code():
 
-    server.addGitMetric(facade.top_new_repos_this_year_lines_of_code, 'top_new_repos_this_year_lines_of_code')
+        repo_url_base = request.args.get('repo_url_base')
 
-    server.addGitMetric(facade.top_new_repos_this_year_commits, 'top_new_repos_this_year_commits')
+        timeframe = request.args.get('timeframe')
+
+        data = server.transform(facade.top_repos_lines_of_code, args=([]), repo_url_base=repo_url_base, kwargs=({'timeframe': timeframe}))
+
+        return Response(response=data,
+                       status=200,
+                       mimetype="application/json")
+
+    server.addGitMetric(facade.top_repos_commits, 'top_repos_commits')
+    # @server.app.route('/{}/git/top_repos_commits'.format(server.api_version))
+    # def top_repos_commits():
+
+    #     repo_url_base = request.args.get('repo_url_base')
+
+    #     timeframe = request.args.get('timeframe')
+
+    #     data = server.transform(facade.top_repos_commits, args=([]), repo_url_base=repo_url_base, kwargs=({'timeframe': timeframe}))
+
+    #     return Response(response=data,
+    #                    status=200,
+    #                    mimetype="application/json")
+
+    @server.app.route('/{}/git/top_new_repos_lines_of_code'.format(server.api_version))
+    def top_new_repos_lines_of_code():
+
+        repo_url_base = request.args.get('repo_url_base')
+
+        timeframe = request.args.get('timeframe')
+
+        data = server.transform(facade.top_new_repos_lines_of_code, args=([]), repo_url_base=repo_url_base, kwargs=({'timeframe': timeframe}))
+
+        return Response(response=data,
+                       status=200,
+                       mimetype="application/json")
+
+    server.addGitMetric(facade.top_new_repos_commits, 'top_new_repos_commits')
+    # @server.app.route('/{}/git/top_new_repos_commits'.format(server.api_version))
+    # def top_new_repos_commits():
+
+    #     repo_url_base = request.args.get('repo_url_base')
+
+    #     timeframe = request.args.get('timeframe')
+
+    #     data = server.transform(facade.top_new_repos_commits, args=([]), repo_url_base=repo_url_base, kwargs=({'timeframe': timeframe}))
+
+    #     return Response(response=data,
+    #                    status=200,
+    #                    mimetype="application/json")
 
     @server.app.route('/{}/git/contributions_by_time_interval'.format(server.api_version))
     def contributions_by_time_interval():
@@ -162,7 +209,7 @@ def create_routes(server):
 
         year = request.args.get('year')
 
-        data = server.transform(facade.contributions_by_time_interval, repo_url_base=repo_url_base, kwargs=({'year': year}))
+        data = server.transform(facade.contributions_by_time_interval, args=([]), repo_url_base=repo_url_base, kwargs=({'year': year}))
 
         return Response(response=data,
                        status=200,

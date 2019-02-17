@@ -6,12 +6,9 @@
     </div>
     <!-- content to show if app has no state yet -->
     <div :class="{ hidden: hasState }">
-      <!-- <login-form></login-form> -->
       <section class="unmaterialized">
         <div id="collapse">
           <h3>Downloaded Git Repos by Project</h3>
-          <!--<h3 v-if="isCollapsed" @click="collapseText">Downloaded Git Repos by Project,  <span style="font-size:16px">&#9660</span></h3>
-          <h3 v-else @click="collapseText">Downloaded Git Repos by Project  <span style="font-size:16px">&#9654</span></h3>-->
         </div>
         <downloaded-repos-card></downloaded-repos-card>
       </section>
@@ -19,7 +16,7 @@
 
     <!-- content to show if app does have a repo to show -->
     <div :class="{ hidden: !hasState }">
-      <nav class="tabs">
+      <!-- <nav class="tabs">
         <ul>
           <li :class="{ active: (currentTab == 'gmd') }"><a href="#" @click="changeTab" data-value="gmd">Growth, Maturity, and Decline</a></li>
           <li :class="{ active: (currentTab == 'diversityInclusion') }"><a href="#" @click="changeTab" data-value="diversityInclusion">Diversity and Inclusion</a></li>
@@ -29,30 +26,32 @@
           <li :class="{ active: (currentTab == 'experimental') }"><a href="#" @click="changeTab" data-value="experimental">Experimental</a></li>
           <li :class="{ active: (currentTab == 'git') }"><router-link :to="{name: 'singlegit', params: {tab: 'git', repo: e.url}}" @click.native="open = false">Git</router-link></li>
         </ul>
-      </nav>
+      </nav> -->
 
       <div ref="cards">
         <main-controls></main-controls>
-        <slot></slot>
+        <router-view></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import MainControls from './MainControls'
-import AugurHeader from './AugurHeader'
-import MetricsStatusCard from './MetricsStatusCard'
-import BaseRepoActivityCard from './BaseRepoActivityCard'
-import BaseRepoEcosystemCard from './BaseRepoEcosystemCard'
-import GrowthMaturityDeclineCard from './GrowthMaturityDeclineCard'
-import RiskCard from './RiskCard'
-import ValueCard from './ValueCard'
-import DiversityInclusionCard from './DiversityInclusionCard'
-import GitCard from './GitCard'
-import ExperimentalCard from './ExperimentalCard'
-import DownloadedReposCard from './DownloadedReposCard'
-import LoginForm from './LoginForm'
+import AugurHeader from '../components/AugurHeader.vue'
+import MetricsStatusCard from '../components/MetricsStatusCard.vue'
+import BaseRepoActivityCard from '../components/BaseRepoActivityCard.vue'
+import BaseRepoEcosystemCard from '../components/BaseRepoEcosystemCard.vue'
+import GrowthMaturityDeclineCard from '../components/GrowthMaturityDeclineCard'
+import RiskCard from '../components/RiskCard'
+import ValueCard from '../components/ValueCard'
+import DiversityInclusionCard from '../components/DiversityInclusionCard'
+import GitCard from '../components/GitCard'
+import OverviewCard from '../components/OverviewCard.vue'
+import ExperimentalCard from '../components/ExperimentalCard'
+import DownloadedReposCard from '../components/DownloadedReposCard.vue'
+import MainControls from '../components/MainControls.vue'
+import LoginForm from '../components/LoginForm'
+import ControlsTabs from './ControlsTabs.vue'
 import { mapState } from 'vuex'
 
 module.exports = {
@@ -71,6 +70,77 @@ module.exports = {
     ExperimentalCard,
     DownloadedReposCard,
     LoginForm
+  },
+  created(to, from, next) {
+    if(this.repo || this.groupid){
+      this.$store.commit("resetTab")
+      this.$store.commit('setTab', {
+        tab: this.tab
+      })
+      if (this.$router.history.current.name == "singlegit"){
+        this.$store.commit('setRepo', {
+          gitURL: this.repo
+        })
+      } else if (!this.groupid){
+        if (this.repo.includes('github')) {
+          this.$store.commit('setRepo', {
+            gitURL: this.repo
+          })
+        } else {
+          this.$store.commit('setRepo', {
+            githubURL: this.owner + '/' + this.repo
+          })
+        }
+      }
+      if(this.comparedrepo) { 
+        this.$store.commit('addComparedRepo', {
+          githubURL: this.comparedowner + '/' + this.comparedrepo
+        })
+      }
+      if(this.groupid){
+        let repos = this.groupid.split('+')
+        if (repos[0].includes('github')) {
+          this.$store.commit('setRepo', {
+            gitURL: repos[0]
+          })
+        } else {
+          this.$store.commit('setRepo', {
+            githubURL: repos[0]
+          })
+        }
+        repos.shift()
+        // repos.pop()
+        repos.forEach((cmprepo) => {
+          this.$store.commit('addComparedRepo', {
+            githubURL: cmprepo
+          })
+        })
+      }
+    }
+  },
+  watch: {
+    // comparedRepos: function(){
+    //   localStorage.setItem('group', JSON.stringify(this.$store.state.comparedRepos));
+       
+    //   if (this.gitRepo != null){
+    //     localStorage.setItem('domain', this.domain)
+    //     localStorage.setItem('git', this.$store.state.gitRepo)
+    //   }
+    //   console.log(localStorage.getItem('git'), "this is it") 
+    //   localStorage.setItem('base', this.$store.state.baseRepo)
+      
+    //   if(this.$store.state.comparedRepos.length > 1){
+    //     localStorage.setItem("groupid", this.groupid)
+    //     localStorage.setItem('repo', this.repo)
+    //     localStorage.setItem('owner', this.owner)
+    //   }
+    // },
+    '$route': function (to, from) {
+      console.log(to, from)
+      if (to.path != from.path)
+        // window.location.reload()
+        window.location.replace(to.path)
+    }
   },
   currentTab() {
     return this.$store.state.tab

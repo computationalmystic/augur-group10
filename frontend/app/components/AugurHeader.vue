@@ -39,7 +39,7 @@ module.exports = {
           githubURL: e.target.value
         })
         this.$router.push({
-          name: 'single',
+          name: 'gmd',
           params: {tab: 'gmd', owner: repo.owner, repo: repo.name}
         })
 

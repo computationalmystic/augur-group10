@@ -264,6 +264,7 @@ class Server(object):
         if not self.show_metadata:
 
             if repo_url_base:
+                print('test')
                 kwargs['repo_url'] = str(base64.b64decode(repo_url_base).decode())
                 print(kwargs['repo_url'], repo_url_base, "hello")
 

@@ -1440,7 +1440,7 @@ module.exports = {
           githubURL: e.target.value
         });
         this.$router.push({
-          name: 'single',
+          name: 'gmd',
           params: { tab: 'gmd', owner: repo.owner, repo: repo.name }
         });
       }
@@ -1558,7 +1558,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-2a4aa320", __vue__options__)
   } else {
-    hotAPI.reload("data-v-2a4aa320", __vue__options__)
+    hotAPI.rerender("data-v-2a4aa320", __vue__options__)
   }
 })()}
 });
@@ -1637,7 +1637,7 @@ module.exports = {
 
       this.$router.push({
         name: 'singlegit',
-        params: { tab: 'git', repo: e.url }
+        params: { repo: e.url }
       });
     },
     getDownloadedRepos: function getDownloadedRepos() {
@@ -7565,50 +7565,14 @@ exports['default'] = SvgSaver;
 module.exports = exports['default'];
 });
 
-require.register("router.js", function(exports, require, module) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _AugurCards = require('./components/AugurCards');
-
-var _AugurCards2 = _interopRequireDefault(_AugurCards);
-
-var _GrowthMaturityDeclineCard = require('./components/GrowthMaturityDeclineCard');
-
-var _GrowthMaturityDeclineCard2 = _interopRequireDefault(_GrowthMaturityDeclineCard);
-
-var _ExperimentalCard = require('./components/ExperimentalCard');
-
-var _ExperimentalCard2 = _interopRequireDefault(_ExperimentalCard);
-
-var _vueRouter = require('vue-router');
-
-var _vueRouter2 = _interopRequireDefault(_vueRouter);
-
-var _vue = require('vue');
-
-var _vue2 = _interopRequireDefault(_vue);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_vue2.default.use(_vueRouter2.default);
-
-exports.default = new _vueRouter2.default({
-    routes: [{ path: '/', component: _vue2.default.component('augur-cards', require('./components/AugurCards')) }]
-});
-});
-
-;require.register("router/ControlsTabs.vue", function(exports, require, module) {
+require.register("router/ControlsTabs.vue", function(exports, require, module) {
 ;(function(){
 "use strict";
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"fullwidth"},[_c('augur-header')],1),_vm._v(" "),_c('div',{class:{ hidden: _vm.hasState }},[_c('section',{staticClass:"unmaterialized"},[_vm._m(0),_vm._v(" "),_c('downloaded-repos-card')],1)]),_vm._v(" "),_c('div',{class:{ hidden: !_vm.hasState }},[_c('nav',{staticClass:"tabs"},[_c('ul',[_c('li',{class:{ active: (_vm.currentTab == 'gmd') }},[_c('a',{attrs:{"href":"#","data-value":"gmd"},on:{"click":_vm.changeTab}},[_vm._v("Growth, Maturity, and Decline")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'diversityInclusion') }},[_c('a',{attrs:{"href":"#","data-value":"diversityInclusion"},on:{"click":_vm.changeTab}},[_vm._v("Diversity and Inclusion")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'risk') }},[_c('a',{attrs:{"href":"#","data-value":"risk"},on:{"click":_vm.changeTab}},[_vm._v("Risk")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'value') }},[_c('a',{attrs:{"href":"#","data-value":"value"},on:{"click":_vm.changeTab}},[_vm._v("Value")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'activity') }},[_c('a',{attrs:{"href":"#","data-value":"activity"},on:{"click":_vm.changeTab}},[_vm._v("Activity")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'experimental') }},[_c('a',{attrs:{"href":"#","data-value":"experimental"},on:{"click":_vm.changeTab}},[_vm._v("Experimental")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'git') }},[_c('router-link',{attrs:{"to":{name: 'singlegit', params: {tab: 'git', repo: _vm.e.url}}},nativeOn:{"click":function($event){_vm.open = false}}},[_vm._v("Git")])],1)])]),_vm._v(" "),_c('div',{ref:"cards"},[_c('main-controls'),_vm._v(" "),_vm._t("default")],2)])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"fullwidth"},[_c('augur-header')],1),_vm._v(" "),_c('div',{class:{ hidden: _vm.hasState }},[_c('section',{staticClass:"unmaterialized"},[_vm._m(0),_vm._v(" "),_c('downloaded-repos-card')],1)]),_vm._v(" "),_c('div',{class:{ hidden: !_vm.hasState }},[_c('div',{ref:"cards"},[_c('main-controls'),_vm._v(" "),_c('router-view')],1)])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"collapse"}},[_c('h3',[_vm._v("Downloaded Git Repos by Project")])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -7617,7 +7581,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-49c6bb24", __vue__options__)
   } else {
-    hotAPI.reload("data-v-49c6bb24", __vue__options__)
+    hotAPI.rerender("data-v-49c6bb24", __vue__options__)
   }
 })()}
 });
@@ -7645,27 +7609,167 @@ var _MetricsStatusCard = require('../components/MetricsStatusCard.vue');
 
 var _MetricsStatusCard2 = _interopRequireDefault(_MetricsStatusCard);
 
-var _GitCard = require('../components/GitCard.vue');
+var _BaseRepoActivityCard = require('../components/BaseRepoActivityCard.vue');
 
-var _GitCard2 = _interopRequireDefault(_GitCard);
+var _BaseRepoActivityCard2 = _interopRequireDefault(_BaseRepoActivityCard);
 
-var _ExperimentalCard = require('../components/ExperimentalCard.vue');
+var _BaseRepoEcosystemCard = require('../components/BaseRepoEcosystemCard.vue');
 
-var _ExperimentalCard2 = _interopRequireDefault(_ExperimentalCard);
+var _BaseRepoEcosystemCard2 = _interopRequireDefault(_BaseRepoEcosystemCard);
 
-var _GrowthMaturityDeclineCard = require('../components/GrowthMaturityDeclineCard.vue');
+var _GrowthMaturityDeclineCard = require('../components/GrowthMaturityDeclineCard');
 
 var _GrowthMaturityDeclineCard2 = _interopRequireDefault(_GrowthMaturityDeclineCard);
 
+var _RiskCard = require('../components/RiskCard');
+
+var _RiskCard2 = _interopRequireDefault(_RiskCard);
+
+var _ValueCard = require('../components/ValueCard');
+
+var _ValueCard2 = _interopRequireDefault(_ValueCard);
+
+var _DiversityInclusionCard = require('../components/DiversityInclusionCard');
+
+var _DiversityInclusionCard2 = _interopRequireDefault(_DiversityInclusionCard);
+
+var _GitCard = require('../components/GitCard');
+
+var _GitCard2 = _interopRequireDefault(_GitCard);
+
+var _OverviewCard = require('../components/OverviewCard.vue');
+
+var _OverviewCard2 = _interopRequireDefault(_OverviewCard);
+
+var _ExperimentalCard = require('../components/ExperimentalCard');
+
+var _ExperimentalCard2 = _interopRequireDefault(_ExperimentalCard);
+
+var _DownloadedReposCard = require('../components/DownloadedReposCard');
+
+var _DownloadedReposCard2 = _interopRequireDefault(_DownloadedReposCard);
+
+var _LoginForm = require('../components/LoginForm');
+
+var _LoginForm2 = _interopRequireDefault(_LoginForm);
+
+var _ControlsTabs = require('./ControlsTabs.vue');
+
+var _ControlsTabs2 = _interopRequireDefault(_ControlsTabs);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = [{ path: '/', component: _AugurCards2.default }, { path: '/metrics_status', component: _MetricsStatusCard2.default },
-// {path: '/:tab/:owner/:repo', component: AugurCards, name: 'single'},
-{ path: '/single/:tab/:owner?/:repo', component: _AugurCards2.default, name: 'single', props: true, canReuse: false }, { path: '/singlegit/:tab/:repo', component: _AugurCards2.default, name: 'singlegit', props: true, canReuse: false },
+var routes = [{ path: '/', component: _AugurCards2.default }, { path: '/login', component: _LoginForm2.default }, { path: '/metrics_status', component: _MetricsStatusCard2.default }, { path: '/single/:owner?/:repo', component: _ControlsTabs2.default, name: 'single', props: true, canReuse: false,
+  children: [{
+    path: "gmd",
+    name: "gmd",
+    component: _GrowthMaturityDeclineCard2.default
+  }, {
+    path: "diversityinclusion",
+    name: "diversityinclusion",
+    component: _DiversityInclusionCard2.default
+  }, {
+    path: "risk",
+    name: "risk",
+    component: _RiskCard2.default
+  }, {
+    path: "/value",
+    name: "value",
+    component: _ValueCard2.default
+  }, {
+    path: "/experiemental",
+    name: "experiemental",
+    component: _ExperimentalCard2.default
+  }]
+}, { path: '/singlegit/:repo', component: _ControlsTabs2.default, name: 'singlegit', props: true, canReuse: false,
+  children: [{
+    path: "/gmd",
+    name: "gmd",
+    component: _GrowthMaturityDeclineCard2.default
+  }, {
+    path: "/diversityinclusion",
+    name: "diversityinclusion",
+    component: _DiversityInclusionCard2.default
+  }, {
+    path: "/risk",
+    name: "risk",
+    component: _RiskCard2.default
+  }, {
+    path: "/value",
+    name: "value",
+    component: _ValueCard2.default
+  }, {
+    path: "/experiemental",
+    name: "experiemental",
+    component: _ExperimentalCard2.default
+  }, {
+    path: "/git",
+    name: "git",
+    component: _GitCard2.default
+  }, {
+    path: "/overview",
+    name: "overview",
+    component: _OverviewCard2.default
+  }]
+},
 // {path: '/:tab/:domain/:owner/:repo/comparedto/:comparedowner/:comparedrepo', component: AugurCards, name: 'gitsinglecompare'},
-{ path: '/compare/:tab/:owner?/:repo/:domain?/comparedto/:comparedowner/:comparedrepo/:compareddomain?', component: _AugurCards2.default, name: 'singlecompare', props: true, canReuse: false },
-// {path: '/:tab/:owner/:repo/comparedto/:comparedowner/:comparedrepo', component: AugurCards, name: 'singlecompare'},
-{ path: '/groupcompare/:tab/:groupid', component: _AugurCards2.default, name: 'group', props: true, canReuse: false }];
+{ path: '/compare/:owner?/:repo/:domain?/comparedto/:comparedowner/:comparedrepo/:compareddomain?', component: _ControlsTabs2.default, name: 'singlecompare', props: true, canReuse: false,
+  children: [{
+    path: "/gmd",
+    name: "gmd",
+    component: _GrowthMaturityDeclineCard2.default
+  }, {
+    path: "/diversityinclusion",
+    name: "diversityinclusion",
+    component: _DiversityInclusionCard2.default
+  }, {
+    path: "/risk",
+    name: "risk",
+    component: _RiskCard2.default
+  }, {
+    path: "/value",
+    name: "value",
+    component: _ValueCard2.default
+  }, {
+    path: "/experiemental",
+    name: "experiemental",
+    component: _ExperimentalCard2.default
+  }, {
+    path: "/git",
+    name: "git",
+    component: _GitCard2.default
+  }]
+}, { path: '/groupcompare/:groupid', component: _ControlsTabs2.default, name: 'group', props: true, canReuse: false,
+  children: [{
+    path: "/gmd",
+    name: "gmd",
+    component: _GrowthMaturityDeclineCard2.default
+  }, {
+    path: "/diversityinclusion",
+    name: "diversityinclusion",
+    component: _DiversityInclusionCard2.default
+  }, {
+    path: "/risk",
+    name: "risk",
+    component: _RiskCard2.default
+  }, {
+    path: "/value",
+    name: "value",
+    component: _ValueCard2.default
+  }, {
+    path: "/experiemental",
+    name: "experiemental",
+    component: _ExperimentalCard2.default
+  }, {
+    path: "/git",
+    name: "git",
+    component: _GitCard2.default
+  }, {
+    path: "/overview",
+    name: "overview",
+    component: _OverviewCard2.default
+  }]
+}];
 var downloadedRepos = [],
     repos = [],
     projects = [];

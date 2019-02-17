@@ -49,7 +49,7 @@ module.exports = {
 
       this.$router.push({
         name: 'singlegit',
-        params: {tab: 'git', repo: e.url}
+        params: {repo: e.url}
       })
     },
     getDownloadedRepos() {
