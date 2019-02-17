@@ -1167,7 +1167,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = {
   name: "app",
   components: {
-    'augur-header': _AugurHeader2.default,
+    AugurHeader: _AugurHeader2.default,
     'augur-cards': _AugurCards2.default
 
   }
@@ -1441,7 +1441,7 @@ module.exports = {
         });
         this.$router.push({
           name: 'gmd',
-          params: { tab: 'gmd', owner: repo.owner, repo: repo.name }
+          params: { owner: repo.owner, repo: repo.name }
         });
       }
     }
@@ -1558,7 +1558,28 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-2a4aa320", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-2a4aa320", __vue__options__)
+    hotAPI.reload("data-v-2a4aa320", __vue__options__)
+  }
+})()}
+});
+
+;require.register("components/ControlsTabs.vue", function(exports, require, module) {
+;(function(){
+"use strict";
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"fullwidth"},[_c('router-view',{attrs:{"name":"header"}})],1),_vm._v(" "),_c('router-view',{attrs:{"name":"tabs"}}),_vm._v(" "),_c('div',{ref:"cards"},[_c('router-view',{attrs:{"name":"controls"}}),_vm._v(" "),_c('router-view',{attrs:{"name":"content"}})],1)],1)}
+__vue__options__.staticRenderFns = []
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83d8c77e", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-83d8c77e", __vue__options__)
   }
 })()}
 });
@@ -1663,7 +1684,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row section"},[_c('hr'),_vm._v(" "),_c('div',{staticClass:"col col-12 relative spinner loader",staticStyle:{"margin-left":"42.4%"}}),_vm._v(" "),_vm._l((_vm.projects),function(project){return _c('div',{staticClass:"col-6"},[_c('h4',[_vm._v(_vm._s(project))]),_vm._v(" "),_c('div',{staticClass:"repo-link-holder"},[_c('table',{staticClass:"is-responsive"},[_vm._m(0,true),_vm._v(" "),_c('tbody',{staticClass:"repo-link-table repo-link-table-body"},_vm._l((_vm.repos[project]),function(repo){return _c('tr',[_c('td',[_c('a',{attrs:{"href":"#"},on:{"click":function($event){_vm.onGitRepo(repo)}}},[_vm._v(_vm._s(repo.url))])]),_vm._v(" "),_c('td',[_vm._v(_vm._s(repo.status))])])}))])])])})],2)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"unmaterialized"},[_c('div',{staticClass:"row section"},[_c('h3',[_vm._v("Downloaded Git Repos by Project")]),_vm._v(" "),_c('hr'),_vm._v(" "),_c('div',{staticClass:"col col-12 relative spinner loader",staticStyle:{"margin-left":"42.4%"}}),_vm._v(" "),_vm._l((_vm.projects),function(project){return _c('div',{staticClass:"col-6"},[_c('h4',[_vm._v(_vm._s(project))]),_vm._v(" "),_c('div',{staticClass:"repo-link-holder"},[_c('table',{staticClass:"is-responsive"},[_vm._m(0,true),_vm._v(" "),_c('tbody',{staticClass:"repo-link-table repo-link-table-body"},_vm._l((_vm.repos[project]),function(repo){return _c('tr',[_c('td',[_c('a',{attrs:{"href":"#"},on:{"click":function($event){_vm.onGitRepo(repo)}}},[_vm._v(_vm._s(repo.url))])]),_vm._v(" "),_c('td',[_vm._v(_vm._s(repo.status))])])}))])])])})],2)])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('thead',{staticClass:"repo-link-table repo-link-table-body"},[_c('tr',[_c('th',[_vm._v("URL")]),_vm._v(" "),_c('th',[_vm._v("Status")])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -2440,6 +2461,63 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.createRecord("data-v-0abc386c", __vue__options__)
   } else {
     hotAPI.reload("data-v-0abc386c", __vue__options__)
+  }
+})()}
+});
+
+;require.register("components/Tabs.vue", function(exports, require, module) {
+;(function(){
+'use strict';
+
+module.exports = {
+  computed: {
+    gitRepo: function gitRepo() {
+      return this.$store.state.gitRepo;
+    }
+  },
+  methods: {
+    changeTab: function changeTab(e) {
+
+      var repo = this.repo;
+
+      if (this.$store.state.comparedRepos.length == 1) {
+        this.$router.push({
+          name: 'singlecompare',
+          params: { tab: e.target.dataset['value'], owner: this.owner, repo: this.repo, comparedowner: this.comparedowner, comparedrepo: this.comparedrepo }
+        });
+      } else if (this.$store.state.comparedRepos.length > 1) {
+        this.$router.push({
+          name: 'group',
+          params: { tab: e.target.dataset['value'], groupid: this.groupid }
+        });
+      } else if (this.$router.history.current.name == "singlegit") {
+        this.$router.push({
+          name: 'singlegit',
+          params: { tab: e.target.dataset['value'], repo: this.repo }
+        });
+      } else {
+        this.$router.push({
+          name: 'single',
+          params: { tab: e.target.dataset['value'], owner: this.owner, repo: this.repo }
+        });
+      }
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',{staticClass:"tabs"},[_c('ul',[_c('li',{class:{ active: (_vm.currentTab == 'gmd') }},[_c('a',{attrs:{"href":"#","data-value":"gmd"},on:{"click":_vm.changeTab}},[_vm._v("Growth, Maturity, and Decline")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'diversityInclusion') }},[_c('a',{attrs:{"href":"#","data-value":"diversityInclusion"},on:{"click":_vm.changeTab}},[_vm._v("Diversity and Inclusion")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'risk') }},[_c('a',{attrs:{"href":"#","data-value":"risk"},on:{"click":_vm.changeTab}},[_vm._v("Risk")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'value') }},[_c('a',{attrs:{"href":"#","data-value":"value"},on:{"click":_vm.changeTab}},[_vm._v("Value")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'activity') }},[_c('a',{attrs:{"href":"#","data-value":"activity"},on:{"click":_vm.changeTab}},[_vm._v("Activity")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'experimental') }},[_c('a',{attrs:{"href":"#","data-value":"experimental"},on:{"click":_vm.changeTab}},[_vm._v("Experimental")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'git'), hidden: !_vm.gitRepo }},[_c('a',{attrs:{"href":"#","data-value":"git"},on:{"click":_vm.changeTab}},[_vm._v("Git")])]),_vm._v(" "),_c('li',{class:{ active: (_vm.currentTab == 'overview'), hidden: !_vm.gitRepo }},[_c('a',{attrs:{"href":"#","data-value":"overview"},on:{"click":_vm.changeTab}},[_vm._v("Overview")])])])])}
+__vue__options__.staticRenderFns = []
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-004f2c6b", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-004f2c6b", __vue__options__)
   }
 })()}
 });
@@ -7572,8 +7650,8 @@ require.register("router/ControlsTabs.vue", function(exports, require, module) {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"fullwidth"},[_c('augur-header')],1),_vm._v(" "),_c('div',{class:{ hidden: _vm.hasState }},[_c('section',{staticClass:"unmaterialized"},[_vm._m(0),_vm._v(" "),_c('downloaded-repos-card')],1)]),_vm._v(" "),_c('div',{class:{ hidden: !_vm.hasState }},[_c('div',{ref:"cards"},[_c('main-controls'),_vm._v(" "),_c('router-view')],1)])])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"collapse"}},[_c('h3',[_vm._v("Downloaded Git Repos by Project")])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"fullwidth"},[_c('augur-header')],1)])}
+__vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -7581,7 +7659,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-49c6bb24", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-49c6bb24", __vue__options__)
+    hotAPI.reload("data-v-49c6bb24", __vue__options__)
   }
 })()}
 });
@@ -7645,7 +7723,7 @@ var _ExperimentalCard = require('../components/ExperimentalCard');
 
 var _ExperimentalCard2 = _interopRequireDefault(_ExperimentalCard);
 
-var _DownloadedReposCard = require('../components/DownloadedReposCard');
+var _DownloadedReposCard = require('../components/DownloadedReposCard.vue');
 
 var _DownloadedReposCard2 = _interopRequireDefault(_DownloadedReposCard);
 
@@ -7653,121 +7731,220 @@ var _LoginForm = require('../components/LoginForm');
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
-var _ControlsTabs = require('./ControlsTabs.vue');
+var _ControlsTabs = require('../components/ControlsTabs.vue');
 
 var _ControlsTabs2 = _interopRequireDefault(_ControlsTabs);
 
+var _MainControls = require('../components/MainControls.vue');
+
+var _MainControls2 = _interopRequireDefault(_MainControls);
+
+var _AugurHeader = require('../components/AugurHeader.vue');
+
+var _AugurHeader2 = _interopRequireDefault(_AugurHeader);
+
+var _Tabs = require('../components/Tabs.vue');
+
+var _Tabs2 = _interopRequireDefault(_Tabs);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = [{ path: '/', component: _AugurCards2.default }, { path: '/login', component: _LoginForm2.default }, { path: '/metrics_status', component: _MetricsStatusCard2.default }, { path: '/single/:owner?/:repo', component: _ControlsTabs2.default, name: 'single', props: true, canReuse: false,
+var routes = [{ path: '/', component: _ControlsTabs2.default,
+  children: [{
+    path: "",
+    name: "reposcard",
+    components: {
+      header: _AugurHeader2.default,
+      content: _DownloadedReposCard2.default
+    }
+  }]
+}, { path: '/login', component: _LoginForm2.default }, { path: '/metrics_status',
+  components: {
+    header: _AugurHeader2.default,
+    content: _MainControls2.default
+  }
+}, { path: '/single/:owner?/:repo', name: 'single', props: true, canReuse: false, components: {
+    header: _AugurHeader2.default,
+    tabs: _Tabs2.default,
+    ControlsTabs: _MainControls2.default
+  },
   children: [{
     path: "gmd",
     name: "gmd",
-    component: _GrowthMaturityDeclineCard2.default
+    components: {
+      content: _GrowthMaturityDeclineCard2.default
+    }
   }, {
     path: "diversityinclusion",
     name: "diversityinclusion",
-    component: _DiversityInclusionCard2.default
+    components: {
+      content: _DiversityInclusionCard2.default
+    }
   }, {
     path: "risk",
     name: "risk",
-    component: _RiskCard2.default
+    components: {
+      content: _RiskCard2.default
+    }
   }, {
     path: "/value",
     name: "value",
-    component: _ValueCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _ValueCard2.default
+    }
   }, {
     path: "/experiemental",
     name: "experiemental",
-    component: _ExperimentalCard2.default
-  }]
-}, { path: '/singlegit/:repo', component: _ControlsTabs2.default, name: 'singlegit', props: true, canReuse: false,
-  children: [{
-    path: "/gmd",
-    name: "gmd",
-    component: _GrowthMaturityDeclineCard2.default
-  }, {
-    path: "/diversityinclusion",
-    name: "diversityinclusion",
-    component: _DiversityInclusionCard2.default
-  }, {
-    path: "/risk",
-    name: "risk",
-    component: _RiskCard2.default
-  }, {
-    path: "/value",
-    name: "value",
-    component: _ValueCard2.default
-  }, {
-    path: "/experiemental",
-    name: "experiemental",
-    component: _ExperimentalCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _ExperimentalCard2.default
+    }
   }, {
     path: "/git",
     name: "git",
-    component: _GitCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _GitCard2.default
+    }
   }, {
     path: "/overview",
     name: "overview",
-    component: _OverviewCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _OverviewCard2.default
+    }
   }]
 },
 // {path: '/:tab/:domain/:owner/:repo/comparedto/:comparedowner/:comparedrepo', component: AugurCards, name: 'gitsinglecompare'},
 { path: '/compare/:owner?/:repo/:domain?/comparedto/:comparedowner/:comparedrepo/:compareddomain?', component: _ControlsTabs2.default, name: 'singlecompare', props: true, canReuse: false,
   children: [{
-    path: "/gmd",
+    path: "gmd",
     name: "gmd",
-    component: _GrowthMaturityDeclineCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _GrowthMaturityDeclineCard2.default
+    }
   }, {
-    path: "/diversityinclusion",
+    path: "diversityinclusion",
     name: "diversityinclusion",
-    component: _DiversityInclusionCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _DiversityInclusionCard2.default
+    }
   }, {
-    path: "/risk",
+    path: "risk",
     name: "risk",
-    component: _RiskCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _RiskCard2.default
+    }
   }, {
     path: "/value",
     name: "value",
-    component: _ValueCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _ValueCard2.default
+    }
   }, {
     path: "/experiemental",
     name: "experiemental",
-    component: _ExperimentalCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _ExperimentalCard2.default
+    }
   }, {
     path: "/git",
     name: "git",
-    component: _GitCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _GitCard2.default
+    }
   }]
 }, { path: '/groupcompare/:groupid', component: _ControlsTabs2.default, name: 'group', props: true, canReuse: false,
   children: [{
-    path: "/gmd",
+    path: "gmd",
     name: "gmd",
-    component: _GrowthMaturityDeclineCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _GrowthMaturityDeclineCard2.default
+    }
   }, {
-    path: "/diversityinclusion",
+    path: "diversityinclusion",
     name: "diversityinclusion",
-    component: _DiversityInclusionCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _DiversityInclusionCard2.default
+    }
   }, {
-    path: "/risk",
+    path: "risk",
     name: "risk",
-    component: _RiskCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _RiskCard2.default
+    }
   }, {
     path: "/value",
     name: "value",
-    component: _ValueCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _ValueCard2.default
+    }
   }, {
     path: "/experiemental",
     name: "experiemental",
-    component: _ExperimentalCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _ExperimentalCard2.default
+    }
   }, {
     path: "/git",
     name: "git",
-    component: _GitCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _GitCard2.default
+    }
   }, {
     path: "/overview",
     name: "overview",
-    component: _OverviewCard2.default
+    components: {
+      header: _AugurHeader2.default,
+      tabs: _Tabs2.default,
+      controls: _MainControls2.default,
+      content: _OverviewCard2.default
+    }
   }]
 }];
 var downloadedRepos = [],

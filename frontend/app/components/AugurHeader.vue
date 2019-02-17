@@ -40,7 +40,7 @@ module.exports = {
         })
         this.$router.push({
           name: 'gmd',
-          params: {tab: 'gmd', owner: repo.owner, repo: repo.name}
+          params: {owner: repo.owner, repo: repo.name}
         })
 
       }

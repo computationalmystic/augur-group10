@@ -21,7 +21,7 @@ import ExperimentalCard from './ExperimentalCard'
 module.exports = {
   name: "app",
   components: {
-    'augur-header': AugurHeader,
+    AugurHeader,
     'augur-cards': AugurCards,
   
   }

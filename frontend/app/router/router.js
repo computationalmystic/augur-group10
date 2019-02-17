@@ -11,80 +11,102 @@ import DiversityInclusionCard from '../components/DiversityInclusionCard'
 import GitCard from '../components/GitCard'
 import OverviewCard from '../components/OverviewCard.vue'
 import ExperimentalCard from '../components/ExperimentalCard'
-import DownloadedReposCard from '../components/DownloadedReposCard'
+import DownloadedReposCard from '../components/DownloadedReposCard.vue'
 import LoginForm from '../components/LoginForm'
-import ControlsTabs from './ControlsTabs.vue'
+import ControlsTabs from '../components/ControlsTabs.vue'
+import MainControls from '../components/MainControls.vue'
+import AugurHeader from '../components/AugurHeader.vue'
+import Tabs from '../components/Tabs.vue'
+
+
 
 let routes = [
-      {path: '/', component: AugurCards},
+      {path: '/', component: ControlsTabs,
+        children: [
+          {
+            path: "",
+            name: "reposcard",
+            components: {
+              header: AugurHeader,
+              content: DownloadedReposCard
+            }
+          },
+        ]
+      },
       {path: '/login', component: LoginForm},
-      {path: '/metrics_status', component: MetricsStatusCard},
+      {path: '/metrics_status', 
+        components: {
+          header: AugurHeader,
+          content: MainControls
+        }
+      },
       
-      {path: '/single/:owner?/:repo', component: ControlsTabs, name: 'single', props: true, canReuse: false, 
+      {path: '/single/:owner?/:repo', name: 'single', props: true, canReuse: false, components: {
+        header: AugurHeader,
+        tabs: Tabs,
+        ControlsTabs: MainControls,
+      },
         children: [
           {
             path: "gmd",
             name: "gmd",
-            component: GrowthMaturityDeclineCard
+            components: {
+              content: GrowthMaturityDeclineCard
+            }
           },
           {
             path: "diversityinclusion",
             name: "diversityinclusion",
-            component: DiversityInclusionCard
+            components: {
+              content: DiversityInclusionCard
+            }
           },
           {
             path: "risk",
             name: "risk",
-            component: RiskCard
+            components: {
+              content: RiskCard
+            }
           },
           {
             path: "/value",
             name: "value",
-            component: ValueCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: ValueCard
+            }
           },
           {
             path: "/experiemental",
             name: "experiemental",
-            component: ExperimentalCard
-          },
-        ]
-      },
-      {path: '/singlegit/:repo', component: ControlsTabs, name: 'singlegit', props: true, canReuse: false,
-        children: [
-          {
-            path: "/gmd",
-            name: "gmd",
-            component: GrowthMaturityDeclineCard
-          },
-          {
-            path: "/diversityinclusion",
-            name: "diversityinclusion",
-            component: DiversityInclusionCard
-          },
-          {
-            path: "/risk",
-            name: "risk",
-            component: RiskCard
-          },
-          {
-            path: "/value",
-            name: "value",
-            component: ValueCard
-          },
-          {
-            path: "/experiemental",
-            name: "experiemental",
-            component: ExperimentalCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: ExperimentalCard
+            }
           },
           {
             path: "/git",
             name: "git",
-            component: GitCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: GitCard
+            }
           },
           {
             path: "/overview",
             name: "overview",
-            component: OverviewCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: OverviewCard
+            }
           },
         ]
       },
@@ -92,73 +114,138 @@ let routes = [
       {path: '/compare/:owner?/:repo/:domain?/comparedto/:comparedowner/:comparedrepo/:compareddomain?', component: ControlsTabs, name: 'singlecompare', props: true, canReuse: false,
         children: [
           {
-            path: "/gmd",
+            path: "gmd",
             name: "gmd",
-            component: GrowthMaturityDeclineCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: GrowthMaturityDeclineCard
+            }
           },
           {
-            path: "/diversityinclusion",
+            path: "diversityinclusion",
             name: "diversityinclusion",
-            component: DiversityInclusionCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: DiversityInclusionCard
+            }
           },
           {
-            path: "/risk",
+            path: "risk",
             name: "risk",
-            component: RiskCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: RiskCard
+            }
           },
           {
             path: "/value",
             name: "value",
-            component: ValueCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: ValueCard
+            }
           },
           {
             path: "/experiemental",
             name: "experiemental",
-            component: ExperimentalCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: ExperimentalCard
+            }
           },
           {
             path: "/git",
             name: "git",
-            component: GitCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: GitCard
+            }
           },
         ]
       },
       {path: '/groupcompare/:groupid', component: ControlsTabs, name: 'group', props: true, canReuse: false,
         children: [
           {
-            path: "/gmd",
+            path: "gmd",
             name: "gmd",
-            component: GrowthMaturityDeclineCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: GrowthMaturityDeclineCard
+            }
           },
           {
-            path: "/diversityinclusion",
+            path: "diversityinclusion",
             name: "diversityinclusion",
-            component: DiversityInclusionCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: DiversityInclusionCard
+            }
           },
           {
-            path: "/risk",
+            path: "risk",
             name: "risk",
-            component: RiskCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: RiskCard
+            }
           },
           {
             path: "/value",
             name: "value",
-            component: ValueCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: ValueCard
+            }
           },
           {
             path: "/experiemental",
             name: "experiemental",
-            component: ExperimentalCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: ExperimentalCard
+            }
           },
           {
             path: "/git",
             name: "git",
-            component: GitCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: GitCard
+            }
           },
           {
             path: "/overview",
             name: "overview",
-            component: OverviewCard
+            components: {
+              header: AugurHeader,
+              tabs: Tabs,
+              controls: MainControls,
+              content: OverviewCard
+            }
           },
         ]
       },

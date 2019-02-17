@@ -2,11 +2,11 @@
    
   <div>
     <div class="fullwidth">
-      <!-- <router-view name="header"></router-view> -->
-      <augur-header></augur-header>
+      <router-view name="header"></router-view>
+      <!-- <augur-header></augur-header> -->
     </div>
 
-    <!-- <router-view name="tabs"></router-view>
+    <router-view name="tabs"></router-view>
 
     <div ref="cards">
 
@@ -14,25 +14,25 @@
 
       <router-view name="content"></router-view>
 
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
-import MainControls from './MainControls'
-import AugurHeader from './AugurHeader'
-import MetricsStatusCard from './MetricsStatusCard'
-import BaseRepoActivityCard from './BaseRepoActivityCard'
-import BaseRepoEcosystemCard from './BaseRepoEcosystemCard'
-import GrowthMaturityDeclineCard from './GrowthMaturityDeclineCard'
-import RiskCard from './RiskCard'
-import ValueCard from './ValueCard'
-import DiversityInclusionCard from './DiversityInclusionCard'
-import GitCard from './GitCard'
-import OverviewCard from './OverviewCard.vue'
-import ExperimentalCard from './ExperimentalCard'
-import DownloadedReposCard from './DownloadedReposCard'
-import LoginForm from './LoginForm'
+import AugurHeader from '../components/AugurHeader.vue'
+import MetricsStatusCard from '../components/MetricsStatusCard.vue'
+import BaseRepoActivityCard from '../components/BaseRepoActivityCard.vue'
+import BaseRepoEcosystemCard from '../components/BaseRepoEcosystemCard.vue'
+import GrowthMaturityDeclineCard from '../components/GrowthMaturityDeclineCard'
+import RiskCard from '../components/RiskCard'
+import ValueCard from '../components/ValueCard'
+import DiversityInclusionCard from '../components/DiversityInclusionCard'
+import GitCard from '../components/GitCard'
+import OverviewCard from '../components/OverviewCard.vue'
+import ExperimentalCard from '../components/ExperimentalCard'
+import DownloadedReposCard from '../components/DownloadedReposCard.vue'
+import MainControls from '../components/MainControls.vue'
+import LoginForm from '../components/LoginForm'
 import { mapState } from 'vuex'
 
 module.exports = {
