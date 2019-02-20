@@ -287,7 +287,7 @@ class Facade(object):
 
 
         contributionsByTimeIntervalSQL = s.sql.text("""
-            SELECT sum(cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, 
+            SELECT name, sum(cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, 
             sum(IFNULL(added, 0)) as added, sum(IFNULL(removed, 0)) as removed, sum(IFNULL(whitespace, 0)) as whitespace, 
             IFNULL(patches, 0) as commits, a.month, IFNULL(year, :year) as year
             FROM (select month from repo_monthly_cache group by month) a 

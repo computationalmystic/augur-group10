@@ -208,8 +208,37 @@ def create_routes(server):
         repo_url_base = request.args.get('repo_url_base')
 
         year = request.args.get('year')
+        interval = request.args.get('interval')
 
-        data = server.transform(facade.contributions_by_time_interval, args=([]), repo_url_base=repo_url_base, kwargs=({'year': year}))
+        data = server.transform(facade.contributions_by_time_interval, args=([]), repo_url_base=repo_url_base, kwargs=({'year': year, 'interval': interval}))
+
+        return Response(response=data,
+                       status=200,
+                       mimetype="application/json")
+
+    @server.app.route('/{}/git/outside_contributions_by_time_interval'.format(server.api_version))
+    def outside_contributions_by_time_interval():
+
+        repo_url_base = request.args.get('repo_url_base')
+
+        year = request.args.get('year')
+        interval = request.args.get('interval')
+
+        data = server.transform(facade.outside_contributions_by_time_interval, args=([]), repo_url_base=repo_url_base, kwargs=({'year': year, 'interval': interval}))
+
+        return Response(response=data,
+                       status=200,
+                       mimetype="application/json")
+
+    @server.app.route('/{}/git/project_wide_contributions_by_time_interval'.format(server.api_version))
+    def project_wide_contributions_by_time_interval():
+
+        repo_url_base = request.args.get('repo_url_base')
+
+        year = request.args.get('year')
+        interval = request.args.get('interval')
+
+        data = server.transform(facade.project_wide_contributions_by_time_interval, args=([]), repo_url_base=repo_url_base, kwargs=({'year': year, 'interval': interval}))
 
         return Response(response=data,
                        status=200,
