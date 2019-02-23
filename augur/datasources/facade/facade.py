@@ -145,19 +145,29 @@ class Facade(object):
         results = pd.read_sql(commitsByMonthSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-    @annotate(tag='top-new-repos-this-year-commits')
-    def top_new_repos_commits(self, repo_url, timeframe=None):
+    # cd - code
+    # rg - repo group
+    # tp - time period (fixed time period)
+    # interval
+    # ranked - ordered top to bottom
+    # commits
+    # loc - lines of code
+    # rep - repo
+    # ua - unaffiliated
+
+    @annotate(tag='cd-rg-newrep-ranked-commits')
+    def cd_rg_newrep_ranked_commits(self, repo_url, calendar_year=None, repo_group=None):
         """
         Returns top new repos this year by commits
 
 
         """
-        if timeframe == None:
-            timeframe == 'year'
+        if calendar_year == None:
+            calendar_year == 'year'
 
         
 
-        topNewReposCommits = s.sql.text("""
+        cdRgNewrepRankedCommitsSQL = s.sql.text("""
            SELECT repos_id, sum(cast(repo_monthly_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
            FROM repo_monthly_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
@@ -171,23 +181,23 @@ class Facade(object):
            ORDER BY net desc
            LIMIT 10
         """)
-        results = pd.read_sql(topNewReposCommits, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        results = pd.read_sql(cdRgNewrepRankedCommitsSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-    @annotate(tag='top-new-repos-this-year-lines-of-code')
-    def top_new_repos_lines_of_code(self, repo_url, timeframe=None):
+    @annotate(tag='cd-rg-newrep-ranked-loc')
+    def cd_rg_newrep_ranked_loc(self, repo_url, calendar_year=None, repo_group=None):
         """
         Returns top new repos this year by lines of code
 
 
         """       
 
-        if timeframe == None:
-            timeframe = 'year'
+        if calendar_year == None:
+            calendar_year = 'year'
 
-        topNewReposLines = None
+        cdRgNewrepRankedLocSQL = None
         if timeframe == 'year':
-            topNewReposLines = s.sql.text("""
+            cdRgNewrepRankedLocSQL = s.sql.text("""
                 SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
                FROM repo_annual_cache, projects, repos
                where projects.name = (SELECT projects.name FROM repos, projects
@@ -202,7 +212,7 @@ class Facade(object):
                LIMIT 10
             """)
         elif timeframe == 'month':
-            topNewReposLines = s.sql.text("""
+            cdRgNewrepRankedLocSQL = s.sql.text("""
                 SELECT repos_id, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches, projects.name
                FROM repo_annual_cache, projects, repos
                where projects.name = (SELECT projects.name FROM repos, projects
@@ -216,18 +226,18 @@ class Facade(object):
                ORDER BY net desc
                LIMIT 10
             """)
-        results = pd.read_sql(topNewReposLines, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        results = pd.read_sql(cdRgNewrepRankedLocSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-    @annotate(tag='top-repos-commits')
-    def top_repos_commits(self, repo_url):
+    @annotate(tag='cd-rg-tp-ranked-commits')
+    def cd_rg_tp_ranked_commits(self, repo_url, calendar_year=None, repo_group=None):
         """
         Returns top new repos of all time by commits within given repo's organization
 
 
         """       
 
-        topNewReposCommits = s.sql.text("""
+        cdRgTpRankedCommitsSQL = s.sql.text("""
            SELECT repos_id, repos.name as name, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches
            FROM repo_annual_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
@@ -240,21 +250,21 @@ class Facade(object):
            ORDER BY net desc
            LIMIT 10
         """)
-        results = pd.read_sql(topNewReposCommits, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        results = pd.read_sql(cdRgTpRankedCommitsSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-    @annotate(tag='top-repos-lines-of-code')
-    def top_repos_lines_of_code(self, repo_url, timeframe=None):
+    @annotate(tag='cd-rg-tp-ranked-loc')
+    def cd_rg_tp_ranked_loc(self, repo_url, calendar_year=None, repo_group=None):
         """
         Returns top new repos of all time by lines of code within given repo's organization
 
         :param limit: number of repos the user wishes to display
         """
 
-        if timeframe == None:
-            timeframe == 'year'
+        if calendar_year == None:
+            calendar_year == 'year'
 
-        topNewReposLines = s.sql.text("""
+        cdRgTpRankedLocSQL = s.sql.text("""
             SELECT repos_id, repos.name as name, sum(cast(repo_annual_cache.added as signed) - cast(removed as signed) - cast(whitespace as signed)) as net, patches
            FROM repo_annual_cache, projects, repos
            where projects.name = (SELECT projects.name FROM repos, projects
@@ -267,11 +277,11 @@ class Facade(object):
            ORDER BY net desc
            LIMIT 10
         """)
-        results = pd.read_sql(topNewReposLines, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        results = pd.read_sql(cdRgTpRankedLocSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-    @annotate(tag='contributions-by-time-interval')
-    def contributions_by_time_interval(self, repo_url, year=None, interval=None):
+    @annotate(tag='cd-rep-tp-interval-loc-commits')
+    def cd_rep_tp_interval_loc_commits(self, repo_url, year=None, interval=None, repo_group=None):
         """
         Returns commits and lines of code data for a given time interval throughout the current or a given year
 
@@ -286,7 +296,7 @@ class Facade(object):
 
 
 
-        contributionsByTimeIntervalSQL = s.sql.text("""
+        cdRepTpIntervalLocCommitsSQL = s.sql.text("""
             SELECT name, sum(cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, 
             sum(IFNULL(added, 0)) as added, sum(IFNULL(removed, 0)) as removed, sum(IFNULL(whitespace, 0)) as whitespace, 
             IFNULL(patches, 0) as commits, a.month, IFNULL(year, :year) as year
@@ -300,11 +310,11 @@ class Facade(object):
             ON a.month = b.month
             GROUP BY month
         """)
-        results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url), 'year': year})
+        results = pd.read_sql(cdRepTpIntervalLocCommitsSQL, self.db, params={"repourl": '%{}%'.format(repo_url), 'year': year})
         return results
 
-    @annotate(tag='new-repos-added-by-time-period')
-    def new_repos_added_by_time_period(self, repo_url, year, interval):
+    @annotate(tag='cd-rep-tp-interval-loc-commits-ua')
+    def cd_rep_tp_interval_loc_commits_ua(self, repo_url, year=None, interval=None, repo_group=None):
         """
         Returns commits and lines of code data for a given time interval throughout the current or a given year
 
@@ -312,29 +322,7 @@ class Facade(object):
         :param interval: 
         """
 
-        contributionsByTimeIntervalSQL = s.sql.text("""
-            SELECT repos.name AS repo
-            FROM repos
-            WHERE repos.projects_id = (SELECT projects.id FROM repos, projects 
-            WHERE git LIKE 'https://review.gluster.org/gluster-swift' 
-            and repos.projects_id = projects.id
-            LIMIT 1)
-            AND YEAR(repos.added) = :year
-            ORDER BY repo ASC
-        """)
-        results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
-        return results
-
-    @annotate(tag='outside-contributions-by-time-interval')
-    def outside_contributions_by_time_interval(self, repo_url, year, interval):
-        """
-        Returns commits and lines of code data for a given time interval throughout the current or a given year
-
-        :param year: 
-        :param interval: 
-        """
-
-        contributionsByTimeIntervalSQL = s.sql.text("""
+        cdRepTpIntervalLocCommitsUaSQL = s.sql.text("""
             SELECT added, whitespace, removed, (cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, patches, a.month, affiliation 
             FROM (SELECT month FROM repo_monthly_cache GROUP BY month) a 
             LEFT JOIN
@@ -353,11 +341,11 @@ class Facade(object):
             ) b ON a.month = b.month
             ORDER BY month
         """)
-        results = pd.read_sql(contributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        results = pd.read_sql(cdRepTpIntervalLocCommitsUaSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
-    @annotate(tag='outside-contributions-by-time-interval')
-    def project_wide_contributions_by_time_interval(self, repo_url, year, interval):
+    @annotate(tag='cd-rg-tp-interval-loc-commits')
+    def cd_rg_tp_interval_loc_commits(self, repo_url, year=None, interval=None, repo_group=None):
         """
         Returns commits and lines of code data for a given time interval throughout the current or a given year
 
@@ -365,7 +353,7 @@ class Facade(object):
         :param interval: 
         """
 
-        projectWideContributionsByTimeIntervalSQL = s.sql.text("""
+        cdRgTpIntervalLocCommitsSQL = s.sql.text("""
             SELECT name, added, whitespace, removed, (cast(IFNULL(added, 0) as signed) - cast(IFNULL(removed, 0) as signed) - cast(IFNULL(whitespace, 0) as signed)) as net_lines_minus_whitespace, patches, a.month
             FROM (SELECT month FROM repo_monthly_cache GROUP BY month) a 
             LEFT JOIN
@@ -384,6 +372,6 @@ class Facade(object):
             ) b ON a.month = b.month
             ORDER BY name, month
         """)
-        results = pd.read_sql(projectWideContributionsByTimeIntervalSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
+        results = pd.read_sql(cdRgTpIntervalLocCommitsSQL, self.db, params={"repourl": '%{}%'.format(repo_url)})
         return results
 
