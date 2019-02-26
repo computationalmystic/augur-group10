@@ -5,11 +5,15 @@ ALTER TABLE "project_commits" DROP CONSTRAINT "fk_project_commits_commits_1";
 ALTER TABLE "project_commits" DROP CONSTRAINT "fk_project_commits_repos_1";
 ALTER TABLE "repos_meta" DROP CONSTRAINT "fk_repos_meta_repos_1";
 ALTER TABLE "repos_stats" DROP CONSTRAINT "fk_repos_stats_repos_1";
-ALTER TABLE "commits" DROP CONSTRAINT "fk_commits_commit_comments_1";
 ALTER TABLE "commit_parents" DROP CONSTRAINT "fk_commit_parents_commits_1";
 ALTER TABLE "commit_parents" DROP CONSTRAINT "fk_commit_parents_commits_2";
-ALTER TABLE "commits" DROP CONSTRAINT "fk_commits_contributors_aliases_1";
-ALTER TABLE "commits" DROP CONSTRAINT "fk_commits_contributors_aliases_2";
+ALTER TABLE "commits" DROP CONSTRAINT "fk_commits_contributors_1";
+ALTER TABLE "commits" DROP CONSTRAINT "fk_commits_contributors_2";
+ALTER TABLE "commits" DROP CONSTRAINT "fk_commits_commit_comment_ref_1";
+ALTER TABLE "commit_comment_ref" DROP CONSTRAINT "fk_commit_comment_ref_message_1";
+ALTER TABLE "repo_groups" DROP CONSTRAINT "fk_repo_groups_repo_groups_list_serve_1";
+ALTER TABLE "repo_groups_list_serve" DROP CONSTRAINT "fk_repo_groups_list_serve_message_1";
+ALTER TABLE "platform" DROP CONSTRAINT "fk_platform_message_1";
 
 DROP INDEX "domain,affiliation,start_date";
 DROP INDEX "domain,active";
@@ -63,12 +67,15 @@ DROP TABLE "repo_annual_dm";
 DROP TABLE "repo_monthly_dm";
 DROP TABLE "repo_weekly_dm";
 DROP TABLE "repos";
-DROP TABLE "commit_comments";
+DROP TABLE "commit_comment_ref";
 DROP TABLE "commit_parents";
 DROP TABLE "project_commits";
 DROP TABLE "contributors";
 DROP TABLE "repos_meta";
 DROP TABLE "repos_stats";
+DROP TABLE "platform";
+DROP TABLE "message";
+DROP TABLE "repo_groups_list_serve";
 
 CREATE TABLE "contributor_affiliations" (
 "ght_cntrb_id" int4 NOT NULL,
@@ -268,9 +275,10 @@ WITHOUT OIDS;
 CREATE INDEX "forked" ON "repos" USING btree ("ght_forked_from" ASC);
 COMMENT ON TABLE "repos" IS 'This table is a combination of the columns in Facade’s repos table and GHTorrent’s projects table. ';
 
-CREATE TABLE "commit_comments" (
+CREATE TABLE "commit_comment_ref" (
 "ght_comment_id" int4 NOT NULL,
 "cmt_id" int4 NOT NULL,
+"msg_id" int4 NOT NULL,
 "user_id" int4 NOT NULL,
 "body" varchar(256) DEFAULT NULL,
 "line" int4 DEFAULT NULL,
@@ -280,9 +288,9 @@ CREATE TABLE "commit_comments" (
 PRIMARY KEY ("ght_comment_id") 
 )
 WITHOUT OIDS;
-CREATE INDEX "comment_id" ON "commit_comments" USING btree ("comment_id" ASC);
-CREATE INDEX "commit_comments_ibfk_1" ON "commit_comments" USING btree ("cmt_id" ASC);
-CREATE INDEX "commit_comments_ibfk_2" ON "commit_comments" USING btree ("user_id" ASC);
+CREATE INDEX "comment_id" ON "commit_comment_ref" USING btree ("comment_id" ASC);
+CREATE INDEX "commit_comments_ibfk_1" ON "commit_comment_ref" USING btree ("cmt_id" ASC);
+CREATE INDEX "commit_comments_ibfk_2" ON "commit_comment_ref" USING btree ("user_id" ASC);
 
 CREATE TABLE "commit_parents" (
 "cmt_id" int4 NOT NULL,
@@ -314,6 +322,7 @@ CREATE TABLE "contributors" (
 "ght_cntrb_state" varchar(255) DEFAULT NULL,
 "ght_cntrb_city" varchar(255) DEFAULT NULL,
 "ght_cntrb_location" varchar(255) DEFAULT NULL,
+"cntrb_canonical" varchar(128),
 PRIMARY KEY ("ght_cntrb_id") 
 )
 WITHOUT OIDS;
@@ -339,6 +348,35 @@ PRIMARY KEY ("rstat_id", "repo_id")
 WITHOUT OIDS;
 COMMENT ON TABLE "repos_stats" IS 'Project Watchers';
 
+CREATE TABLE "platform" (
+"pltfrm_id" int4 NOT NULL,
+"pltfrm_name" varchar(255),
+"pltfrm_version" varchar(255),
+"pltfrm_release_date" date,
+PRIMARY KEY ("pltfrm_id") 
+)
+WITHOUT OIDS;
+CREATE TABLE "message" (
+"msg_id" int4 NOT NULL,
+"msg_text" text,
+"msg_timestamp" timestamp(0),
+"msg_sender_email" varchar(255),
+"msg_header" varchar(4000),
+"rgls_id" int4,
+"pltfrm_id" int4,
+PRIMARY KEY ("msg_id") 
+)
+WITHOUT OIDS;
+CREATE TABLE "repo_groups_list_serve" (
+"rgls_id" int4 NOT NULL,
+"repos_group_id" int4,
+"rgls_name" varchar(255),
+"rgls_description" varchar(3000),
+"rgls_sponsor" varchar(255),
+"rgls_email" varchar(255),
+PRIMARY KEY ("rgls_id") 
+)
+WITHOUT OIDS;
 
 ALTER TABLE "repos" ADD CONSTRAINT "fk_repos_repo_groups_1" FOREIGN KEY ("repo_group_id") REFERENCES "repo_groups" ("repos_group_id");
 COMMENT ON CONSTRAINT "fk_repos_repo_groups_1" ON "repos" IS 'Repo_groups cardinality set to one and only one because, although in theory there could be more than one repo group for a repo, this might create dependecies in hosted situation that we do not want to live with. ';
@@ -348,9 +386,13 @@ ALTER TABLE "project_commits" ADD CONSTRAINT "fk_project_commits_commits_1" FORE
 ALTER TABLE "project_commits" ADD CONSTRAINT "fk_project_commits_repos_1" FOREIGN KEY ("repos_id") REFERENCES "repos" ("repos_id");
 ALTER TABLE "repos_meta" ADD CONSTRAINT "fk_repos_meta_repos_1" FOREIGN KEY ("repo_id") REFERENCES "repos" ("repos_id");
 ALTER TABLE "repos_stats" ADD CONSTRAINT "fk_repos_stats_repos_1" FOREIGN KEY ("repo_id") REFERENCES "repos" ("repos_id");
-ALTER TABLE "commits" ADD CONSTRAINT "fk_commits_commit_comments_1" FOREIGN KEY ("cmt_id") REFERENCES "commit_comments" ("ght_comment_id");
 ALTER TABLE "commit_parents" ADD CONSTRAINT "fk_commit_parents_commits_1" FOREIGN KEY ("cmt_id") REFERENCES "commits" ("cmt_id");
 ALTER TABLE "commit_parents" ADD CONSTRAINT "fk_commit_parents_commits_2" FOREIGN KEY ("parent_id") REFERENCES "commits" ("cmt_id");
-ALTER TABLE "commits" ADD CONSTRAINT "fk_commits_contributors_aliases_1" FOREIGN KEY ("cmt_ght_author_id") REFERENCES "contributors_aliases" ("cntrb_a_id");
-ALTER TABLE "commits" ADD CONSTRAINT "fk_commits_contributors_aliases_2" FOREIGN KEY ("cmt_ght_committer_id") REFERENCES "contributors_aliases" ("cntrb_a_id");
+ALTER TABLE "commits" ADD CONSTRAINT "fk_commits_contributors_1" FOREIGN KEY ("cmt_ght_author_id") REFERENCES "contributors" ("ght_cntrb_id");
+ALTER TABLE "commits" ADD CONSTRAINT "fk_commits_contributors_2" FOREIGN KEY ("cmt_ght_committer_id") REFERENCES "contributors" ("ght_cntrb_id");
+ALTER TABLE "commits" ADD CONSTRAINT "fk_commits_commit_comment_ref_1" FOREIGN KEY ("cmt_id") REFERENCES "commit_comment_ref" ("cmt_id");
+ALTER TABLE "commit_comment_ref" ADD CONSTRAINT "fk_commit_comment_ref_message_1" FOREIGN KEY ("msg_id") REFERENCES "message" ("msg_id");
+ALTER TABLE "repo_groups" ADD CONSTRAINT "fk_repo_groups_repo_groups_list_serve_1" FOREIGN KEY ("repos_group_id") REFERENCES "repo_groups_list_serve" ("repos_group_id");
+ALTER TABLE "repo_groups_list_serve" ADD CONSTRAINT "fk_repo_groups_list_serve_message_1" FOREIGN KEY ("rgls_id") REFERENCES "message" ("rgls_id");
+ALTER TABLE "platform" ADD CONSTRAINT "fk_platform_message_1" FOREIGN KEY ("pltfrm_id") REFERENCES "message" ("pltfrm_id");
 
