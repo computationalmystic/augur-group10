@@ -42,7 +42,7 @@ def create_routes(server):
     server.updateMetricMetadata(function=facade.downloaded_repos, endpoint='/{}/git/repos'.format(server.api_version), metric_type='git')
 
     """
-    @api {get} /git/lines_changed/:facade_repo_url Lines Changed by Author
+    @api {get} /git/lines_changed_by_author/:facade_repo_url Lines Changed by Author
     @apiName lines-changed-by-author
     @apiGroup Experimental
     @apiDescription This is an Augur-specific metric. We are currently working to define these more formally. Source: Git Repository
