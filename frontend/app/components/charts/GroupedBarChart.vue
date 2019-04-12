@@ -133,7 +133,9 @@ export default {
                     // "field": "name", "type": "ordinal",
                     // "scale": {"range": ["black", "#CC0314", "#1403CC","#098118","#CCAE00","#C24F00","#5E0081","#0FA1C1","#BD00B3"]},
 
-                  }
+                  },
+                  // Add tooltip for net lines changed
+                  "tooltip": {"field": "net", "type": "quantitative", "format": ","}
               },
             },
             {
@@ -171,7 +173,9 @@ export default {
                     // "field": "name", "type": "ordinal",
                     // "scale": {"range": ["#666666", "#FF697A", "#7A69FF","#6FE77E","#FFFF4C","#FFB564","#C451E7","#75FFFF","#FF65FF"]},
                     "legend": null
-                  }
+                  },
+                  // Add tooltip for number of commits/patches
+                  "tooltip": {"field": "patches", "type": "quantitative", "format": ","}
               },
             },
             {
