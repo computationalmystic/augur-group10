@@ -154,7 +154,7 @@ export default {
             ],
             "mark": {
               "type":"bar",
-              "tooltip": {"content": "data"}
+              //"tooltip": {"content": "data"}
             },
             "encoding": {
               // "y": {"field": "author_date", "type": "temporal", "bin": true, "axis": {"format": "%b %Y", "title": " "}},
@@ -175,6 +175,8 @@ export default {
                 "scale": {"scheme": "category10"},
                 "legend": null
               },
+              // Add tooltip for field
+              "tooltip": {"field": field, "type": "quantitative", "format": ","},
               // "size": size,
               // "opacity":{
               //   "field": "Total lines changed",
