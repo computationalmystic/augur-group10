@@ -144,7 +144,7 @@ export default {
             ],
             "mark": {
               "type":"bar",
-              "tooltip": {"content": "data"}
+              //"tooltip": {"content": "data"}
             },
             "encoding": {
               // "x": {"field": "author_date", "type": "temporal", "bin": true, "axis": {"format": "%b %Y", "title": " "}},
@@ -161,6 +161,8 @@ export default {
               //   "type": "quantitative",
               //   "min": ".5"
               // },
+              // Add tooltip(s)
+	          "tooltip": {"field": "count", "type": "quantitative", "format": ","}
             }
             
             
