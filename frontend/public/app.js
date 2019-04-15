@@ -1291,6 +1291,20 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 });
 
+;require.register("components/CommitsLinesPerCommitRatioCard.vue", function(exports, require, module) {
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-03fa1492", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-03fa1492", __vue__options__)
+  }
+})()}
+});
+
 ;require.register("components/DiversityInclusionCard.vue", function(exports, require, module) {
 ;(function(){
 'use strict';
@@ -2050,6 +2064,20 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.createRecord("data-v-99cabfb0", __vue__options__)
   } else {
     hotAPI.reload("data-v-99cabfb0", __vue__options__)
+  }
+})()}
+});
+
+;require.register("components/NumberClonesCard.vue", function(exports, require, module) {
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8ea45808", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-8ea45808", __vue__options__)
   }
 })()}
 });
@@ -3451,7 +3479,9 @@ exports.default = {
                 "field": "date",
                 "type": "temporal",
                 "axis": {
-                  "labels": !this.showDetail
+                  "labels": this.showDetail,
+                  "format": "%b %Y",
+                  "title": " "
                 }
               },
               "color": {
@@ -4286,7 +4316,9 @@ exports.default = {
             },
             "color": {
               "value": "#FF3647"
-            }
+            },
+
+            "tooltip": { "field": "net", "type": "quantitative", "format": "," }
           }
         }, {
           "transform": [{
@@ -4319,7 +4351,9 @@ exports.default = {
               "value": "#4736FF",
 
               "legend": null
-            }
+            },
+
+            "tooltip": { "field": "patches", "type": "quantitative", "format": "," }
           }
         }, {
           "transform": [{
@@ -4624,8 +4658,7 @@ exports.default = {
             "as": "totalratio"
           }],
           "mark": {
-            "type": "bar",
-            "tooltip": { "content": "data" }
+            "type": "bar"
           },
           "encoding": {
             "x": { "field": field, "type": "quantitative" },
@@ -4644,7 +4677,9 @@ exports.default = {
               "type": "nominal",
               "scale": { "scheme": "category10" },
               "legend": null
-            }
+            },
+
+            "tooltip": { "field": field, "type": "quantitative", "format": "," }
           }
 
         }]
@@ -4972,6 +5007,15 @@ exports.default = {
         type = "area";
       }
 
+      var field = null;
+      if (this.type == 0) {
+        field = "Total lines changed";
+      } else if (this.type == 1) {
+        field = "Net lines added";
+      } else if (this.type == 2) {
+        field = "Total lines added";
+      }
+
       var colors = ["#FF3647", "#4736FF", "#3cb44b", "#ffe119", "#f58231", "#911eb4", "#42d4f4", "#f032e6"];
       var config = {
         "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
@@ -5011,12 +5055,15 @@ exports.default = {
             "calculate": "(datum.additions + datum.deletions)",
             "as": "Total lines changed"
           }, {
+            "calculate": "datum.additions",
+            "as": "Total lines added"
+          }, {
             "calculate": "(datum.count * 100)",
             "as": "percent"
           }],
           "mark": {
             "type": type,
-            "tooltip": { "content": "data" },
+
 
             "cornerRadius": 45
           },
@@ -5041,7 +5088,9 @@ exports.default = {
               "field": "author_email",
               "type": "nominal",
               "scale": { "scheme": "category10" }
-            }
+            },
+
+            "tooltip": { "field": "Total lines added", "type": "quantitative", "format": "," }
           }
 
         }]
@@ -5285,8 +5334,7 @@ exports.default = {
             "as": "percent"
           }],
           "mark": {
-            "type": "bar",
-            "tooltip": { "content": "data" }
+            "type": "bar"
           },
           "encoding": {
             "x": { "field": "count", "type": "quantitative", "sort": { "op": "sum", "order": "descending" }, "stack": "normalize", "axis": { "labels": false, "title": null } },
@@ -5295,7 +5343,9 @@ exports.default = {
               "type": "nominal",
               "scale": { "scheme": "category10" },
               "legend": null
-            }
+            },
+
+            "tooltip": { "field": "count", "type": "quantitative", "format": "," }
           }
 
         }]
@@ -5722,6 +5772,7 @@ exports.default = {
               "type": "quantitative",
               "scale": { "range": ["#FF0000", "#00FF00"] }
             },
+            "tooltip": { "field": "Total lines changed", "type": "quantitative", "format": "," },
             "size": size,
             "opacity": opacity
 
@@ -5968,7 +6019,9 @@ exports.default = {
             },
             "color": {
               "value": "#FF3647"
-            }
+            },
+
+            "tooltip": { "field": "net_lines_minus_whitespace", "type": "quantitative", "format": "," }
           }
         }, {
           "transform": [{
@@ -6003,7 +6056,9 @@ exports.default = {
               "value": "#4736FF",
 
               "legend": null
-            }
+            },
+
+            "tooltip": { "field": "commits", "type": "quantitative", "format": "," }
           }
         }, {
           "transform": [{

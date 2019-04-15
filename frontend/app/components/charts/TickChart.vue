@@ -148,6 +148,7 @@ export default {
                 "type": "quantitative",
                 "scale": { "range": ["#FF0000", "#00FF00"]}
               },
+              "tooltip": {"field": "Total lines changed", "type": "quantitative", "format": ","},
               "size": size,
               "opacity": opacity
 

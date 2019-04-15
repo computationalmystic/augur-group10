@@ -90,6 +90,15 @@ export default {
             size = 13
         type = "area"
       }
+      
+      let field = null;
+      if(this.type == 0) {
+          field = "Total lines changed";
+      }else if(this.type == 1) {
+          field = "Net lines added";
+      }else if(this.type == 2) {
+          field = "Total lines added";
+      }
 
 
       var colors = ["#FF3647", "#4736FF","#3cb44b","#ffe119","#f58231","#911eb4","#42d4f4","#f032e6"]
@@ -137,6 +146,10 @@ export default {
                 "as": "Total lines changed"
               },
               {
+                "calculate": "datum.additions",
+                "as": "Total lines added"
+              },
+              {
                 "calculate": "(datum.count * 100)",
                 "as": "percent"
               },
@@ -171,8 +184,8 @@ export default {
                 "type": "nominal",
                 "scale": {"scheme": "category10"}
               },
-	          // Add tooltip for count
-	          "tooltip": {"field": "count", "type": "quantitative", "format": ","}
+	          // Add tooltip for field
+	          "tooltip": {"field": "Total lines added", "type": "quantitative", "format": ","}
               // "size": size,
               // "opacity":{
               //   "field": "Total lines changed",
