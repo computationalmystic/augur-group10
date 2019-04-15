@@ -143,7 +143,7 @@ export default {
             ],
             "mark": {
               "type": type,
-              "tooltip": {"content": "data"},
+              //"tooltip": {"content": "data"},
               
               "cornerRadius": 45
             },
@@ -171,13 +171,14 @@ export default {
                 "type": "nominal",
                 "scale": {"scheme": "category10"}
               },
+	          // Add tooltip for count
+	          "tooltip": {"field": "count", "type": "quantitative", "format": ","}
               // "size": size,
               // "opacity":{
               //   "field": "Total lines changed",
               //   "type": "quantitative",
               //   "min": ".5"
-              // },
-
+              // }, 
             },
             
             
