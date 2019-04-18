@@ -83,6 +83,7 @@ import HorizontalBarChart from './charts/HorizontalBarChart'
 import GroupedBarChart from './charts/GroupedBarChart'
 import DirectionalTimeChart from './charts/DirectionalTimeChart'
 import TimeIntervalBarChart from './charts/TimeIntervalBarChart'
+import CommitsLinesPerCommitRatio from './CommitsLinesPerCommitRatio.vue'
 
 
 module.exports = {
@@ -100,7 +101,8 @@ module.exports = {
     HorizontalBarChart,
     GroupedBarChart,
     DirectionalTimeChart,
-    TimeIntervalBarChart
+    TimeIntervalBarChart,
+    CommitsLinesPerCommitRatio
   }
 }
 
