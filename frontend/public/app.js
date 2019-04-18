@@ -2805,6 +2805,232 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 });
 
+;require.register("components/charts/ClonesChart.vue", function(exports, require, module) {
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = {
+  props: ['source', 'citeUrl', 'citeText', 'title'],
+  data: function data() {
+    var years = [];
+    for (var i = 9; i >= 0; i--) {
+      years.push(new Date().getFullYear() - i);
+    }
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var monthDecimals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    return {
+      contributors: [],
+      organizations: [],
+      view: 'year',
+      monthNames: monthNames,
+      monthDecimals: monthDecimals,
+      years: years,
+      setYear: 0
+    };
+  },
+
+  computed: {
+    repo: function repo() {
+      return this.$store.state.gitRepo;
+    },
+    chart: function chart() {
+      var _this = this;
+
+      var repo = window.AugurAPI.Repo({ gitURL: this.repo });
+      var contributors = {};
+      var organizations = {};
+
+      var addChanges = function addChanges(dest, src) {
+        if (dest && src) {
+          if ((typeof dest === 'undefined' ? 'undefined' : _typeof(dest)) !== 'object') {
+            dest['additions'] = 0;
+            dest['deletions'] = 0;
+          }
+          dest['additions'] += src['additions'] || 0;
+          dest['deletions'] += src['deletions'] || 0;
+        }
+      };
+
+      var group = function group(obj, name, change, filter) {
+        if (filter(change)) {
+          var year = new Date(change.author_date).getFullYear();
+          var month = new Date(change.author_date).getMonth();
+          obj[change[name]] = obj[change[name]] || { additions: 0, deletions: 0 };
+          addChanges(obj[change[name]], change);
+          obj[change[name]][year] = obj[change[name]][year] || { additions: 0, deletions: 0 };
+          addChanges(obj[change[name]][year], change);
+          obj[change[name]][year + '-' + month] = obj[change[name]][year + '-' + month] || { additions: 0, deletions: 0 };
+          addChanges(obj[change[name]][year + '-' + month], change);
+        }
+      };
+
+      var flattenAndSort = function flattenAndSort(obj, keyName, sortField) {
+        return Object.keys(obj).map(function (key) {
+          var d = obj[key];
+          d[keyName] = key;
+          return d;
+        }).sort(function (a, b) {
+          return b[sortField] - a[sortField];
+        });
+      };
+
+      var filterDates = function filterDates(change) {
+        return new Date(change.author_date).getFullYear() > _this.years[0];
+      };
+
+      repo.changesByAuthor().then(function (changes) {
+        changes.forEach(function (change) {
+          if (isFinite(change.additions) && isFinite(change.deletions)) {
+            group(contributors, 'author_email', change, filterDates);
+            if (change.author_affiliation !== 'Unknown') {
+              group(organizations, 'affiliation', change, filterDates);
+            }
+          }
+        });
+
+        _this.contributors = flattenAndSort(contributors, 'author_email', 'additions');
+        _this.organizations = flattenAndSort(organizations, 'name', 'additions');
+      });
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('h3',[_vm._v("Lines of code added by the top 10 authors")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_c('thead',[_c('tr',[_c('th',[_vm._v("Author")]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = year}}},[_vm._v(_vm._s(year))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthNames),function(month){return (_vm.setYear)?_c('th',[_vm._v(_vm._s(month))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('th',[_vm._v("Total all time")]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('th',{on:{"click":function($event){_vm.setYear = 0}}},[_vm._v(_vm._s(_vm.setYear))]):_vm._e()],2)]),_vm._v(" "),_c('tbody',_vm._l((_vm.contributors.slice(0, 10)),function(contributor){return _c('tr',[_c('td',[_vm._v(_vm._s(contributor.author_email))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[year]) ? contributor[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear + '-' + month]) ? contributor[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(contributor.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear]) ? contributor[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('h3',[_vm._v("Lines of code added by the top 5 organizations")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_c('thead',[_c('tr',[_c('th',[_vm._v("Author")]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = year}}},[_vm._v(_vm._s(year))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthNames),function(month){return (_vm.setYear)?_c('th',[_vm._v(_vm._s(month))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('th',[_vm._v("Total all time")]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = _vm.year}}},[_vm._v(_vm._s(_vm.setYear))]):_vm._e()],2)]),_vm._v(" "),_c('tbody',_vm._l((_vm.organizations.slice(0, 10)),function(organization){return _c('tr',[_c('td',[_vm._v(_vm._s(organization.name))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[year]) ? organization[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[_vm.setYear + '-' + month]) ? organization[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(organization.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[_vm.setYear]) ? organization[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))]),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])])}
+__vue__options__.staticRenderFns = []
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-182f47fb", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-182f47fb", __vue__options__)
+  }
+})()}
+});
+
+;require.register("components/charts/CommitLinesPerCommitRatioChart.vue", function(exports, require, module) {
+;(function(){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = {
+  props: ['source', 'citeUrl', 'citeText', 'title'],
+  data: function data() {
+    var years = [];
+    for (var i = 9; i >= 0; i--) {
+      years.push(new Date().getFullYear() - i);
+    }
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var monthDecimals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    return {
+      contributors: [],
+      organizations: [],
+      view: 'year',
+      monthNames: monthNames,
+      monthDecimals: monthDecimals,
+      years: years,
+      setYear: 0
+    };
+  },
+
+  computed: {
+    repo: function repo() {
+      return this.$store.state.gitRepo;
+    },
+    chart: function chart() {
+      var _this = this;
+
+      var repo = window.AugurAPI.Repo({ gitURL: this.repo });
+      var contributors = {};
+      var organizations = {};
+
+      var addChanges = function addChanges(dest, src) {
+        if (dest && src) {
+          if ((typeof dest === 'undefined' ? 'undefined' : _typeof(dest)) !== 'object') {
+            dest['additions'] = 0;
+            dest['deletions'] = 0;
+          }
+          dest['additions'] += src['additions'] || 0;
+          dest['deletions'] += src['deletions'] || 0;
+        }
+      };
+
+      var group = function group(obj, name, change, filter) {
+        if (filter(change)) {
+          var year = new Date(change.author_date).getFullYear();
+          var month = new Date(change.author_date).getMonth();
+          obj[change[name]] = obj[change[name]] || { additions: 0, deletions: 0 };
+          addChanges(obj[change[name]], change);
+          obj[change[name]][year] = obj[change[name]][year] || { additions: 0, deletions: 0 };
+          addChanges(obj[change[name]][year], change);
+          obj[change[name]][year + '-' + month] = obj[change[name]][year + '-' + month] || { additions: 0, deletions: 0 };
+          addChanges(obj[change[name]][year + '-' + month], change);
+        }
+      };
+
+      var flattenAndSort = function flattenAndSort(obj, keyName, sortField) {
+        return Object.keys(obj).map(function (key) {
+          var d = obj[key];
+          d[keyName] = key;
+          return d;
+        }).sort(function (a, b) {
+          return b[sortField] - a[sortField];
+        });
+      };
+
+      var filterDates = function filterDates(change) {
+        return new Date(change.author_date).getFullYear() > _this.years[0];
+      };
+
+      repo.changesByAuthor().then(function (changes) {
+        changes.forEach(function (change) {
+          if (isFinite(change.additions) && isFinite(change.deletions)) {
+            group(contributors, 'author_email', change, filterDates);
+            if (change.author_affiliation !== 'Unknown') {
+              group(organizations, 'affiliation', change, filterDates);
+            }
+          }
+        });
+
+        _this.contributors = flattenAndSort(contributors, 'author_email', 'additions');
+        _this.organizations = flattenAndSort(organizations, 'name', 'additions');
+      });
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('h3',[_vm._v("Lines of code added by the top 10 authors")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_c('thead',[_c('tr',[_c('th',[_vm._v("Author")]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = year}}},[_vm._v(_vm._s(year))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthNames),function(month){return (_vm.setYear)?_c('th',[_vm._v(_vm._s(month))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('th',[_vm._v("Total all time")]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('th',{on:{"click":function($event){_vm.setYear = 0}}},[_vm._v(_vm._s(_vm.setYear))]):_vm._e()],2)]),_vm._v(" "),_c('tbody',_vm._l((_vm.contributors.slice(0, 10)),function(contributor){return _c('tr',[_c('td',[_vm._v(_vm._s(contributor.author_email))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[year]) ? contributor[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear + '-' + month]) ? contributor[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(contributor.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear]) ? contributor[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('h3',[_vm._v("Lines of code added by the top 5 organizations")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_c('thead',[_c('tr',[_c('th',[_vm._v("Author")]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = year}}},[_vm._v(_vm._s(year))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthNames),function(month){return (_vm.setYear)?_c('th',[_vm._v(_vm._s(month))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('th',[_vm._v("Total all time")]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = _vm.year}}},[_vm._v(_vm._s(_vm.setYear))]):_vm._e()],2)]),_vm._v(" "),_c('tbody',_vm._l((_vm.organizations.slice(0, 10)),function(organization){return _c('tr',[_c('td',[_vm._v(_vm._s(organization.name))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[year]) ? organization[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[_vm.setYear + '-' + month]) ? organization[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(organization.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[_vm.setYear]) ? organization[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))]),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])])}
+__vue__options__.staticRenderFns = []
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5683f1dc", __vue__options__)
+  } else {
+    hotAPI.reload("data-v-5683f1dc", __vue__options__)
+  }
+})()}
+});
+
 ;require.register("components/charts/DependencyOverview.vue", function(exports, require, module) {
 ;(function(){
 'use strict';
