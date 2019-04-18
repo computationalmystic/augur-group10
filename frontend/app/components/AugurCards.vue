@@ -50,7 +50,6 @@ module.exports = {
     ExperimentalCard,
     DownloadedReposCard,
     LoginForm,
-    CommitsLinesPerCommitRatioCard,
   },
 
   watch: {
