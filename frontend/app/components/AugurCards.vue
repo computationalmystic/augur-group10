@@ -33,6 +33,7 @@ import ExperimentalCard from '../components/ExperimentalCard'
 import DownloadedReposCard from '../components/DownloadedReposCard.vue'
 import MainControls from '../components/MainControls.vue'
 import LoginForm from '../components/LoginForm'
+import CommitsLinesPerCommitRatioCard from '../components/CommitsLinesPerCommitRatioCard.vue'
 import { mapState } from 'vuex'
 module.exports = {
   props: ['owner', 'repo', 'domain', 'comparedowner', 'comparedrepo', 'groupid'],
@@ -50,6 +51,7 @@ module.exports = {
     ExperimentalCard,
     DownloadedReposCard,
     LoginForm,
+    CommitsLinesPerCommitRatioCard,
   },
 
   watch: {
