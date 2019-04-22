@@ -36,6 +36,7 @@
           title="Top New Repos in 2018 by Commits with Baseline Averages - Sorted"
           field="commit"></grouped-bar-chart>
         </div>
+
         <div class="col col-6" style="padding-right: 35px">
           <grouped-bar-chart source="cdRgNewrepRankedLoc"
           title="Top New Repos in 2018 by Net LoC with Baseline Averages - Sorted"
@@ -68,7 +69,10 @@
       <div class="row" style="transform: translateY(-50px) !important">
         <lines-of-code-chart></lines-of-code-chart>
       </div>
-    </div>
+
+      <div class="row" style="transform: translateY(-50px) !important">
+        <commit-lines-per-commit-ratio-chart></commit-lines-per-commit-ratio-chart>
+      </div>
   </section>
 </template>
 
@@ -83,7 +87,7 @@ import HorizontalBarChart from './charts/HorizontalBarChart'
 import GroupedBarChart from './charts/GroupedBarChart'
 import DirectionalTimeChart from './charts/DirectionalTimeChart'
 import TimeIntervalBarChart from './charts/TimeIntervalBarChart'
-import CommitsLinesPerCommitRatio from './CommitsLinesPerCommitRatio.vue'
+import CommitLinesPerCommitRatioChart from './charts/CommitLinesPerCommitRatioChart.vue'
 
 
 module.exports = {
@@ -102,7 +106,7 @@ module.exports = {
     GroupedBarChart,
     DirectionalTimeChart,
     TimeIntervalBarChart,
-    CommitsLinesPerCommitRatio
+    CommitLinesPerCommitRatioChart
   }
 }
 
