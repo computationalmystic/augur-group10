@@ -70,8 +70,14 @@
         <lines-of-code-chart></lines-of-code-chart>
       </div>
 
+      <br>
+
       <div class="row" style="transform: translateY(-50px) !important">
         <commit-lines-per-commit-ratio-chart></commit-lines-per-commit-ratio-chart>
+      </div>
+
+      <div class="row" style="transform: translateY(-50px) !important">
+        <clones-chart></clones-chart>
       </div>
   </section>
 </template>
@@ -88,6 +94,7 @@ import GroupedBarChart from './charts/GroupedBarChart'
 import DirectionalTimeChart from './charts/DirectionalTimeChart'
 import TimeIntervalBarChart from './charts/TimeIntervalBarChart'
 import CommitLinesPerCommitRatioChart from './charts/CommitLinesPerCommitRatioChart.vue'
+import ClonesChart from './charts/ClonesChart.vue'
 
 
 module.exports = {
@@ -106,7 +113,8 @@ module.exports = {
     GroupedBarChart,
     DirectionalTimeChart,
     TimeIntervalBarChart,
-    CommitLinesPerCommitRatioChart
+    CommitLinesPerCommitRatioChart,
+    ClonesChart
   }
 }
 
