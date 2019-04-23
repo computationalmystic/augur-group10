@@ -14,35 +14,35 @@
         <tbody>
           <tr>
             <td>Past Week</td>
-            <td v-if="numberOfCommits.week != 0">{{ linesChanged.week.additions / numberOfCommits.week }}</td>
-            <td v-else>{{ linesChanged.week.additions }}</td>
-            <td v-if="numberOfCommits.week != 0">{{ linesChanged.week.deletions / numberOfCommits.week }}</td>
-            <td v-else>{{ linesChanged.week.deletions }}</td>
-            <td v-if="numberOfCommits.week != 0">{{ (linesChanged.week.additions - linesChanged.week.deletions) / numberOfCommits.week }}</td>
-            <td v-else>{{ linesChanged.week.additions - linesChanged.week.deletions }}</td>
-            <td v-if="numberOfCommits.week != 0">{{ (linesChanged.week.additions + linesChanged.week.deletions) / numberOfCommits.week }}</td>
-            <td v-else>{{ linesChanged.week.additions + linesChanged.week.deletions }}</td>
+            <td v-if="numberOfCommits.week != 0">{{ (linesChanged.week.additions / numberOfCommits.week).toFixed(3) }}</td>
+            <td v-else>{{ 0 }}</td>
+            <td v-if="numberOfCommits.week != 0">{{ (linesChanged.week.deletions / numberOfCommits.week).toFixed(3) }}</td>
+            <td v-else>{{ 0 }}</td>
+            <td v-if="numberOfCommits.week != 0">{{ ((linesChanged.week.additions - linesChanged.week.deletions) / numberOfCommits.week).toFixed(3) }}</td>
+            <td v-else>{{ 0 }}</td>
+            <td v-if="numberOfCommits.week != 0">{{ ((linesChanged.week.additions + linesChanged.week.deletions) / numberOfCommits.week).toFixed(3) }}</td>
+            <td v-else>{{ 0 }}</td>
           </tr>
           <tr>
             <td>Past Month</td>
-            <td v-if="numberOfCommits.month != 0">{{ linesChanged.month.additions / numberOfCommits.month }}</td>
+            <td v-if="numberOfCommits.month != 0">{{ (linesChanged.month.additions / numberOfCommits.month).toFixed(3) }}</td>
             <td v-else>0</td>
-            <td v-if="numberOfCommits.month != 0">{{ linesChanged.month.deletions / numberOfCommits.month }}</td>
+            <td v-if="numberOfCommits.month != 0">{{ (linesChanged.month.deletions / numberOfCommits.month).toFixed(3) }}</td>
             <td v-else>0</td>
-            <td v-if="numberOfCommits.month != 0">{{ (linesChanged.month.additions - linesChanged.month.deletions) / numberOfCommits.month }}</td>
+            <td v-if="numberOfCommits.month != 0">{{ ((linesChanged.month.additions - linesChanged.month.deletions) / numberOfCommits.month).toFixed(3) }}</td>
             <td v-else>0</td>
-            <td v-if="numberOfCommits.month != 0">{{ (linesChanged.month.additions + linesChanged.month.deletions) / numberOfCommits.month }}</td>
+            <td v-if="numberOfCommits.month != 0">{{ ((linesChanged.month.additions + linesChanged.month.deletions) / numberOfCommits.month).toFixed(3) }}</td>
             <td v-else>0</td>
           </tr>
           <tr>
             <td>Past Year</td>
-            <td v-if="numberOfCommits.year != 0">{{ linesChanged.year.additions / numberOfCommits.year }}</td>
+            <td v-if="numberOfCommits.year != 0">{{ (linesChanged.year.additions / numberOfCommits.year).toFixed(3) }}</td>
             <td v-else>0</td>
-            <td v-if="numberOfCommits.year != 0">{{ linesChanged.year.deletions / numberOfCommits.year }}</td>
+            <td v-if="numberOfCommits.year != 0">{{ (linesChanged.year.deletions / numberOfCommits.year).toFixed(3) }}</td>
             <td v-else>0</td>
-            <td v-if="numberOfCommits.year != 0">{{ (linesChanged.year.additions - linesChanged.year.deletions) / numberOfCommits.year }}</td>
+            <td v-if="numberOfCommits.year != 0">{{ ((linesChanged.year.additions - linesChanged.year.deletions) / numberOfCommits.year).toFixed(3) }}</td>
             <td v-else>0</td>
-            <td v-if="numberOfCommits.year != 0">{{ (linesChanged.year.additions + linesChanged.year.deletions) / numberOfCommits.year }}</td>
+            <td v-if="numberOfCommits.year != 0">{{ ((linesChanged.year.additions + linesChanged.year.deletions) / numberOfCommits.year).toFixed(3) }}</td>
             <td v-else>0</td>
           </tr>
         </tbody>
@@ -98,14 +98,37 @@ export default {
     chart() {
       let repo = window.AugurAPI.Repo({ gitURL: this.repo })
 
+      // let addChanges = (dest, src) => {
+      //   if (dest && src) {
+      //     if (typeof dest !== 'object') {
+      //       dest['additions'] = 0
+      //       dest['deletions'] = 0
+      //     }
+      //     dest['additions'] += (src['additions'] || 0)
+      //     dest['deletions'] += (src['deletions'] || 0)
+      //   }
+      // }
+
+      // let flattenAndSort = (obj, keyName, sortField) => {
+      //   return Object.keys(obj)
+      //       .map((key) => {
+      //         let d = obj[key]
+      //         d[keyName] = key
+      //         return d
+      //       })
+      //       .sort((a, b) => {
+      //         return b[sortField] - a[sortField]
+      //       })
+      // }
+
       repo.changesByAuthor().then((changes) => {
         changes.forEach((change) => {
             let changeDate = (new Date(change.author_date));
             
-            // if(changeDate.getTime() >= this.yearBeginDate.getTime() && changeDate.getTime() <= (new Date()).getTime()) {
+            if(changeDate.getTime() >= this.yearBeginDate.getTime() && changeDate.getTime() <= (new Date()).getTime()) {
               this.linesChanged.year.additions += (change.additions || 0);
-              this.linesChanged.year.additions += (change.deletions || 0);
-            // }
+              this.linesChanged.year.deletions += (change.deletions || 0);
+            }
 
             if(changeDate.getTime() >= this.monthBeginDate.getTime() && changeDate.getTime() <= (new Date()).getTime()) {
               this.linesChanged.month.additions += (change.additions || 0);

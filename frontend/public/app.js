@@ -1291,20 +1291,6 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 });
 
-;require.register("components/CommitsLinesPerCommitRatioCard.vue", function(exports, require, module) {
-var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
-if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-03fa1492", __vue__options__)
-  } else {
-    hotAPI.reload("data-v-03fa1492", __vue__options__)
-  }
-})()}
-});
-
 ;require.register("components/DiversityInclusionCard.vue", function(exports, require, module) {
 ;(function(){
 'use strict';
@@ -1538,6 +1524,14 @@ var _TimeIntervalBarChart = require('./charts/TimeIntervalBarChart');
 
 var _TimeIntervalBarChart2 = _interopRequireDefault(_TimeIntervalBarChart);
 
+var _CommitLinesPerCommitRatioChart = require('./charts/CommitLinesPerCommitRatioChart.vue');
+
+var _CommitLinesPerCommitRatioChart2 = _interopRequireDefault(_CommitLinesPerCommitRatioChart);
+
+var _ClonesChart = require('./charts/ClonesChart.vue');
+
+var _ClonesChart2 = _interopRequireDefault(_ClonesChart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
@@ -1556,14 +1550,16 @@ module.exports = {
     HorizontalBarChart: _HorizontalBarChart2.default,
     GroupedBarChart: _GroupedBarChart2.default,
     DirectionalTimeChart: _DirectionalTimeChart2.default,
-    TimeIntervalBarChart: _TimeIntervalBarChart2.default
+    TimeIntervalBarChart: _TimeIntervalBarChart2.default,
+    CommitLinesPerCommitRatioChart: _CommitLinesPerCommitRatioChart2.default,
+    ClonesChart: _ClonesChart2.default
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('div',{staticStyle:{"display":"inline-block"}},[_c('h2',{staticStyle:{"display":"inline-block","color":"black !important","margin-bottom":"20px"}},[_vm._v(_vm._s(_vm.$store.state.gitRepo))]),_vm._v(" "),(_vm.$store.state.comparedRepos.length > 0)?_c('h2',{staticClass:"repolisting",staticStyle:{"display":"inline-block","margin-bottom":"20px"}},[_vm._v(" compared to: ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.$store.state.comparedRepos),function(repo,index){return _c('h2',{staticStyle:{"display":"inline-block","margin-bottom":"20px"}},[_c('span',{staticClass:"repolisting",style:({ 'color': _vm.colors[index] })},[_vm._v(" "+_vm._s(repo)+" ")])])})],2),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"cdRgTpRankedCommits","title":"Top Repos in 2018 by Commits with Baseline Averages - Sorted","field":"commit"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"cdRgTpRankedLoc","title":"Top Repos in 2018 by Net LoC with Baseline Averages - Sorted","field":"loc"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-12",staticStyle:{"padding-right":"35px"}},[_c('time-interval-bar-chart',{attrs:{"source":"cdRepTpIntervalLocCommits","title":"Contributions in 2018 by Monthly Intervals with Baseline Averages","field":"loc"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"cdRgNewrepRankedCommits","title":"Top New Repos in 2018 by Commits with Baseline Averages - Sorted","field":"commit"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"cdRgNewrepRankedLoc","title":"Top New Repos in 2018 by Net LoC with Baseline Averages - Sorted","field":"loc"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-12"},[_c('tick-chart')],1)]),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-50px) !important"}},[_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('normalized-stacked-bar-chart',{attrs:{"title":"Lines of code added by the top 10 authors as Percentages - By Time Period"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-left":"65px"}},[_c('div',{staticStyle:{"padding-top":"35px"}}),_vm._v(" "),_c('horizontal-bar-chart',{attrs:{"type":"lines","title":"Average Lines of Code Per Commit"}})],1)]),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-100px) !important"}},[_c('div',{staticClass:"col col-6"},[_c('one-dimensional-stacked-bar-chart',{attrs:{"type":"lines","title":"Lines of Code Added by the top 10 Authors as Percentages - All Time"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6"},[_c('one-dimensional-stacked-bar-chart',{attrs:{"type":"commit","title":"Commits by the top 10 Authors as Percentages - All Time"}})],1)]),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-50px) !important"}},[_c('lines-of-code-chart')],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('div',{staticStyle:{"display":"inline-block"}},[_c('h2',{staticStyle:{"display":"inline-block","color":"black !important","margin-bottom":"20px"}},[_vm._v(_vm._s(_vm.$store.state.gitRepo))]),_vm._v(" "),(_vm.$store.state.comparedRepos.length > 0)?_c('h2',{staticClass:"repolisting",staticStyle:{"display":"inline-block","margin-bottom":"20px"}},[_vm._v(" compared to: ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.$store.state.comparedRepos),function(repo,index){return _c('h2',{staticStyle:{"display":"inline-block","margin-bottom":"20px"}},[_c('span',{staticClass:"repolisting",style:({ 'color': _vm.colors[index] })},[_vm._v(" "+_vm._s(repo)+" ")])])})],2),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"cdRgTpRankedCommits","title":"Top Repos in 2018 by Commits with Baseline Averages - Sorted","field":"commit"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"cdRgTpRankedLoc","title":"Top Repos in 2018 by Net LoC with Baseline Averages - Sorted","field":"loc"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-12",staticStyle:{"padding-right":"35px"}},[_c('time-interval-bar-chart',{attrs:{"source":"cdRepTpIntervalLocCommits","title":"Contributions in 2018 by Monthly Intervals with Baseline Averages","field":"loc"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"cdRgNewrepRankedCommits","title":"Top New Repos in 2018 by Commits with Baseline Averages - Sorted","field":"commit"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('grouped-bar-chart',{attrs:{"source":"cdRgNewrepRankedLoc","title":"Top New Repos in 2018 by Net LoC with Baseline Averages - Sorted","field":"loc"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-12"},[_c('tick-chart')],1)]),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-50px) !important"}},[_c('div',{staticClass:"col col-6",staticStyle:{"padding-right":"35px"}},[_c('normalized-stacked-bar-chart',{attrs:{"title":"Lines of code added by the top 10 authors as Percentages - By Time Period"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6",staticStyle:{"padding-left":"65px"}},[_c('div',{staticStyle:{"padding-top":"35px"}}),_vm._v(" "),_c('horizontal-bar-chart',{attrs:{"type":"lines","title":"Average Lines of Code Per Commit"}})],1)]),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-100px) !important"}},[_c('div',{staticClass:"col col-6"},[_c('one-dimensional-stacked-bar-chart',{attrs:{"type":"lines","title":"Lines of Code Added by the top 10 Authors as Percentages - All Time"}})],1),_vm._v(" "),_c('div',{staticClass:"col col-6"},[_c('one-dimensional-stacked-bar-chart',{attrs:{"type":"commit","title":"Commits by the top 10 Authors as Percentages - All Time"}})],1)]),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-50px) !important"}},[_c('lines-of-code-chart')],1),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-50px) !important"}},[_c('commit-lines-per-commit-ratio-chart')],1),_vm._v(" "),_c('div',{staticClass:"row",staticStyle:{"transform":"translateY(-50px) !important"}},[_c('clones-chart')],1)])}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -2064,20 +2060,6 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.createRecord("data-v-99cabfb0", __vue__options__)
   } else {
     hotAPI.reload("data-v-99cabfb0", __vue__options__)
-  }
-})()}
-});
-
-;require.register("components/NumberClonesCard.vue", function(exports, require, module) {
-var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
-if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8ea45808", __vue__options__)
-  } else {
-    hotAPI.reload("data-v-8ea45808", __vue__options__)
   }
 })()}
 });
@@ -2812,26 +2794,12 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.default = {
   props: ['source', 'citeUrl', 'citeText', 'title'],
   data: function data() {
-    var years = [];
-    for (var i = 9; i >= 0; i--) {
-      years.push(new Date().getFullYear() - i);
-    }
-    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var monthDecimals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     return {
-      contributors: [],
-      organizations: [],
-      view: 'year',
-      monthNames: monthNames,
-      monthDecimals: monthDecimals,
-      years: years,
-      setYear: 0
+      numberOfClones: "",
+      numberOfUniqueClones: ""
     };
   },
 
@@ -2843,59 +2811,27 @@ exports.default = {
       var _this = this;
 
       var repo = window.AugurAPI.Repo({ gitURL: this.repo });
-      var contributors = {};
-      var organizations = {};
+      var owner = repo.gitURL.split("/")[1];
+      var project = repo.gitURL.split('/')[2];
+      var token = "githubAPItoken";
 
-      var addChanges = function addChanges(dest, src) {
-        if (dest && src) {
-          if ((typeof dest === 'undefined' ? 'undefined' : _typeof(dest)) !== 'object') {
-            dest['additions'] = 0;
-            dest['deletions'] = 0;
+      $.ajax({
+        url: "https://api.github.com/repos/" + owner + "/" + project + "/traffic/clones",
+        type: "GET",
+        headers: { "Accept": "application/vnd.github.v3+json", "Authorization": "token " + token },
+        success: function success(result) {
+          _this.numberOfClones = result.count;
+          _this.numberOfUniqueClones = result.uniques;
+        },
+        error: function error(_error) {
+          if (_error.status == 401) {
+            _this.numberOfClones = "Unauthorized. User must have push access to the repo.";
+            _this.numberOfUniqueClones = "Unauthorized. User must have push access to the repo.";
+          } else {
+            _this.numberOfClones = "Unable to retrieve data. User must have push access to the repo.";
+            _this.numberOfUniqueClones = "Unable to retrieve data. User must have push access to the repo.";
           }
-          dest['additions'] += src['additions'] || 0;
-          dest['deletions'] += src['deletions'] || 0;
         }
-      };
-
-      var group = function group(obj, name, change, filter) {
-        if (filter(change)) {
-          var year = new Date(change.author_date).getFullYear();
-          var month = new Date(change.author_date).getMonth();
-          obj[change[name]] = obj[change[name]] || { additions: 0, deletions: 0 };
-          addChanges(obj[change[name]], change);
-          obj[change[name]][year] = obj[change[name]][year] || { additions: 0, deletions: 0 };
-          addChanges(obj[change[name]][year], change);
-          obj[change[name]][year + '-' + month] = obj[change[name]][year + '-' + month] || { additions: 0, deletions: 0 };
-          addChanges(obj[change[name]][year + '-' + month], change);
-        }
-      };
-
-      var flattenAndSort = function flattenAndSort(obj, keyName, sortField) {
-        return Object.keys(obj).map(function (key) {
-          var d = obj[key];
-          d[keyName] = key;
-          return d;
-        }).sort(function (a, b) {
-          return b[sortField] - a[sortField];
-        });
-      };
-
-      var filterDates = function filterDates(change) {
-        return new Date(change.author_date).getFullYear() > _this.years[0];
-      };
-
-      repo.changesByAuthor().then(function (changes) {
-        changes.forEach(function (change) {
-          if (isFinite(change.additions) && isFinite(change.deletions)) {
-            group(contributors, 'author_email', change, filterDates);
-            if (change.author_affiliation !== 'Unknown') {
-              group(organizations, 'affiliation', change, filterDates);
-            }
-          }
-        });
-
-        _this.contributors = flattenAndSort(contributors, 'author_email', 'additions');
-        _this.organizations = flattenAndSort(organizations, 'name', 'additions');
       });
     }
   }
@@ -2904,8 +2840,8 @@ exports.default = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('h3',[_vm._v("Lines of code added by the top 10 authors")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_c('thead',[_c('tr',[_c('th',[_vm._v("Author")]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = year}}},[_vm._v(_vm._s(year))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthNames),function(month){return (_vm.setYear)?_c('th',[_vm._v(_vm._s(month))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('th',[_vm._v("Total all time")]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('th',{on:{"click":function($event){_vm.setYear = 0}}},[_vm._v(_vm._s(_vm.setYear))]):_vm._e()],2)]),_vm._v(" "),_c('tbody',_vm._l((_vm.contributors.slice(0, 10)),function(contributor){return _c('tr',[_c('td',[_vm._v(_vm._s(contributor.author_email))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[year]) ? contributor[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear + '-' + month]) ? contributor[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(contributor.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear]) ? contributor[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('h3',[_vm._v("Lines of code added by the top 5 organizations")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_c('thead',[_c('tr',[_c('th',[_vm._v("Author")]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = year}}},[_vm._v(_vm._s(year))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthNames),function(month){return (_vm.setYear)?_c('th',[_vm._v(_vm._s(month))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('th',[_vm._v("Total all time")]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = _vm.year}}},[_vm._v(_vm._s(_vm.setYear))]):_vm._e()],2)]),_vm._v(" "),_c('tbody',_vm._l((_vm.organizations.slice(0, 10)),function(organization){return _c('tr',[_c('td',[_vm._v(_vm._s(organization.name))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[year]) ? organization[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[_vm.setYear + '-' + month]) ? organization[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(organization.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[_vm.setYear]) ? organization[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))]),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])])}
-__vue__options__.staticRenderFns = []
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('h3',[_vm._v("Number of Clones")]),_vm._v(" "),_c('table',{staticClass:"clones-table"},[_vm._m(0),_vm._v(" "),_c('tbody',[_c('tr',[_c('td',[_vm._v(_vm._s(_vm.numberOfClones))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(_vm.numberOfUniqueClones))])])])]),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('thead',[_c('tr',[_c('th',[_vm._v("Total")]),_vm._v(" "),_c('th',[_vm._v("Unique")])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -2925,26 +2861,41 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.default = {
   props: ['source', 'citeUrl', 'citeText', 'title'],
   data: function data() {
-    var years = [];
-    for (var i = 9; i >= 0; i--) {
-      years.push(new Date().getFullYear() - i);
-    }
-    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var monthDecimals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    var yearBeginDate = new Date();
+    yearBeginDate.setFullYear(yearBeginDate.getFullYear() - 1);
+
+    var monthBeginDate = new Date();
+    monthBeginDate.setMonth(monthBeginDate.getMonth() - 1);
+
+    var weekBeginDate = new Date();
+    weekBeginDate.setDate(weekBeginDate.getDate() - 7);
+
     return {
-      contributors: [],
-      organizations: [],
-      view: 'year',
-      monthNames: monthNames,
-      monthDecimals: monthDecimals,
-      years: years,
-      setYear: 0
+      linesChanged: {
+        "year": {
+          "additions": 0,
+          "deletions": 0
+        },
+        "month": {
+          "additions": 0,
+          "deletions": 0
+        },
+        "week": {
+          "additions": 0,
+          "deletions": 0
+        }
+      },
+      numberOfCommits: {
+        "year": 0,
+        "month": 0,
+        "week": 0
+      },
+      yearBeginDate: yearBeginDate,
+      monthBeginDate: monthBeginDate,
+      weekBeginDate: weekBeginDate
     };
   },
 
@@ -2956,69 +2907,77 @@ exports.default = {
       var _this = this;
 
       var repo = window.AugurAPI.Repo({ gitURL: this.repo });
-      var contributors = {};
-      var organizations = {};
-
-      var addChanges = function addChanges(dest, src) {
-        if (dest && src) {
-          if ((typeof dest === 'undefined' ? 'undefined' : _typeof(dest)) !== 'object') {
-            dest['additions'] = 0;
-            dest['deletions'] = 0;
-          }
-          dest['additions'] += src['additions'] || 0;
-          dest['deletions'] += src['deletions'] || 0;
-        }
-      };
-
-      var group = function group(obj, name, change, filter) {
-        if (filter(change)) {
-          var year = new Date(change.author_date).getFullYear();
-          var month = new Date(change.author_date).getMonth();
-          obj[change[name]] = obj[change[name]] || { additions: 0, deletions: 0 };
-          addChanges(obj[change[name]], change);
-          obj[change[name]][year] = obj[change[name]][year] || { additions: 0, deletions: 0 };
-          addChanges(obj[change[name]][year], change);
-          obj[change[name]][year + '-' + month] = obj[change[name]][year + '-' + month] || { additions: 0, deletions: 0 };
-          addChanges(obj[change[name]][year + '-' + month], change);
-        }
-      };
-
-      var flattenAndSort = function flattenAndSort(obj, keyName, sortField) {
-        return Object.keys(obj).map(function (key) {
-          var d = obj[key];
-          d[keyName] = key;
-          return d;
-        }).sort(function (a, b) {
-          return b[sortField] - a[sortField];
-        });
-      };
-
-      var filterDates = function filterDates(change) {
-        return new Date(change.author_date).getFullYear() > _this.years[0];
-      };
 
       repo.changesByAuthor().then(function (changes) {
         changes.forEach(function (change) {
-          if (isFinite(change.additions) && isFinite(change.deletions)) {
-            group(contributors, 'author_email', change, filterDates);
-            if (change.author_affiliation !== 'Unknown') {
-              group(organizations, 'affiliation', change, filterDates);
-            }
+          var changeDate = new Date(change.author_date);
+
+          if (changeDate.getTime() >= _this.yearBeginDate.getTime() && changeDate.getTime() <= new Date().getTime()) {
+            _this.linesChanged.year.additions += change.additions || 0;
+            _this.linesChanged.year.deletions += change.deletions || 0;
+          }
+
+          if (changeDate.getTime() >= _this.monthBeginDate.getTime() && changeDate.getTime() <= new Date().getTime()) {
+            _this.linesChanged.month.additions += change.additions || 0;
+            _this.linesChanged.month.deletions += change.deletions || 0;
+          }
+
+          if (changeDate.getTime() >= _this.weekBeginDate.getTime() && changeDate.getTime() <= new Date().getTime()) {
+            _this.linesChanged.week.additions += change.additions || 0;
+            _this.linesChanged.week.deletions += change.deletions || 0;
           }
         });
+      });
 
-        _this.contributors = flattenAndSort(contributors, 'author_email', 'additions');
-        _this.organizations = flattenAndSort(organizations, 'name', 'additions');
+      repo.codeCommits().then(function (commits) {
+        commits.forEach(function (commit) {
+          var commitDate = new Date(commit.date);
+
+          if (commitDate.getTime() >= _this.yearBeginDate.getTime() && commitDate.getTime() <= new Date().getTime()) {
+            _this.numberOfCommits.year += commit.commits;
+          }
+
+          if (commitDate.getTime() >= _this.monthBeginDate.getTime() && commitDate.getTime() <= new Date().getTime()) {
+            _this.numberOfCommits.month += commit.commits;
+          }
+
+          if (commitDate.getTime() >= _this.weekBeginDate.getTime() && commitDate.getTime() <= new Date().getTime()) {
+            _this.numberOfCommits.week += commit.commits;
+          }
+        });
       });
     }
+  },
+
+  methods: {
+    getDBInfo: function getDBInfo() {
+      var repo = window.AugurAPI.Repo({ gitURL: this.repo });
+
+      repo.codeCommits().then(function (commits) {
+        console.dir(commits);
+
+        console.dir(commits[0]);
+      });
+      repo.changesByAuthor().then(function (changes) {
+        console.dir(changes);
+
+        console.dir(changes[0]);
+      });
+
+      console.dir(this.linesChanged);
+      console.dir(this.numberOfCommits);
+    }
+  },
+  mounted: function mounted() {
+    this.getDBInfo();
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('h3',[_vm._v("Lines of code added by the top 10 authors")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_c('thead',[_c('tr',[_c('th',[_vm._v("Author")]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = year}}},[_vm._v(_vm._s(year))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthNames),function(month){return (_vm.setYear)?_c('th',[_vm._v(_vm._s(month))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('th',[_vm._v("Total all time")]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('th',{on:{"click":function($event){_vm.setYear = 0}}},[_vm._v(_vm._s(_vm.setYear))]):_vm._e()],2)]),_vm._v(" "),_c('tbody',_vm._l((_vm.contributors.slice(0, 10)),function(contributor){return _c('tr',[_c('td',[_vm._v(_vm._s(contributor.author_email))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[year]) ? contributor[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear + '-' + month]) ? contributor[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(contributor.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((contributor[_vm.setYear]) ? contributor[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))]),_vm._v(" "),_c('br'),_vm._v(" "),_c('h3',[_vm._v("Lines of code added by the top 5 organizations")]),_vm._v(" "),_c('table',{staticClass:"lines-of-code-table"},[_c('thead',[_c('tr',[_c('th',[_vm._v("Author")]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = year}}},[_vm._v(_vm._s(year))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthNames),function(month){return (_vm.setYear)?_c('th',[_vm._v(_vm._s(month))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('th',[_vm._v("Total all time")]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('th',{staticClass:"clickable-header",on:{"click":function($event){_vm.setYear = _vm.year}}},[_vm._v(_vm._s(_vm.setYear))]):_vm._e()],2)]),_vm._v(" "),_c('tbody',_vm._l((_vm.organizations.slice(0, 10)),function(organization){return _c('tr',[_c('td',[_vm._v(_vm._s(organization.name))]),_vm._v(" "),_vm._l((_vm.years),function(year){return (!_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[year]) ? organization[year].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),_vm._l((_vm.monthDecimals),function(month){return (_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[_vm.setYear + '-' + month]) ? organization[_vm.setYear + '-' + month].additions || 0 : 0))]):_vm._e()}),_vm._v(" "),(!_vm.setYear)?_c('td',[_vm._v(_vm._s(organization.additions))]):_vm._e(),_vm._v(" "),(_vm.setYear)?_c('td',[_vm._v(_vm._s((organization[_vm.setYear]) ? organization[_vm.setYear].additions || 0 : 0))]):_vm._e()],2)}))]),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])])}
-__vue__options__.staticRenderFns = []
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"holder"},[_c('h3',[_vm._v("Lines of code : Number of commits Ratio")]),_vm._v(" "),_c('table',{staticClass:"commit-lines-per-commit-ratio-table"},[_vm._m(0),_vm._v(" "),_c('tbody',[_c('tr',[_c('td',[_vm._v("Past Week")]),_vm._v(" "),(_vm.numberOfCommits.week != 0)?_c('td',[_vm._v(_vm._s((_vm.linesChanged.week.additions / _vm.numberOfCommits.week).toFixed(3)))]):_c('td',[_vm._v(_vm._s(0))]),_vm._v(" "),(_vm.numberOfCommits.week != 0)?_c('td',[_vm._v(_vm._s((_vm.linesChanged.week.deletions / _vm.numberOfCommits.week).toFixed(3)))]):_c('td',[_vm._v(_vm._s(0))]),_vm._v(" "),(_vm.numberOfCommits.week != 0)?_c('td',[_vm._v(_vm._s(((_vm.linesChanged.week.additions - _vm.linesChanged.week.deletions) / _vm.numberOfCommits.week).toFixed(3)))]):_c('td',[_vm._v(_vm._s(0))]),_vm._v(" "),(_vm.numberOfCommits.week != 0)?_c('td',[_vm._v(_vm._s(((_vm.linesChanged.week.additions + _vm.linesChanged.week.deletions) / _vm.numberOfCommits.week).toFixed(3)))]):_c('td',[_vm._v(_vm._s(0))])]),_vm._v(" "),_c('tr',[_c('td',[_vm._v("Past Month")]),_vm._v(" "),(_vm.numberOfCommits.month != 0)?_c('td',[_vm._v(_vm._s((_vm.linesChanged.month.additions / _vm.numberOfCommits.month).toFixed(3)))]):_c('td',[_vm._v("0")]),_vm._v(" "),(_vm.numberOfCommits.month != 0)?_c('td',[_vm._v(_vm._s((_vm.linesChanged.month.deletions / _vm.numberOfCommits.month).toFixed(3)))]):_c('td',[_vm._v("0")]),_vm._v(" "),(_vm.numberOfCommits.month != 0)?_c('td',[_vm._v(_vm._s(((_vm.linesChanged.month.additions - _vm.linesChanged.month.deletions) / _vm.numberOfCommits.month).toFixed(3)))]):_c('td',[_vm._v("0")]),_vm._v(" "),(_vm.numberOfCommits.month != 0)?_c('td',[_vm._v(_vm._s(((_vm.linesChanged.month.additions + _vm.linesChanged.month.deletions) / _vm.numberOfCommits.month).toFixed(3)))]):_c('td',[_vm._v("0")])]),_vm._v(" "),_c('tr',[_c('td',[_vm._v("Past Year")]),_vm._v(" "),(_vm.numberOfCommits.year != 0)?_c('td',[_vm._v(_vm._s((_vm.linesChanged.year.additions / _vm.numberOfCommits.year).toFixed(3)))]):_c('td',[_vm._v("0")]),_vm._v(" "),(_vm.numberOfCommits.year != 0)?_c('td',[_vm._v(_vm._s((_vm.linesChanged.year.deletions / _vm.numberOfCommits.year).toFixed(3)))]):_c('td',[_vm._v("0")]),_vm._v(" "),(_vm.numberOfCommits.year != 0)?_c('td',[_vm._v(_vm._s(((_vm.linesChanged.year.additions - _vm.linesChanged.year.deletions) / _vm.numberOfCommits.year).toFixed(3)))]):_c('td',[_vm._v("0")]),_vm._v(" "),(_vm.numberOfCommits.year != 0)?_c('td',[_vm._v(_vm._s(((_vm.linesChanged.year.additions + _vm.linesChanged.year.deletions) / _vm.numberOfCommits.year).toFixed(3)))]):_c('td',[_vm._v("0")])])])]),_vm._v(" "),_c('br'),_vm._v(" "),_c('p',[_vm._v(" "+_vm._s(_vm.chart)+" ")])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('thead',[_c('tr',[_c('th',[_vm._v("Time Period")]),_vm._v(" "),_c('th',[_vm._v("Additions")]),_vm._v(" "),_c('th',[_vm._v("Deletions")]),_vm._v(" "),_c('th',[_vm._v("Net")]),_vm._v(" "),_c('th',[_vm._v("Total")])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
