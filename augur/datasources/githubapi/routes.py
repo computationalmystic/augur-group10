@@ -120,3 +120,37 @@ def create_routes(server):
                         ]
     """
     server.addTimeseries(github.tags, 'tags')
+
+    """
+    @api {get} /:owner/:repo/timeseries/clones
+    @apiName clones
+    @apiGroup Experimental
+    @apiDescription <a href="com/chaoss/metrics/blob/master/activity-metrics/code-commits.md">CHAOSS Metric Definition</a>. Source: <a href="http://ghtorrent.org/">GHTorrent</a>
+
+    @apiParam {String} owner Username of the owner of the GitHub repository
+    @apiParam {String} repo Name of the GitHub repository
+
+    @apiSuccessExample {json} Success-Response:
+                        {
+                            "count": 5,
+                            "uniques": 4,
+                            "clones": [
+                                {
+                                "timestamp": "2019-04-14T00:00:00Z",
+                                "count": 3,
+                                "uniques": 2
+                                },
+                                {
+                                "timestamp": "2019-04-15T00:00:00Z",
+                                "count": 1,
+                                "uniques": 1
+                                },
+                                {
+                                "timestamp": "2019-04-25T00:00:00Z",
+                                "count": 1,
+                                "uniques": 1
+                                }
+                            ]
+                        }
+    """
+    server.addTimeseries(github.clones, 'clones')

@@ -442,3 +442,21 @@ class GitHubAPI(object):
     #             cursor = '"{}"'.format(data['data']['repository']['pullRequests']['edges'][-1]['cursor'])
 
     #     return pd.DataFrame({'date': pullReqTime, 'code_reviews': numReviews})
+
+    @annotate(tag='clones')
+    def clones(self, owner, repo):
+        """
+        Timeseries of the number of clones (total and unique)
+
+        :param owner: The name of the project owner.
+        :param repo: The name of the repo.
+        :return: DataFrame with number of clones and count
+        """
+
+        url = "https://api.github.com/repos/{}/{}/traffic/clones".format(owner, repo)
+        json = requests.get(url, auth=('user', self.GITHUB_API_KEY)).json()
+        
+        # df = pd.DataFrame([{'count': json['count'], 'uniques': json['uniques']}])
+        df = pd.DataFrame({'response', json})
+
+        return df

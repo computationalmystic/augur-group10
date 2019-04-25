@@ -762,6 +762,7 @@ var AugurAPI = function () {
         Timeseries(repo, 'majorTags', 'tags/major');
         Timeseries(repo, 'newWatchers', 'new_watchers');
         Timeseries(repo, 'tags', 'tags');
+        Timeseries(repo, 'clones', 'clones');
       }
 
       if (repo.gitURL) {
@@ -2813,6 +2814,7 @@ exports.default = {
       var repo = window.AugurAPI.Repo({ gitURL: this.repo });
       var owner = repo.gitURL.split("/")[1];
       var project = repo.gitURL.split('/')[2];
+
       var token = "githubAPItoken";
 
       $.ajax({
@@ -2834,6 +2836,18 @@ exports.default = {
         }
       });
     }
+  },
+  methods: {
+    getClones: function getClones() {
+      var repo = window.AugurAPI.Repo({ gitURL: this.repo });
+
+      repo.clones().then(function (data) {
+        console.dir(data);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getClones();
   }
 };
 })()

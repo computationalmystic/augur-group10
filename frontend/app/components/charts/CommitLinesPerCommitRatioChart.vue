@@ -98,29 +98,6 @@ export default {
     chart() {
       let repo = window.AugurAPI.Repo({ gitURL: this.repo })
 
-      // let addChanges = (dest, src) => {
-      //   if (dest && src) {
-      //     if (typeof dest !== 'object') {
-      //       dest['additions'] = 0
-      //       dest['deletions'] = 0
-      //     }
-      //     dest['additions'] += (src['additions'] || 0)
-      //     dest['deletions'] += (src['deletions'] || 0)
-      //   }
-      // }
-
-      // let flattenAndSort = (obj, keyName, sortField) => {
-      //   return Object.keys(obj)
-      //       .map((key) => {
-      //         let d = obj[key]
-      //         d[keyName] = key
-      //         return d
-      //       })
-      //       .sort((a, b) => {
-      //         return b[sortField] - a[sortField]
-      //       })
-      // }
-
       repo.changesByAuthor().then((changes) => {
         changes.forEach((change) => {
             let changeDate = (new Date(change.author_date));
