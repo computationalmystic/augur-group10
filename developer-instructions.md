@@ -1,5 +1,7 @@
 # Developer Instructions
 
+There is no difference in installing Augur for our fork versus the main Augur project. The instructions for installing and deploying the Augur project are as follows:
+
 ## Vagrant
 **The quickest way to get started working on Augur is by using [Vagrant](https://www.vagrantup.com/)** to spin up a virtual machine (VM) that comes with Augur already installed. We'll do all the work of setting up and installing dependencies, leaving you free to jump right into making something awesome. 
 
