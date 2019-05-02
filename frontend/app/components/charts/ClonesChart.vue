@@ -26,7 +26,8 @@ export default {
   data() {
     return {
       numberOfClones: "",
-      numberOfUniqueClones: ""
+      numberOfUniqueClones: "",
+      clones: []
     }
   },
   computed: {
@@ -35,35 +36,59 @@ export default {
     },
     chart() {
       let repo = window.AugurAPI.Repo({ gitURL: this.repo })
-      let owner = repo.gitURL.split("/")[1];
-      let project = repo.gitURL.split('/')[2];
+
+      repo.clones().then((data) => {
+        if('message' in data) {
+            this.numberOfClones = data.message;
+            this.numberOfUniqueClones = data.message;
+        }else {
+            if('count' in data) {
+                this.numberOfClones = data.count;
+            }
+
+            if('uniques' in data) {
+                this.numberOfUniqueClones = data.uniques;
+            }
+
+            if('clones' in data) {
+                this.clones.push(data.clones);
+            }
+        }
+      });
+
+
+      // old implementation without using backend Timeseries.. BAD
+
+    //   let owner = repo.gitURL.split("/")[1];
+    //   let project = repo.gitURL.split('/')[2];
         // for proof of concept, using our group repo and one of our personal tokens.. still not super secure
         // let owner = "computationalmystic";
         // let project = "augur-group10";
         // let token = "insertPersonalAccessTokenHere";
-      let token = "githubAPItoken"; // any way to obtain this? maybe prompt user to enter credentials..?
+    //   let token = "githubAPItoken"; // any way to obtain this? maybe prompt user to enter credentials..?
       // this may not be obtainable with security in mind since the user needs push access to the repo to get clone info
         
-        $.ajax({
-            url: "https://api.github.com/repos/" + owner + "/" + project + "/traffic/clones",
-            type: "GET",
-            headers: {"Accept": "application/vnd.github.v3+json", "Authorization": "token " + token},
-            success: (result) => {
-                this.numberOfClones = result.count;
-                this.numberOfUniqueClones = result.uniques;
-            },
-            error: (error) => {
-                if(error.status == 401) {
-                    this.numberOfClones = "Unauthorized. User must have push access to the repo.";
-                    this.numberOfUniqueClones = "Unauthorized. User must have push access to the repo.";
-                }else {
-                    this.numberOfClones = "Unable to retrieve data. User must have push access to the repo.";
-                    this.numberOfUniqueClones = "Unable to retrieve data. User must have push access to the repo.";
-                }
-            }
-        });
+        // $.ajax({
+        //     url: "https://api.github.com/repos/" + owner + "/" + project + "/traffic/clones",
+        //     type: "GET",
+        //     headers: {"Accept": "application/vnd.github.v3+json", "Authorization": "token " + token},
+        //     success: (result) => {
+        //         this.numberOfClones = result.count;
+        //         this.numberOfUniqueClones = result.uniques;
+        //     },
+        //     error: (error) => {
+        //         if(error.status == 401) {
+        //             this.numberOfClones = "Unauthorized. User must have push access to the repo.";
+        //             this.numberOfUniqueClones = "Unauthorized. User must have push access to the repo.";
+        //         }else {
+        //             this.numberOfClones = "Unable to retrieve data. User must have push access to the repo.";
+        //             this.numberOfUniqueClones = "Unable to retrieve data. User must have push access to the repo.";
+        //         }
+        //     }
+        // });
     }
   },
+  // methods & mounted are for debugging.
   methods: {
     getClones: function() {
       let repo = window.AugurAPI.Repo({ gitURL: this.repo });

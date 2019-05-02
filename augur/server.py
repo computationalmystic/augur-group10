@@ -42,6 +42,8 @@ class Server(object):
 
         create_plugin_routes(self)
 
+        logger.info(['%s' % rule for rule in app.url_map.iter_rules()])
+
         #####################################
         ###          UTILITY              ###
         #####################################

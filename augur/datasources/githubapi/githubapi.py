@@ -450,13 +450,14 @@ class GitHubAPI(object):
 
         :param owner: The name of the project owner.
         :param repo: The name of the repo.
-        :return: DataFrame with number of clones and count
+        :return: JSON object with number of clones and summary of clones
         """
 
         url = "https://api.github.com/repos/{}/{}/traffic/clones".format(owner, repo)
-        json = requests.get(url, auth=('user', self.GITHUB_API_KEY)).json()
-        
-        # df = pd.DataFrame([{'count': json['count'], 'uniques': json['uniques']}])
-        df = pd.DataFrame({'response', json})
 
-        return df
+        # for testing.. using our groups github url instead
+        # url = "https://api.github.com/repos/computationalmystic/augur-group10/traffic/clones"
+
+        json = requests.get(url, auth=('user', self.GITHUB_API_KEY)).json()
+        # print(json)
+        return json

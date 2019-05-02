@@ -2800,7 +2800,8 @@ exports.default = {
   data: function data() {
     return {
       numberOfClones: "",
-      numberOfUniqueClones: ""
+      numberOfUniqueClones: "",
+      clones: []
     };
   },
 
@@ -2812,31 +2813,28 @@ exports.default = {
       var _this = this;
 
       var repo = window.AugurAPI.Repo({ gitURL: this.repo });
-      var owner = repo.gitURL.split("/")[1];
-      var project = repo.gitURL.split('/')[2];
 
-      var token = "githubAPItoken";
+      repo.clones().then(function (data) {
+        if ('message' in data) {
+          _this.numberOfClones = data.message;
+          _this.numberOfUniqueClones = data.message;
+        } else {
+          if ('count' in data) {
+            _this.numberOfClones = data.count;
+          }
 
-      $.ajax({
-        url: "https://api.github.com/repos/" + owner + "/" + project + "/traffic/clones",
-        type: "GET",
-        headers: { "Accept": "application/vnd.github.v3+json", "Authorization": "token " + token },
-        success: function success(result) {
-          _this.numberOfClones = result.count;
-          _this.numberOfUniqueClones = result.uniques;
-        },
-        error: function error(_error) {
-          if (_error.status == 401) {
-            _this.numberOfClones = "Unauthorized. User must have push access to the repo.";
-            _this.numberOfUniqueClones = "Unauthorized. User must have push access to the repo.";
-          } else {
-            _this.numberOfClones = "Unable to retrieve data. User must have push access to the repo.";
-            _this.numberOfUniqueClones = "Unable to retrieve data. User must have push access to the repo.";
+          if ('uniques' in data) {
+            _this.numberOfUniqueClones = data.uniques;
+          }
+
+          if ('clones' in data) {
+            _this.clones.push(data.clones);
           }
         }
       });
     }
   },
+
   methods: {
     getClones: function getClones() {
       var repo = window.AugurAPI.Repo({ gitURL: this.repo });
