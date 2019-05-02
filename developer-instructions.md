@@ -8,7 +8,6 @@ There is no difference in installing Augur for our fork versus the main Augur pr
 
 ```
 git clone https://github.com/computationalmystic/augur-group10.git
-
 ```
 
 3. 
