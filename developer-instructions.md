@@ -6,7 +6,7 @@ There is no difference in installing Augur for our fork versus the main Augur pr
 
 2. Install all dependencies for Augur.
 
-```
+```bash
 # Install NodeSource
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 
@@ -27,7 +27,7 @@ rm Anaconda.sh
 
 3. Install the Augur project on the server:
 
-```
+```sh
 git clone https://github.com/computationalmystic/augur-group10.git
 
 ## Assume you are in the root from which you cloned augur
@@ -42,9 +42,10 @@ pip install -e .
 ```
 
 4. Configure the Augur config file. (augur.config.json)
-```
-# Replace <GitHub API Key> with your GitHub personal access token.
-# This uses the existing Facade and GHTorrent databases created by Professor Goggins.
+
+```js
+// Replace <GitHub API Key> with your GitHub personal access token.
+// This uses the existing Facade and GHTorrent databases created by Professor Goggins.
 
 {
     "Cache": {
@@ -98,7 +99,7 @@ pip install -e .
 
 5. Start the Augur server(s)
 
-```
+```sh
 # * In the Augur root folder...*
 # To start the server w/o monitoring in the terminal
 make dev-start
