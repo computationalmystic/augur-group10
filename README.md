@@ -16,12 +16,15 @@ Functionally, Augur is a prototyped implementation of the Linux Foundation's [CH
 ### Our Fork
 
 Tooltips:
+
 ![Tooltips](Tooltip.png)
 
 Lines of Code Per Commit : Number of Commits Ratio:
+
 ![Ratio](Ratio.png)
 
 Number of Clones:
+
 ![Number Of Clones](NumberOfClones.png)
 
 
