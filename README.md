@@ -11,7 +11,7 @@ Augur is focused on prototyping open source software metrics.
 
 Functionally, Augur is a prototyped implementation of the Linux Foundation's [CHAOSS Project](http://chaoss.community) on [open source software metrics](https://github.com/chaoss/metrics). Technically, Augur is a [Flask web application](http://augurlabs.io), [Python library](http://augur.augurlabs.io/static/docs/) and [REST server](http://augur.augurlabs.io/static/api_docs/) that presents metrics on open source software development project health and sustainability. 
 
-[Augur](Augur.png)
+![Augur](Augur.png)
 
 ### Our Fork
 
