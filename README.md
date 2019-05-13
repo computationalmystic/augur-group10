@@ -12,15 +12,17 @@ Functionally, Augur is a prototyped implementation of the Linux Foundation's [CH
 
 ### Our Fork
 
-Tooltips have been added to graphs:
+We have made three main additions to the main Augur project:
+
+1. Tooltips have been added to graphs.
 
 ![Tooltips](Tooltip.png)
 
-Lines of Code Per Commit : Number of Commits Ratio added:
+2. Lines of Code Per Commit : Number of Commits Ratio was added.
 
 ![Ratio](Ratio.png)
 
-Number of Clones metric added:
+3. Number of Clones metric was added.
 
 ![Number Of Clones](NumberOfClones.png)
 
