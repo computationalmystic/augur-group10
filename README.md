@@ -14,15 +14,15 @@ Functionally, Augur is a prototyped implementation of the Linux Foundation's [CH
 
 We have made three main additions to the main Augur project:
 
-1. Tooltips have been added to graphs.
+1. Tooltips have been added to graphs. When hovering over a data point on a graph, a tooltip appears displaying the numeric value associated with the data point.
 
 ![Tooltips](Tooltip.png)
 
-2. Lines of Code Per Commit : Number of Commits Ratio was added.
+2. Lines of Code Per Commit : Number of Commits Ratio was added to the page.
 
 ![Ratio](Ratio.png)
 
-3. Number of Clones metric was added.
+3. Number of Clones metric was added to the page. The metric requires push access to the repository that is being viewed.
 
 ![Number Of Clones](NumberOfClones.png)
 
