@@ -18,11 +18,11 @@ We have made three main additions to the main Augur project:
 
 ![Tooltips](Tooltip.png)
 
-2. Lines of Code Per Commit : Number of Commits Ratio was added to the page.
+2. Lines of Code Per Commit : Number of Commits Ratio was added to the page. It shows the ratio in terms of lines of code additions, deletions, net (additions - deletions), and total (additions + deletions) in the past week, month, and year.
 
 ![Ratio](Ratio.png)
 
-3. Number of Clones metric was added to the page. The metric requires push access to the repository that is being viewed.
+3. Number of Clones metric was added to the page. The metric requires push access to the repository that is being viewed. It shows total clones and also unique clones (number of different devices/users that have cloned).
 
 ![Number Of Clones](NumberOfClones.png)
 
