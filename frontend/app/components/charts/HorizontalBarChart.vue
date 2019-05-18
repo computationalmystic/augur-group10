@@ -176,7 +176,7 @@ export default {
                 "legend": null
               },
               // Add tooltip for field
-              "tooltip": {"field": field, "type": "quantitative", "format": ","},
+              "tooltip": {"field": field, "type": "quantitative", "format": ",.2f"},
               // "size": size,
               // "opacity":{
               //   "field": "Total lines changed",

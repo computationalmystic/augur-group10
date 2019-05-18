@@ -4876,7 +4876,7 @@ exports.default = {
               "legend": null
             },
 
-            "tooltip": { "field": field, "type": "quantitative", "format": "," }
+            "tooltip": { "field": field, "type": "quantitative", "format": ",.2f" }
           }
 
         }]
